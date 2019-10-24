@@ -15,11 +15,21 @@ public class CardElement {
     }
     public CardElement() {}
 
+    /**
+     * This method takes a title and finds the correct image in drawable.
+     * Example:
+     * cardTitle = "Dal Bhat"
+     * The method search for "dal_bhat" (underscore insted of space and toLowerCase) in drawable folder.
+     * @param cardTitle is the title for the card
+     * @param context is the context for the card. Simply write "getContex()" when using. A View always knows its contex.
+     * @return the id for the resource. An int.
+     */
     public int getBgImgIDFromTitle(String cardTitle, Context context) {
         String imgToFind = cardTitle.replaceAll(" ", "_").toLowerCase();
         return context.getResources().getIdentifier(imgToFind, "drawable", context.getPackageName());
     }
 
+    // TODO: 24-10-2019 fix denne, hvis den overhoved skal bruges?
     public ImageView findImage(View view, String cardTitle) {
         ImageView imgToReturn;
         try {
@@ -39,7 +49,6 @@ public class CardElement {
     public String getCardTitle() {
         return cardTitle;
     }
-
     public String getDefaultImg() {
         return defaultImg;
     }
