@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:layout_marginBottom="10dp"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardElevation="5dp">
+
+        <ImageView
+            android:id="@+id/image_recipe"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            card_view:srcCompat="@drawable/dal_bhat"
+            tools:srcCompat="@drawable/dal_bhat" />
+
+        <TextView
+            android:id="@+id/card_title"
+            android:background="#88ffffff"
+            android:textSize="32sp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="40dp"
+            android:paddingVertical="10dp"
+            android:layout_gravity="center"
+            android:text="Dal Bhat" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
