@@ -22,7 +22,7 @@ public class Calender extends Fragment {
 
     //test arrays for cardElements and their title
     List<CardElement> cardArray = new ArrayList<>();
-    String[] test = {"Dal Bhat", "Food", "madopskrift"};
+    String[] test = {"Dal Bhat", "Food", "madopskrift", "Peda", "god mad"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
