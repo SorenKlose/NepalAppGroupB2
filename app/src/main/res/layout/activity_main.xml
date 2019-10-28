@@ -13,7 +13,7 @@
         android:layout_marginTop="250dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/Line"
+        android:src="@drawable/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ProfilePicture"
+        android:src="@drawable/profilepicture"
         tools:layout_editor_absoluteX="-3dp"
         tools:layout_editor_absoluteY="143dp" />
 
@@ -45,7 +45,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/Line"
+        android:src="@drawable/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
@@ -56,7 +56,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/Line"
+        android:src="@drawable/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="TextView"
+        android:text="BirthDate"
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="60dp"
-        android:text="TextView"
+        android:text="Weight"
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="60dp"
-        android:text="TextView"
+        android:text="Height"
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
