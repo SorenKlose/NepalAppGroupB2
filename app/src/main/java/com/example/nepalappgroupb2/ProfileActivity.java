@@ -24,7 +24,7 @@ import java.util.Calendar;
 public class ProfileActivity extends AppCompatActivity {
 
     SharedPreferences mPrefs;
-    final String welcomeScreenShownPref = "welcomeScreenShown";
+    final String popUpScreenShownPref = "popupscreen";
 
     private static final String TAG = "MainActivity";
 
@@ -43,10 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
 
   //FORSØG PÅ POPUP DER KUN KOMMER EN GANG
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        // second argument is the default to use if the preference can't be found
-        Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
+        Boolean popUpScreenShown = mPrefs.getBoolean(popUpScreenShownPref, false);
 
-        if (!welcomeScreenShown) {
+        if (!popUpScreenShown) {
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
             View mView = getLayoutInflater().inflate(R.layout.popup, null);
             final ImageView mom = (ImageView) mView.findViewById(R.id.iwMom);
@@ -70,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
             });
         }
         SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putBoolean(welcomeScreenShownPref, true);
+        editor.putBoolean(popUpScreenShownPref, true);
         editor.commit();
 
 
