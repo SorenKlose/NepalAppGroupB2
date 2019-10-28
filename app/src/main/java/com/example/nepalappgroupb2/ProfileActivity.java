@@ -38,8 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         ProfileActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener
-                        ,year,month,day);
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener
+                        , year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
@@ -52,11 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month + 1;
-                        Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+                        Log.d(TAG, "onDateSet: mm/dd/yyy: " + day + "/" + month + "/" + year);
 
-                        String date = month + "/" + day + "/" + year;
+                        String date = day + "/" + month + "/" + year;
                         mDisplayDate.setText(date);
                     }
                 };
             }
-}
+        };
+    }}
