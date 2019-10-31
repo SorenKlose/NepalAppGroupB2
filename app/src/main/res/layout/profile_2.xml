@@ -7,11 +7,11 @@
     tools:context=".Profile2Activity">
 
     <ImageView
-        android:id="@+id/imFaneM"
+        android:id="@+id/imFaneP2"
         android:layout_width="316dp"
         android:layout_height="118dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/fanen"
+        android:src="@drawable/fane2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
