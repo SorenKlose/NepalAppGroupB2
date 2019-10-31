@@ -50,7 +50,7 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
             startActivity(i);
         }
         if (view == quizButton) {
-            Intent i = new Intent(this, Quiz.class);
+            Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
     }

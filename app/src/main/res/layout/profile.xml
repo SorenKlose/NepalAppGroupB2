@@ -93,21 +93,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="228dp"
         android:layout_marginLeft="228dp"
+        android:layout_marginTop="30dp"
         android:hint="Date"
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="361dp" />
+        app:layout_constraintTop_toBottomOf="@+id/plain_text_input3" />
 
     <EditText
         android:id="@+id/plain_text_input3"
         android:layout_width="108dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:hint="Name of baby"
         android:inputType="text"
         app:fontFamily="@font/roboto_condensed_light"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="274dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -139,10 +142,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="25dp"
         android:text="BirthDate"
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="361dp" />
+        app:layout_constraintTop_toBottomOf="@+id/plain_text_input3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

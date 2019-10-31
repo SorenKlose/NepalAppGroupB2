@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_marginBottom="10dp"
-        card_view:cardBackgroundColor="#fff"
-        card_view:cardElevation="5dp">
+>
 
         <ImageView
             android:id="@+id/image_recipe"
@@ -36,7 +35,6 @@
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:button="@drawable/checkbox_heart"
             android:layout_gravity="bottom"
             android:layout_marginLeft="350dp"
             android:layout_marginStart="350dp"

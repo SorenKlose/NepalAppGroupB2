@@ -40,7 +40,7 @@ public class Quiz extends Fragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = getLayoutInflater().inflate(R.layout.card_layout, parent, false);
+            View itemView = getLayoutInflater().inflate(R.layout.quiz_card_layout, parent, false);
             return new RecyclerView.ViewHolder(itemView) {
             };
         }
