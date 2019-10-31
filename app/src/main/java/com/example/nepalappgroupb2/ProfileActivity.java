@@ -70,6 +70,18 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+        ImageView imFaneM = (ImageView) findViewById(R.id.imFaneM);
+        imFaneM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ProfileActivity.this, Profile2Activity.class);
+                ProfileActivity.this.startActivity(myIntent);
+                finish();
+            }});
+
+
+
+
 
 
     //DATE PICKER
