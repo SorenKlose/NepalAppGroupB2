@@ -1,7 +1,6 @@
 package com.example.nepalappgroupb2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
@@ -13,8 +12,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, new Quiz())
-                .addToBackStack(null)
+                .replace(R.id.quiz_frameLayout, new Quiz())
                 .commit();
     }
 }

@@ -31,7 +31,7 @@ public class Quiz extends Fragment {
         for (int i = 0; i < quizliste.length; i++){
             cardArray.add(new RecipeCardElement(quizliste[i]));
         }
-        recyclerView = layout.findViewById(R.id.recyclerView);
+        recyclerView = layout.findViewById(R.id.quiz_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         return layout;

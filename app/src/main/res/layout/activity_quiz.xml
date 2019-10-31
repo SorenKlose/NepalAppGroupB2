@@ -8,7 +8,7 @@
     tools:context=".QuizActivity">
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/quiz_frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
@@ -23,10 +23,13 @@
         android:id="@+id/card_title"
         android:layout_width="400dp"
         android:layout_height="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintBottom_toTopOf="@+id/quiz_frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     <fragment
         android:id="@+id/fragment2"

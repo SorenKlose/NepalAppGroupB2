@@ -33,7 +33,7 @@ public class Recipe extends Fragment {
             cardArray.add(new RecipeCardElement(test[i]));
         }
 
-        recyclerView = layout.findViewById(R.id.recyclerView);
+        recyclerView = layout.findViewById(R.id.quiz_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         return layout;
