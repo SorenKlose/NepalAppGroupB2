@@ -58,13 +58,13 @@ public class ProfileActivity extends AppCompatActivity {
             mom.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  //  Intent myIntent = new Intent(ProfileActivity.this, Profile2Acitivty.class);
-                  //  ProfileActivity.this.startActivity(myIntent);
                     dialog.dismiss();
                 }});
             pregnate.setOnClickListener(new View.OnClickListener(){
                 public void onClick (View view){
-                    dialog.dismiss();
+                    Intent myIntent = new Intent(ProfileActivity.this, Profile2Activity.class);
+                    ProfileActivity.this.startActivity(myIntent);
+                    finish();
                 }
             });
         }
