@@ -15,7 +15,6 @@ public class RecipeActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.recipe_framelayout, new Recipe())
-
                 .commit();
     }
 

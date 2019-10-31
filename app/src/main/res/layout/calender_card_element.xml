@@ -11,16 +11,16 @@
         android:layout_marginBottom="10dp">
 
         <ImageView
-            android:id="@+id/image_recipe"
+            android:id="@+id/image_calender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            card_view:srcCompat="@drawable/dal_bhat"
-            tools:srcCompat="@drawable/dal_bhat" />
+            card_view:srcCompat="@drawable/baby_temperature"
+            tools:srcCompat="@drawable/baby_temperature" />
 
         <TextView
-            android:id="@+id/card_title"
+            android:id="@+id/calender_card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,17 +28,9 @@
             android:background="#88ffffff"
             android:gravity="center"
             android:paddingVertical="10dp"
-            android:text="Dal Bhat"
+            android:text="1 month old"
             android:textColor="#000"
             android:textSize="32sp" />
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="350dp"
-            android:layout_marginStart="350dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </androidx.cardview.widget.CardView>
 

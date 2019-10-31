@@ -25,8 +25,17 @@ public class RecipeCardElement {
      * @return the id for the resource. An int.
      */
     public int getBgImgIDFromTitle(String cardTitle, Context context) {
-        String imgToFind = cardTitle.replaceAll(" ", "_").toLowerCase();
+        String imgToFind;
+        if(isDigit(cardTitle)) {
+            cardTitle = "_" + cardTitle;
+        }
+        imgToFind = cardTitle.replaceAll(" ", "_").toLowerCase();
         return context.getResources().getIdentifier(imgToFind, "drawable", context.getPackageName());
+    }
+
+    private boolean isDigit(String title) {
+        char c = title.charAt(0);
+        return  (c >= '0' && c <= '9');
     }
 
     // TODO: 24-10-2019 fix denne, hvis den overhoved skal bruges?

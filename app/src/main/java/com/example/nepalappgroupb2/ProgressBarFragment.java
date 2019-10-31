@@ -38,7 +38,7 @@ public class ProgressBarFragment extends Fragment {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         long currentDate = Calendar.getInstance().getTimeInMillis();
-        // Calendar birthDate = new GregorianCalendar();
+        // com.example.nepalappgroupb2.Calendar birthDate = new GregorianCalendar();
 
         long birthDate = 25;
 
