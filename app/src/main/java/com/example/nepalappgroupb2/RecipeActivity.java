@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class RecipeActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Button btn;
@@ -14,12 +14,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.recipe_card_layout);
 
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, new Calender())
+                .replace(R.id.recipe_framelayout, new Recipe())
                 .addToBackStack(null)
                 .commit();
     }
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(view == btn) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameLayout, new Calender())
+                    .replace(R.id.recipe_framelayout, new Recipe())
                     .addToBackStack(null)
                     .commit();
         }

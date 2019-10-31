@@ -45,7 +45,7 @@ public class ProgressBarFragment extends Fragment {
         long progressInDays = TimeUnit.MILLISECONDS.toDays(currentDate - birthDate);
 
 
-        progressBar.setProgress((int) progressInDays); // progressStatus
+        progressBar.setProgress(50); // progressStatus
 
         return view;
 

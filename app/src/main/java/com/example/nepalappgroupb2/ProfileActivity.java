@@ -23,7 +23,6 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences mPrefs;
     final String popUpScreenShownPref = "popupscreen";
 
-    private static final String TAG = "MainActivity";
 
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -100,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month + 1;
-                        Log.d(TAG, "onDateSet: mm/dd/yyy: " + day + "/" + month + "/" + year);
+                       // Log.d(TAG, "onDateSet: mm/dd/yyy: " + day + "/" + month + "/" + year);
 
                         String date = day + "/" + month + "/" + year;
                         mDisplayDate.setText(date);

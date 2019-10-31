@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calender extends Fragment {
+public class Recipe extends Fragment {
     RecipeCardElement recipeCardElement = new RecipeCardElement();
 
     private RecyclerView recyclerView;

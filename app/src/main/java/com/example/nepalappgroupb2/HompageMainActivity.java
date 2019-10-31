@@ -38,11 +38,11 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view == calenderButton) {
-            Intent i = new Intent(this, Calender.class);
+            Intent i = new Intent(this, CalenderActivity.class);
             startActivity(i);
         }
         if (view == recipesButton) {
-            Intent i = new Intent(this, RecipeCardElement.class);
+            Intent i = new Intent(this, RecipeActivity.class);
             startActivity(i);
         }
         if (view == comicsButton) {
@@ -50,6 +50,10 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
             startActivity(i);
         }
         if (view == quizButton) {
+            Intent i = new Intent(this, QuizActivity.class);
+            startActivity(i);
+        }
+        if(view == profileButton){
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
