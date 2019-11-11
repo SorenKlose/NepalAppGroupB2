@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,8 +43,11 @@ public class Calendar extends Fragment {
         recyclerView.setAdapter(adapter);
         return layout;
     }
+    FilterAdapter adapter = new FilterAdapter();
 
-    RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
+    final List<RecipeCardElement> originalCardArray = cardArray;
+
+    class FilterAdapter extends RecyclerView.Adapter implements Filterable {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,8 +75,62 @@ public class Calendar extends Fragment {
 
         @Override
         public int getItemCount() {
-            return test.length;
+            return cardArray.size();
         }
-    };
+        @Override
+        public Filter getFilter() {
+            Filter filter = new Filter() {
 
+                @Override
+                protected FilterResults performFiltering(CharSequence input) {
+                    FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
+                    ArrayList<RecipeCardElement> filteredList = new ArrayList<RecipeCardElement>();
+
+                    if (input == null || input.length() == 0) {
+
+                        // set the Original result to return
+                        results.values = originalCardArray;
+                        results.count = originalCardArray.size();
+
+                    } else {
+                        input = input.toString().toLowerCase();
+                        for (int i = 0; i < originalCardArray.size(); i++) {
+                            // Her kunne man søge i teksterne for hvert element som cardArray'et "linker" til,
+                            // ved at bruge netop samme indexering som cardArray'et bruger.
+                            String data = originalCardArray.get(i).getCardTitle();
+                            if (data.toLowerCase().contains(input.toString())) {
+                                filteredList.add(new RecipeCardElement(originalCardArray.get(i).getCardTitle()));
+                            }
+                        }
+                        // set the Filtered result to return
+                        results.values = filteredList;
+                        results.count = filteredList.size();
+
+                    }
+
+                    return results;
+                }
+                @SuppressWarnings("unchecked")
+                @Override
+                protected void publishResults(CharSequence constraint,FilterResults results) {
+                    cardArray = (ArrayList<RecipeCardElement>) results.values; // has the filtered values
+                    notifyDataSetChanged();  // notifies the data with new filtered values
+                }
+            };
+            return filter;
+        }
+    }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final SearchFilterViewModel model = ViewModelProviders.of(getActivity()).get(SearchFilterViewModel.class);
+        model.getSearchWord().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                adapter.getFilter().filter(s);
+            }
+
+
+
+        });
+    }
 }

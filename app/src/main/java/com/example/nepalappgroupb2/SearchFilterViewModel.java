@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SearchFilterViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
 
     public LiveData<String> getSearchWord() {
