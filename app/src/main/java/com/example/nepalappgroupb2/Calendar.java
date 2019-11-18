@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Calendar extends Fragment {
+public class Calendar extends Fragment implements Observer<String>{
     RecipeCardElement recipeCardElement = new RecipeCardElement();
 
     private RecyclerView recyclerView;
@@ -37,7 +37,7 @@ public class Calendar extends Fragment {
         for(int i = 0; i < test.length; i++) {
             cardArray.add(new RecipeCardElement(test[i]));
         }
-
+        ((searchWordProvider)getActivity()).getSearchWord().observe(getActivity(), this);
         recyclerView = layout.findViewById(R.id.calendar_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -120,17 +120,10 @@ public class Calendar extends Fragment {
             return filter;
         }
     }
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final SearchFilterViewModel model = ViewModelProviders.of(getActivity()).get(SearchFilterViewModel.class);
-        model.getSearchWord().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                adapter.getFilter().filter(s);
-            }
 
 
-
-        });
+    @Override
+    public void onChanged(String s) {
+        adapter.getFilter().filter(s);
     }
 }

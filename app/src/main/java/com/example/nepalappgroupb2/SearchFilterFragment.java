@@ -17,7 +17,6 @@ import android.widget.EditText;
 
 public class SearchFilterFragment extends Fragment {
     private EditText searchEditText;
-    private SearchFilterViewModel viewModel;
 
     public static SearchFilterFragment newInstance() {
         return new SearchFilterFragment();
@@ -38,7 +37,6 @@ public class SearchFilterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(SearchFilterViewModel.class);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -52,7 +50,8 @@ public class SearchFilterFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                viewModel.setSearchWord(s.toString());
+                    ((searchWordProvider)getActivity()).getSearchWord().setValue(s.toString());
+
             }
         });
     }
