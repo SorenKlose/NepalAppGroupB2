@@ -3,6 +3,7 @@ package com.example.nepalappgroupb2;
 import android.app.Activity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class CalenderActivity extends AppCompatActivity implements searchWordPro
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.calendar_framelayout, new Calendar())
                 .commit();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
     public MutableLiveData<String> getSearchWord() {
         return searchWord;
