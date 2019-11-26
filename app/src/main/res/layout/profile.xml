@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/plain_text_input2"
+        android:id="@+id/heightInput"
         android:layout_width="291dp"
         android:layout_height="40dp"
         android:layout_marginTop="56dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
     <EditText
-        android:id="@+id/plain_text_input"
+        android:id="@+id/weightInput"
         android:layout_width="291dp"
         android:layout_height="40dp"
         android:layout_marginTop="64dp"
@@ -61,7 +61,7 @@
         android:inputType="text"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/heightInput" />
 
     <TextView
         android:id="@+id/tvBirthDate3"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input" />
+        app:layout_constraintTop_toBottomOf="@+id/weightInput" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -98,10 +98,10 @@
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input3" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <EditText
-        android:id="@+id/plain_text_input3"
+        android:id="@+id/nameInput"
         android:layout_width="108dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -147,7 +147,7 @@
         android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input3" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
     <fragment
         android:id="@+id/fragment2"
         android:name="com.example.nepalappgroupb2.ProgressBarFragment"
