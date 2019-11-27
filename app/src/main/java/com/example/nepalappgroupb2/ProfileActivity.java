@@ -49,9 +49,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
 
+        String height = (sp.getString("height", null) + " cm");
+        String weight = (sp.getString("weight", null) + " kg");
         nameInput.setText(sp.getString("name", null));
-        heightInput.setText(sp.getString("height", null));
-        weightInput.setText(sp.getString("weight", null));
+        heightInput.setText(height);
+        weightInput.setText(weight);
 
 
         int year = sp.getInt("year", -1);
@@ -144,15 +146,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
-        if(view == nameInput){
+        if (view == nameInput) {
             editor.putString("name", nameInput.getText().toString());
-        } else if(view == heightInput){
-            NumberPicker heightPicker = new NumberPicker(ProfileActivity.this);
-            heightPicker.setMinValue(1);
-            heightPicker.setMaxValue(200);
+        } else if (view == heightInput) {
             editor.putString("height", heightInput.getText().toString());
-        } else if(view == weightInput){
-                editor.putString("weight", weightInput.getText().toString());
+        } else if (view == weightInput) {
+            editor.putString("weight", weightInput.getText().toString());
         }
         editor.apply();
     }
