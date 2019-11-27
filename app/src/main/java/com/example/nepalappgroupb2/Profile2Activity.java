@@ -2,7 +2,9 @@ package com.example.nepalappgroupb2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,7 +43,11 @@ public class Profile2Activity extends AppCompatActivity {
         public void onValueChange(NumberPicker numberPicker, int i, int i1) {
             Toast.makeText(Profile2Activity.this,
                     "selected number "+numberPicker.getValue(), Toast.LENGTH_SHORT);
-            int timePreg =  i1;
+            SharedPreferences sp = getSharedPreferences("profile2", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+
+            editor.putInt("monthPreg", i1);
+            editor.apply();
             System.out.println(i1);
 
         }
