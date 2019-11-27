@@ -1,5 +1,6 @@
 package com.example.nepalappgroupb2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,10 +47,20 @@ public class Quiz extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
             TextView title = holder.itemView.findViewById(R.id.card_title);
 
             title.setText(cardArray.get(position).getCardTitle());
+
+
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), QuizInner.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
 
         @Override
