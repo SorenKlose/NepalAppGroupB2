@@ -22,16 +22,27 @@ import java.util.List;
 
 public class BenytRecyclerviewEkspanderbar extends Fragment {
 
+  DataFromSheets db = new DataFromSheets();
+
   RecipeCardElement calendarCardElement = new RecipeCardElement();
 
   static class CalendarInfoData {
     List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
 
     List<List<String>> byer = Arrays.asList(
-            Arrays.asList("København", "Århus", "Odense", "Aalborg", "Ballerup"),
-            Arrays.asList("Oslo", "Trondheim"),
-            Arrays.asList("Stockholm", "Malmø", "Lund"),
-            Arrays.asList("Reykjavík", "Kópavogur", "Hafnarfjörður", "Dalvík"));
+            Arrays.asList("Congratulations on your pregnancy! During the fourth month of pregnancy, " +
+                          "visit the health facility for antenatal care, so that you learn about " +
+                          "your and child’s health.\n",
+                          "One IFA per day starting from the fourth " +
+                          "month of pregnancy will reduce your risk for anemia. IFA is available " +
+                          "free of cost at health facilities or from the FCHV.\n"),
+            Arrays.asList("As the child in the womb also receives nutrition from mother's food, " +
+                          "the pregnant woman should eat one more meal than usual daily and should " +
+                          "eat nutritious foods including eggs, fish and meat.\n",
+                          "During pregnancy, participating in FCHV led Health Mother's Group meetings is an opportunity to learn many things about your and your child’s health. Therefore, go every month.\n"),
+
+            Arrays.asList("For further information on your and the child’s health, listen to Bhanchhin Aama radio program from your local FM every Sunday morning at 7.30 hrs, afternoon at 13:00 hrs and at night at 9:15pm.\n", "Please eat eggs, meat and milk products every day for health and nutrition of both you and your child.\n"),
+            Arrays.asList("Always only drink water after boiling or filtering to prevent diarrheal diseases, typhoid and malnutrition.\n", "Hope you have not forgotten to take an IFA every day?\n"));
   }
 
   CalendarInfoData data = new CalendarInfoData();
@@ -84,7 +95,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       vh.title = vh.landeview.findViewById(R.id.calender_card_title);
       vh.calendarImage = vh.landeview.findViewById(R.id.image_calender);
       vh.landeview.setOnClickListener(vh);
-      //vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
+      vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
       vh.calendarImage.setOnClickListener(vh);
 //      vh.calendarImage.setBackgroundResource(android.R.drawable.btn_default);
       vh.rodLayout.addView(vh.landeview);
@@ -102,7 +113,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-        List<String> byerILandet = data.byer.get(position);
+          List<String> byerILandet = data.byer.get(position);
+//        List<String> infoList = new ArrayList<>();
+//        infoList.add(db.getMsgEngWithNum(position+1));
 
         while (vh.underviews.size()<byerILandet.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
