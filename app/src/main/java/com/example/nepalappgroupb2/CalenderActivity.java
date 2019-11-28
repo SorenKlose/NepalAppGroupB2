@@ -17,7 +17,7 @@ public class CalenderActivity extends AppCompatActivity implements searchWordPro
         setContentView(R.layout.calender_card_layout);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.calendar_framelayout, new Calendar())
+                .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())
                 .commit();
     }
     public MutableLiveData<String> getSearchWord() {
