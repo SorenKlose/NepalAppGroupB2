@@ -22,8 +22,10 @@ import java.util.List;
 
 public class BenytRecyclerviewEkspanderbar extends Fragment {
 
-  static class LandeOgByerData {
-    List<String> lande = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
+  RecipeCardElement calendarCardElement = new RecipeCardElement();
+
+  static class CalendarInfoData {
+    List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
 
     List<List<String>> byer = Arrays.asList(
             Arrays.asList("København", "Århus", "Odense", "Aalborg", "Ballerup"),
@@ -32,7 +34,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             Arrays.asList("Reykjavík", "Kópavogur", "Hafnarfjörður", "Dalvík"));
   }
 
-  LandeOgByerData data = new LandeOgByerData();
+  CalendarInfoData data = new CalendarInfoData();
 
   HashSet<Integer> åbneLande = new HashSet<>(); // hvilke lande der lige nu er åbne
 
@@ -67,20 +69,22 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     @Override
     public int getItemCount()  {
-      return data.lande.size();
+      return data.months.size();
     }
 
     @Override
     public EkspanderbartListeelemViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
       LinearLayout rodLayout = new LinearLayout(parent.getContext());
       rodLayout.setOrientation(LinearLayout.VERTICAL);
+      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+      rodLayout.setLayoutParams(lp);
       EkspanderbartListeelemViewholder vh = new EkspanderbartListeelemViewholder(rodLayout);
       vh.rodLayout = rodLayout;
       vh.landeview = getLayoutInflater().inflate(R.layout.calender_card_element, parent, false);
       vh.title = vh.landeview.findViewById(R.id.calender_card_title);
       vh.calendarImage = vh.landeview.findViewById(R.id.image_calender);
       vh.landeview.setOnClickListener(vh);
-      vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
+      //vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
       vh.calendarImage.setOnClickListener(vh);
 //      vh.calendarImage.setBackgroundResource(android.R.drawable.btn_default);
       vh.rodLayout.addView(vh.landeview);
@@ -90,7 +94,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     @Override
     public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
       boolean åben = åbneLande.contains(position);
-      vh.title.setText(data.lande.get(position));
+      vh.title.setText(data.months.get(position));
+      vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle(""+(position + 1) + " month old", getContext()));
+      System.out.println(""+(position + 1) + "month old");
 
       if (!åben) {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
@@ -149,7 +155,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         adapter.notifyItemChanged(position);
       } else {
         int id = v.getId();
-        Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i "+data.lande.get(position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i "+data.months.get(position), Toast.LENGTH_SHORT).show();
       }
     }
   }
