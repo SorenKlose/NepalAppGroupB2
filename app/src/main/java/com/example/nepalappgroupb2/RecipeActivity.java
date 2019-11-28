@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 public class RecipeActivity extends AppCompatActivity implements searchWordProvider{
@@ -18,6 +19,7 @@ public class RecipeActivity extends AppCompatActivity implements searchWordProvi
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.recipe_framelayout, new Recipe())
                 .commit();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     public MutableLiveData<String> getSearchWord() {

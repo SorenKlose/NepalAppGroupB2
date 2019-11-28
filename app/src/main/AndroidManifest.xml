@@ -22,6 +22,7 @@
         <activity android:name=".ComicActivity" ></activity>
         <activity android:name=".RecipeActivity" ></activity>
         <activity android:name=".CalenderActivity" ></activity>
+        <activity android:name=".QuizInner"></activity>
     </application>
 
 </manifest>

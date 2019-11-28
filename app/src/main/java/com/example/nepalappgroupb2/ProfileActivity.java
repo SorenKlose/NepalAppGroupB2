@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,27 +14,53 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     SharedPreferences mPrefs;
     final String popUpScreenShownPref = "popupscreen";
 
 
     private TextView mDisplayDate;
+    private EditText nameInput;
+    private EditText heightInput;
+    private EditText weightInput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
+        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+        nameInput = (EditText) findViewById(R.id.nameInput);
+        heightInput = (EditText) findViewById(R.id.heightInput);
+        weightInput = (EditText) findViewById(R.id.weightInput);
+
+        nameInput.setOnClickListener(this);
+        heightInput.setOnClickListener(this);
+        weightInput.setOnClickListener(this);
+
+        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+
+        String height = (sp.getString("height", null) + " cm");
+        String weight = (sp.getString("weight", null) + " kg");
+        nameInput.setText(sp.getString("name", null));
+        heightInput.setText(height);
+        weightInput.setText(weight);
+
+
+        int year = sp.getInt("year", -1);
+        int month = sp.getInt("month", -1);
+        int day = sp.getInt("day", -1);
+        String date = day + "/" + month + "/" + year;
+        mDisplayDate.setText(date);
 
 
 
@@ -66,9 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         SharedPreferences.Editor editor = mPrefs.edit();
         editor.putBoolean(popUpScreenShownPref, true);
-        editor.commit();
-
-
+        editor.apply();
 
         ImageView imFaneM = (ImageView) findViewById(R.id.imFaneM);
         imFaneM.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +105,6 @@ public class ProfileActivity extends AppCompatActivity {
             }});
 
 
-
-
-
-
-    //DATE PICKER
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,17 +125,35 @@ public class ProfileActivity extends AppCompatActivity {
         });
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        month = month + 1;
-                       // Log.d(TAG, "onDateSet: mm/dd/yyy: " + day + "/" + month + "/" + year);
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                String date = day + "/" + month + "/" + year;
+                mDisplayDate.setText(date);
 
-                        String date = day + "/" + month + "/" + year;
-                        mDisplayDate.setText(date);
-                    }
-                };
+                SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+
+                editor.putInt("year", year);
+                editor.putInt("month", month);
+                editor.putInt("day", day);
+                editor.apply();
             }
         };
-    }}
+    }
+
+    @Override
+    public void onClick(View view) {
+        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (view == nameInput) {
+            editor.putString("name", nameInput.getText().toString());
+        } else if (view == heightInput) {
+            editor.putString("height", heightInput.getText().toString());
+        } else if (view == weightInput) {
+            editor.putString("weight", weightInput.getText().toString());
+        }
+        editor.apply();
+    }
+};
+
