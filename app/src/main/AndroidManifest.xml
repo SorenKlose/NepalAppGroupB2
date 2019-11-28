@@ -20,8 +20,9 @@
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".Profile2Activity"></activity>
         <activity android:name=".ComicActivity" ></activity>
-        <activity android:name=".RecipeActivity" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".CalenderActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".RecipeActivity" ></activity>
+        <activity android:name=".CalenderActivity" ></activity>
+        <activity android:name=".QuizInner"></activity>
     </application>
 
 </manifest>
