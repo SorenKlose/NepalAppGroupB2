@@ -21,9 +21,11 @@
         android:id="@+id/comics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/quiz"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/quiz"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipes"
         app:srcCompat="@drawable/comics" />
 
@@ -31,12 +33,9 @@
         android:id="@+id/quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/comics"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/comics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comics"
+        app:layout_constraintTop_toBottomOf="@+id/recipes"
         app:srcCompat="@drawable/quiz" />
 
     <ImageView
@@ -49,7 +48,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recipes"
-        app:srcCompat="@drawable/calender" />
+        app:srcCompat="@drawable/calendar" />
 
     <ImageView
         android:id="@+id/recipes"
@@ -60,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/calender"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/recipe" />
+        app:srcCompat="@drawable/recipes" />
 
     <ImageView
         android:id="@+id/profile"
@@ -70,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz"
-        app:srcCompat="@drawable/bottom" />
+        app:srcCompat="@drawable/profile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

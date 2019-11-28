@@ -1,5 +1,7 @@
 package com.example.nepalappgroupb2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,46 +12,40 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
-import static java.util.Calendar.getInstance;
 
 public class ProgressBarFragment extends Fragment {
 
     private ProgressBar progressBar;
 
-
-
-
-
-
-
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_bar, container, false);
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+
+        int year = sp.getInt("year", -1);
+        int month = sp.getInt("month", -1);
+        int day = sp.getInt("day", -1);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(year, month, day);
+
+        long birthDate = calendar.getTimeInMillis();
         long currentDate = Calendar.getInstance().getTimeInMillis();
-        // com.example.nepalappgroupb2.Calendar birthDate = new GregorianCalendar();
+// 726 er ca. antal dage når 9 måneder fratrækkes 1000 dage. de +30 er for månedsindeksering
+        long progressInDays = TimeUnit.MILLISECONDS.toDays(
+                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
 
-        long birthDate = 25;
+        double progressInPercent =  (double) progressInDays / (double)726 * 100;
 
-        long progressInDays = TimeUnit.MILLISECONDS.toDays(currentDate - birthDate);
-
-
-        progressBar.setProgress(50); // progressStatus
-
+        progressBar.setProgress((int)progressInPercent); // progressStatus
         return view;
-
-
     }
-
 }
