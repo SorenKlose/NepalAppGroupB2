@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HompageMainActivity">
+    tools:context=".Homepage.HompageMainActivity">
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.nepalappgroupb2.ProgressBarFragment"
+        android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
-import com.example.nepalappgroupb2.searchWordProvider;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 import java.util.ArrayList;
 import java.util.List;

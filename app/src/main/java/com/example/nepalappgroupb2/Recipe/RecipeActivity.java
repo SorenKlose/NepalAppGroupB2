@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.example.nepalappgroupb2.R;
-import com.example.nepalappgroupb2.searchWordProvider;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 public class RecipeActivity extends AppCompatActivity implements searchWordProvider {
 

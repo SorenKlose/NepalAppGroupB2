@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.nepalappgroupb2.ProgressBarFragment"
+        android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

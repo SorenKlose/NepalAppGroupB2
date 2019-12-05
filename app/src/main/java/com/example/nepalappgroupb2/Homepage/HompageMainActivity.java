@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Homepage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.nepalappgroupb2.Comic.ComicActivity;
+import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
+import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
 public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
