@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,13 +11,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import com.example.nepalappgroupb2.R;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nepalappgroupb2.R;
+import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
+import com.example.nepalappgroupb2.searchWordProvider;
 
 import java.util.ArrayList;
 import java.util.List;

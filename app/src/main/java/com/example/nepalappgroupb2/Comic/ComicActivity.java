@@ -1,8 +1,10 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Comic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.nepalappgroupb2.R;
 
 public class ComicActivity extends AppCompatActivity {
 

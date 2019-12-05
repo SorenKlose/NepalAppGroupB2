@@ -33,7 +33,7 @@ public class DataFromSheets {
     }
 
     /**
-     * Taken from "Galgelogik" by Jakob Nordfalk
+     * Taken from "Galgelogik" by Jacob Nordfalk
      */
     private static String dataFromURL(String url) throws IOException {
         System.out.println("Henter data fra " + url);
