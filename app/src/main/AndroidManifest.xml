@@ -9,20 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HompageMainActivity">
+        <activity android:name=".Homepage.HompageMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuizActivity"></activity>
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".Profile2Activity"></activity>
-        <activity android:name=".ComicActivity" ></activity>
-        <activity android:name=".RecipeActivity" ></activity>
-        <activity android:name=".CalenderActivity" ></activity>
-        <activity android:name=".QuizInner"></activity>
+        <activity android:name=".Quiz.QuizActivity"></activity>
+        <activity android:name=".Profile.ProfileActivity"></activity>
+        <activity android:name=".Profile.Profile2Activity"></activity>
+        <activity android:name=".Comic.ComicActivity" ></activity>
+        <activity android:name=".Recipe.RecipeActivity" ></activity>
+        <activity android:name=".Calendar.CalenderActivity" ></activity>
+        <activity android:name=".Quiz.QuizInner"></activity>
     </application>
 
 </manifest>

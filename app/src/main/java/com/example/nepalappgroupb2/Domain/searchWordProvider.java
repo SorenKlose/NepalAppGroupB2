@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Domain;
 
 import androidx.lifecycle.MutableLiveData;
 

@@ -1,6 +1,4 @@
-package com.example.nepalappgroupb2;
-
-import android.app.Activity;
+package com.example.nepalappgroupb2.Calendar;
 
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -9,7 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 
-public class CalenderActivity extends AppCompatActivity implements searchWordProvider{
+import com.example.nepalappgroupb2.BenytRecyclerviewEkspanderbar;
+import com.example.nepalappgroupb2.R;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
+
+public class CalenderActivity extends AppCompatActivity implements searchWordProvider {
 
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     @Override
@@ -18,7 +20,7 @@ public class CalenderActivity extends AppCompatActivity implements searchWordPro
         setContentView(R.layout.calender_card_layout);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.calendar_framelayout, new Calendar())
+                .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())
                 .commit();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }

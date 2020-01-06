@@ -1,14 +1,15 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Recipe;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
-public class RecipeActivity extends AppCompatActivity implements searchWordProvider{
+import com.example.nepalappgroupb2.R;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
+
+public class RecipeActivity extends AppCompatActivity implements searchWordProvider {
 
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     @Override
