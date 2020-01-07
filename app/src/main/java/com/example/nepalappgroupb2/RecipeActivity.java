@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 public class RecipeActivity extends AppCompatActivity implements searchWordProvider{
+    
 
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     @Override

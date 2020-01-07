@@ -49,16 +49,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
 
-        String height = (sp.getString("height", null) + " cm");
-        String weight = (sp.getString("weight", null) + " kg");
-        nameInput.setText(sp.getString("name", null));
-        heightInput.setText(height);
-        weightInput.setText(weight);
 
 
-        int year = sp.getInt("year", -1);
-        int month = sp.getInt("month", -1);
-        int day = sp.getInt("day", -1);
+        nameInput.setText(sp.getString("name", ""));
+        heightInput.setText(sp.getString("height", "0"));
+        weightInput.setText(sp.getString("weight", "0"));
+
+
+        int year = sp.getInt("year", 0);
+        int month = sp.getInt("month", 0);
+        int day = sp.getInt("day", 0);
         String date = day + "/" + month + "/" + year;
         mDisplayDate.setText(date);
 
@@ -149,9 +149,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (view == nameInput) {
             editor.putString("name", nameInput.getText().toString());
         } else if (view == heightInput) {
-            editor.putString("height", heightInput.getText().toString());
+            editor.putString("height", heightInput.getText().toString() + " cm");
         } else if (view == weightInput) {
-            editor.putString("weight", weightInput.getText().toString());
+            editor.putString("weight", weightInput.getText().toString() + " kg");
         }
         editor.apply();
     }

@@ -32,7 +32,6 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         comicsButton.setOnClickListener(this);
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
-
     }
 
     @Override
