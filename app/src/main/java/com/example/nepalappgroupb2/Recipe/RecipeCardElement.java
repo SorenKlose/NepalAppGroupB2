@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Recipe;
 
 import android.content.Context;
 import android.view.View;

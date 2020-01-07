@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Quiz;
 
 public class QuizQuestionsOne {
 

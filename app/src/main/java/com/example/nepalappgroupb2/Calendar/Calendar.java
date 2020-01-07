@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nepalappgroupb2.R;
+import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,13 +59,26 @@ public class Calendar extends Fragment implements Observer<String>{
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
             //finding the views
-            TextView title = holder.itemView.findViewById(R.id.calender_card_title);
+            final TextView title = holder.itemView.findViewById(R.id.calender_card_title);
             ImageView bgImage = holder.itemView.findViewById(R.id.image_calender);
 
             //setting title and background image for each of the cards
             title.setText(cardArray.get(position).getCardTitle());
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title.setText("klik på " + holder.getAdapterPosition());
+                }
+            });
+
+            bgImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title.setText("klik på " + holder.getAdapterPosition());
+                }
+            });
 
             int resID = recipeCardElement.getBgImgIDFromTitle(cardArray.get(position).getCardTitle(), getContext());
             if(resID != 0) {

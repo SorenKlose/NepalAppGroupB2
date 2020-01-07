@@ -16,8 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            card_view:srcCompat="@drawable/baby_temperature"
-            tools:srcCompat="@drawable/baby_temperature" />
+            android:src="@drawable/_2_month_old" />
 
         <TextView
             android:id="@+id/calender_card_title"

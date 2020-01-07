@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".Profile.ProfileActivity">
 
     <ImageView
         android:id="@+id/imFaneP"
@@ -75,17 +75,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBirthDate4" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/elipse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightInput" />
-
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
@@ -110,17 +99,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/tick1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
     <TextView
         android:id="@+id/tvBirthDate4"
@@ -150,7 +128,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.nepalappgroupb2.ProgressBarFragment"
+        android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
