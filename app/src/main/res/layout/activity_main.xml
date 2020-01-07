@@ -29,32 +29,31 @@
 
     <ImageView
         android:id="@+id/recipes"
-        android:layout_width="180dp"
-        android:layout_height="135dp"
+        android:layout_width="200dp"
+        android:layout_height="176dp"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/recipes" />
 
     <ImageView
         android:id="@+id/quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="135dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_width="200dp"
+        android:layout_height="176dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipes"
         app:srcCompat="@drawable/quiz" />
 
     <ImageView
         android:id="@+id/calender"
-        android:layout_width="180dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_width="200dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recipes"
@@ -62,22 +61,22 @@
 
     <ImageView
         android:id="@+id/profile"
-        android:layout_width="230dp"
-        android:layout_height="77dp"
+        android:layout_width="303dp"
+        android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz"
         app:layout_constraintVertical_bias="0.053"
-        app:srcCompat="@drawable/profile2" />
+        app:srcCompat="@drawable/profile3" />
 
     <ImageView
         android:id="@+id/comics"
-        android:layout_width="wrap_content"
-        android:layout_height="135dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_width="200dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="4dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
