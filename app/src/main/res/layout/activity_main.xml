@@ -9,9 +9,9 @@
     <fragment
         android:id="@+id/fragment2"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="411dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="410dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Titel" />

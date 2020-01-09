@@ -22,7 +22,7 @@
         android:layout_width="316dp"
         android:layout_height="118dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/fanen"
+        android:src="@drawable/fane1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
