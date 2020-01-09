@@ -42,50 +42,40 @@
         android:id="@+id/heightInput"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
         android:hint="cm"
         android:inputType="text"
         app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvBirthDate4"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
     <EditText
         android:id="@+id/weightInput"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
         android:hint="kg"
         android:inputType="text"
         app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvBirthDate3"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvBirthDate3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
-        android:text="Weight"
-        android:textSize="30dp"
-        app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirthDate4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heightInput" />
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_marginLeft="228dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
         android:hint="Date"
-        android:textSize="30dp"
+        android:textSize="18dp"
         app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvBirthDate"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <EditText
         android:id="@+id/nameInput"
@@ -100,41 +90,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/tvBirthDate4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
-        android:text="Height"
-        android:textSize="30dp"
-        app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirthDate" />
-
-    <TextView
-        android:id="@+id/tvBirthDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="25dp"
-        android:text="BirthDate"
-        android:textSize="30dp"
-        app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
-
     <fragment
         android:id="@+id/fragment2"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="16dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="106dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11"
+        app:srcCompat="@drawable/weight" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="95dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:srcCompat="@drawable/height" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="98dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput"
+        app:srcCompat="@drawable/birthday" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
