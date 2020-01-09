@@ -31,7 +31,7 @@
         android:id="@+id/recipes"
         android:layout_width="200dp"
         android:layout_height="176dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,10 +66,9 @@
         android:layout_height="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quiz"
-        app:layout_constraintVertical_bias="0.053"
+        app:layout_constraintTop_toBottomOf="@+id/comics"
         app:srcCompat="@drawable/profile2" />
 
     <ImageView
