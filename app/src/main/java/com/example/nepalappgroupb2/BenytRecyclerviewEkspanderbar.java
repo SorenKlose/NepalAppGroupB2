@@ -1,5 +1,6 @@
 package com.example.nepalappgroupb2;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +54,30 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   RecyclerView recyclerView;
 
+  List<String> hej;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+
+    new AsyncTask() {
+      @Override
+      protected Object doInBackground(Object[] objects) {
+        try {
+          db.fromSheets();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        return null;
+      }
+
+      @Override
+      protected void onPostExecute(Object o) {
+        hej = db.getWithMonth(DataFromSheets.Headers.MsgEng, 1);
+        for(String s: hej) System.out.println("hej: "+s);
+      }
+    }.execute();
 
     View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
 
@@ -70,14 +92,13 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     }
     return layout;
   }
-/*
+
   @Override
   public void onSaveInstanceState(Bundle outState) { // Understøttelse for skærmvending - kan evt udelades
     super.onSaveInstanceState(outState);
     outState.putSerializable("openMonths", openMonths);
     outState.putParcelable("liste", recyclerView.getLayoutManager().onSaveInstanceState());
   }
-*/
 
   RecyclerView.Adapter adapter = new RecyclerView.Adapter<EkspanderbartListeelemViewholder>() {
 
@@ -116,11 +137,10 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-          List<String> byerILandet = data.info.get(position);
-//        List<String> infoList = new ArrayList<>();
-//        infoList.add(db.getMsgEngWithNum(position+1));
+        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, position);
+        List<String> byerILandet = data.info.get(position);
 
-        while (vh.underviews.size() < byerILandet.size()) { // sørg for at der er nok underviews
+        while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
           //underView.setPadding(0, 20, 0, 20);
           underView.setBackgroundResource(android.R.drawable.list_selector_background);
@@ -132,8 +152,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         for (int i=0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
           TextView underView = vh.underviews.get(i);
-          if (i < byerILandet.size()) {
-            underView.setText(byerILandet.get(i));
+          if (i < infoList.size()) {
+            underView.setText(infoList.get(i));
             underView.setVisibility(View.VISIBLE);
           } else {
             underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
