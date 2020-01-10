@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataFromSheets {
     private Map<String, String> map;
+    private enum Headers {
+        MsgNum, Week, Month, Goal, MsgNep, MsgEng, RadioTxt, RadioUrl
+    }
 
     /**
      * We are using this Google Sheet: https://docs.google.com/spreadsheets/d/1XV2U8gztCXR4BmPuLT1eQBxYUx0GFPDJp9S8YqRn92A/edit#gid=0
@@ -19,18 +24,59 @@ public class DataFromSheets {
         DataFromSheets data = new DataFromSheets();
         try {
             data.fromSheets();
-            data.getMsgEngWithWeek(24);
-            System.out.println(data.getMsgNum(34));
 
-            System.out.println(data.getRadioTxtWithWeek(16));
-            System.out.println(data.getRadioUrlWithNum(1));
-            System.out.println(data.getRadioUrlWithWeek(12));
-            System.out.println(data.getGoalWithNum(36));
-            System.out.println(data.getGoalWithWeek(12));
+            for(String s: data.getWithMonth(Headers.Week, 24)) {
+                System.out.println(s);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Finds the value of a header from msgNum. This is being used by "getWithMonth" method
+     * @param headerToGet the header of what value you want. Taken from the Headers enum
+     * @param msgNum at which msgNum it should retrieve the header value from
+     * @return a String with the value. If you expect an int you have to parse it yourself
+     */
+    public String getWithMsgNum(Headers headerToGet, int msgNum) {
+        String key = headerToGet.toString() + msgNum;
+        return map.get(key);
+    }
+
+    /**
+     * Get a list of all the header values from a specific month
+     * @param headerToGet the header of what value you want. Taken from the Headers enum
+     * @param month from which month do you want the data
+     * @return a List of Strings with the values for that specific month. Returns null if no matches.
+     */
+    public List<String> getWithMonth(Headers headerToGet, int month) {
+        List<String> headerList = new ArrayList<>();
+        //we are searching for any of the months
+        String keyWord = "Month";
+        String key;
+        try {
+            //looping through the whole map
+            for (int i = 0; i < map.size(); i++) {
+                key = keyWord + i;
+
+                //when this is true it means that we found the index of the month we were looking fore.
+                //this is then send to "getWithMsgNum" where we parse the header and the index/msgNum. We add the return of this to the headerList
+                if (map.get(key).equals(String.valueOf(month))) {
+                    headerList.add(getWithMsgNum(headerToGet, i));
+                }
+
+            }
+        }catch (NullPointerException e) {
+            //return null if no match for headerToGet in any of the months
+            if(headerList.isEmpty()) return null;
+        }
+        //if we found anything before running out of month, we return it
+        return headerList;
+    }
+
+
 
     /**
      * Taken from "Galgelogik" by Jacob Nordfalk
@@ -108,153 +154,6 @@ public class DataFromSheets {
         }
 
         System.out.println(map);
-    }
-
-    /**
-     * To get the MsgNum when you only know the week
-     * @param week the week number from Google Sheet
-     * @return the MsgNum corresponding to the "week" parameter or -1 if not found
-     */
-    public int getMsgNum(int week) {
-        String searchKey = "Week";
-        String key;
-        try {
-            for (int i = 0; i < map.size(); i++) {
-                key = searchKey + i;
-                if (map.get(key).equals(String.valueOf(week))) {
-                    return i;
-                }
-            }
-        } catch (NullPointerException e) {}
-
-        return -1;
-    }
-
-    /**
-     * The best method to get the english message. Running as fast as the Hashmap.get function.
-     * @param msgNum the MsgNum from the Google Sheet
-     * @return The english message as a String for the given msgNum
-     */
-    public String getMsgEngWithNum(int msgNum) {
-        String key = "MsgEng" + msgNum;
-        return map.get(key);
-    }
-
-    /**
-     * If you know the msgNum use the function "getMsgEngWithNum()" instead.
-     * This is O(n) to find the msgNum for the specific week.
-     * @param week the week number from Google Sheet
-     * @return the english message as a String or null if not found
-     */
-    public String getMsgEngWithWeek(int week) {
-        int msgNum = getMsgNum(week);
-        try {
-            return getMsgEngWithNum(msgNum);
-        } catch (NullPointerException e) {}
-
-        return null;
-    }
-
-    /**
-     * The best method to get the nepali message. Running as fast as the Hashmap.get function.
-     * @param msgNum the MsgNum from the Google Sheet
-     * @return The nepali message as a String for the given msgNum
-     */
-    public String getMsgNepWithNum(int msgNum) {
-        String key = "MsgNep" + msgNum;
-        return map.get(key);
-    }
-
-    /**
-     * If you know the msgNum use the function "getMsgNepWithNum()" instead.
-     * This is O(n) to find the msgNum for the specific week.
-     * @param week the week number from Google Sheet
-     * @return the nepali message as a String or null if not found
-     */
-    public String getMsgNepWithWeek(int week) {
-        int msgNum = getMsgNum(week);
-        try {
-            return getMsgNepWithNum(msgNum);
-        } catch (NullPointerException e) {}
-
-        return null;
-    }
-
-    /**
-     * The best method to get the RadioTxt. Running as fast as the Hashmap.get function.
-     * @param msgNum the MsgNum from the Google Sheet
-     * @return The RadioTxt as a String for the given msgNum
-     */
-    public String getRadioTxtWithNum(int msgNum) {
-        String key = "RadioTxt" + msgNum;
-        String radioTxt = map.get(key);
-        return radioTxt.equals("") ? null : radioTxt;
-    }
-
-    /**
-     * If you know the msgNum use the function "getRadioTxtWithNum()" instead.
-     * This is O(n) to find the msgNum for the specific week.
-     * @param week the week number from Google Sheet
-     * @return the RadioTxt as a String or null if not found
-     */
-    public String getRadioTxtWithWeek(int week) {
-        int msgNum = getMsgNum(week);
-        try {
-            return getRadioTxtWithNum(msgNum);
-        } catch (NullPointerException e) {}
-
-        return null;
-    }
-
-    /**
-     * The best method to get the RadioUrl. Running as fast as the Hashmap.get function.
-     * @param msgNum the MsgNum from the Google Sheet
-     * @return The RadioUrl as a String for the given msgNum
-     */
-    public String getRadioUrlWithNum(int msgNum) {
-        String key = "RadioUrl" + msgNum;
-        String radioTxt = map.get(key);
-        return radioTxt.equals("") ? null : radioTxt;
-    }
-
-    /**
-     * If you know the msgNum use the function "getRadioUrlWithNum()" instead.
-     * This is O(n) to find the msgNum for the specific week.
-     * @param week the week number from Google Sheet
-     * @return the RadioUrl as a String or null if not found
-     */
-    public String getRadioUrlWithWeek(int week) {
-        int msgNum = getMsgNum(week);
-        try {
-            return getRadioUrlWithNum(msgNum);
-        } catch (NullPointerException e) {}
-
-        return null;
-    }
-
-    /**
-     * The best method to get the Goal message. Running as fast as the Hashmap.get function.
-     * @param msgNum the MsgNum from the Google Sheet
-     * @return The Goal message as a String for the given msgNum
-     */
-    public String getGoalWithNum(int msgNum) {
-        String key = "Goal" + msgNum;
-        return map.get(key);
-    }
-
-    /**
-     * If you know the msgNum use the function "getGoalWithNum()" instead.
-     * This is O(n) to find the msgNum for the specific week.
-     * @param week the week number from Google Sheet
-     * @return the Goal of the message as a String or null if not found
-     */
-    public String getGoalWithWeek(int week) {
-        int msgNum = getMsgNum(week);
-        try {
-            return getGoalWithNum(msgNum);
-        } catch (NullPointerException e) {}
-
-        return null;
     }
 
     /**
