@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/card_title"
-            android:background="#8CF07C"
+            android:background="#9EC5FF"
             android:textSize="32sp"
             android:textColor="#000"
             android:gravity="center"
