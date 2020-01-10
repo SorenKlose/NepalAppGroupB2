@@ -71,7 +71,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
 
@@ -97,7 +96,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
-                    NextRandomQuestion(random.nextInt(questionLength));
                 }
                 break;
 
@@ -145,7 +143,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
-                    NextRandomQuestion(random.nextInt(questionLength));
                 }
                 break;
 
@@ -168,7 +165,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
 
@@ -194,7 +190,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
-                    NextRandomQuestion(random.nextInt(questionLength));
                 }
                 break;
 
@@ -217,7 +212,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
 
@@ -243,7 +237,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
-                    NextRandomQuestion(random.nextInt(questionLength));
                 }
                 break;
         }
