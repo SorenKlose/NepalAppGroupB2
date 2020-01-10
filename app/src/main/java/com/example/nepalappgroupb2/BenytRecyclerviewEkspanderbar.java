@@ -31,7 +31,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
   static class CalendarInfoData {
     List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
 
-    List<List<String>> byer = Arrays.asList(
+    List<List<String>> info = Arrays.asList(
             Arrays.asList("Congratulations on your pregnancy! During the fourth month of pregnancy, " +
                           "visit the health facility for antenatal care, so that you learn about " +
                           "your and child’s health.\n",
@@ -49,7 +49,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   CalendarInfoData data = new CalendarInfoData();
 
-  HashSet<Integer> åbneLande = new HashSet<>(); // hvilke lande der lige nu er åbne
+  HashSet<Integer> openMonths = new HashSet<>(); // Which months are currently open
 
   RecyclerView recyclerView;
 
@@ -65,18 +65,19 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     // Understøttelse for skærmvending - kan evt udelades
     if (savedInstanceState!=null) {
-      åbneLande = (HashSet<Integer>) savedInstanceState.getSerializable("åbneLande");
+      openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
       recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
     }
     return layout;
   }
-
+/*
   @Override
   public void onSaveInstanceState(Bundle outState) { // Understøttelse for skærmvending - kan evt udelades
     super.onSaveInstanceState(outState);
-    outState.putSerializable("åbneLande", åbneLande);
+    outState.putSerializable("openMonths", openMonths);
     outState.putParcelable("liste", recyclerView.getLayoutManager().onSaveInstanceState());
   }
+*/
 
   RecyclerView.Adapter adapter = new RecyclerView.Adapter<EkspanderbartListeelemViewholder>() {
 
@@ -106,7 +107,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     @Override
     public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
-      boolean åben = åbneLande.contains(position);
+      boolean åben = openMonths.contains(position);
       vh.title.setText(data.months.get(position));
       vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle(""+(position + 1) + " month old", getContext()));
       System.out.println(""+(position + 1) + "month old");
@@ -115,11 +116,11 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-          List<String> byerILandet = data.byer.get(position);
+          List<String> byerILandet = data.info.get(position);
 //        List<String> infoList = new ArrayList<>();
 //        infoList.add(db.getMsgEngWithNum(position+1));
 
-        while (vh.underviews.size()<byerILandet.size()) { // sørg for at der er nok underviews
+        while (vh.underviews.size() < byerILandet.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
           //underView.setPadding(0, 20, 0, 20);
           underView.setBackgroundResource(android.R.drawable.list_selector_background);
@@ -129,9 +130,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
           vh.underviews.add(underView);
         }
 
-        for (int i=0; i<vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
+        for (int i=0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
           TextView underView = vh.underviews.get(i);
-          if (i<byerILandet.size()) {
+          if (i < byerILandet.size()) {
             underView.setText(byerILandet.get(i));
             underView.setVisibility(View.VISIBLE);
           } else {
@@ -164,9 +165,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       final int position = getAdapterPosition();
 
       if (v == calendarImage || v==landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
-        boolean åben = åbneLande.contains(position);
-        if (åben) åbneLande.remove(position); // luk
-        else åbneLande.add(position); // åbn
+        boolean åben = openMonths.contains(position);
+        if (åben) openMonths.remove(position); // luk
+        else openMonths.add(position); // åbn
         adapter.notifyItemChanged(position);
       } else {
         int id = v.getId();
