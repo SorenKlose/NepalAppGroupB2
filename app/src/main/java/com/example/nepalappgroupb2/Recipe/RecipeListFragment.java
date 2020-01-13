@@ -16,29 +16,25 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Recipe extends Fragment implements Observer<String>{
+public class RecipeListFragment extends Fragment implements Observer<String>{
     RecipeCardElement recipeCardElement = new RecipeCardElement();
 
     private RecyclerView recyclerView;
 
-    //test arrays for cardElements and their title
-    List<RecipeCardElement> cardArray = new ArrayList<>();
-    String[] test = {"Dal Bhat", "Food", "madopskrift", "Peda", "god mad"};
+    List<RecipeCardElement> cardArray = DataService.getListOfRecipes();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View layout = inflater.inflate(R.layout.recipe_card_layout, container, false);
 
-        //creating cardElements for the array
-        for(int i = 0; i < test.length; i++) {
-            cardArray.add(new RecipeCardElement(test[i]));
-        }
 
         ((searchWordProvider)getActivity()).getSearchWord().observe(getActivity(), this);
         recyclerView = layout.findViewById(R.id.quiz_recyclerView);
@@ -100,10 +96,8 @@ public class Recipe extends Fragment implements Observer<String>{
                         results.count = originalCardArray.size();
 
                     } else {
-                        input = input.toString().toLowerCase();
                         for (int i = 0; i < originalCardArray.size(); i++) {
-                            String data = originalCardArray.get(i).getCardTitle();
-                            if (data.toLowerCase().contains(input.toString())) {
+                            if (originalCardArray.get(i).containsSearchword(input)) {
                                 filteredList.add(new RecipeCardElement(originalCardArray.get(i).getCardTitle()));
                             }
                         }

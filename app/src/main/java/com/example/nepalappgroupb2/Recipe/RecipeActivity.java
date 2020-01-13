@@ -18,7 +18,7 @@ public class RecipeActivity extends AppCompatActivity implements searchWordProvi
         setContentView(R.layout.recipe_act);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.recipe_framelayout, new Recipe())
+                .replace(R.id.recipe_framelayout, new RecipeListFragment())
                 .commit();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
