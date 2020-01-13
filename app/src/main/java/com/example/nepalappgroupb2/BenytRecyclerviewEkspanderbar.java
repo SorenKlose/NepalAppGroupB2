@@ -38,6 +38,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   List<Integer> tempMonths; //List of every month that has at least one message.
 
+  ViewGroup vg;
+
 
   static class CalendarInfoData {
 //    List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
@@ -146,6 +148,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       vh.calendarImage.setOnClickListener(vh);
 //      vh.calendarImage.setBackgroundResource(android.R.drawable.btn_default);
       vh.rodLayout.addView(vh.landeview);
+      vg = parent;
       return vh;
     }
 
@@ -162,24 +165,41 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths.get(position));
 
-        while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
-          TextView underView = new TextView(vh.rodLayout.getContext());
+//        while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
+          View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
+          //TextView underView = new TextView(vh.rodLayout.getContext());
           //underView.setPadding(0, 20, 0, 20);
           underView.setBackgroundResource(android.R.drawable.list_selector_background);
           underView.setOnClickListener(vh);      // lad viewholderen håndtere evt klik
           underView.setId(vh.underviews.size()); // unik ID så vi senere kan se hvilket af underviewne der klikkes på
           vh.rodLayout.addView(underView);
           vh.underviews.add(underView);
-        }
+//        }
 
-        for (int i=0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
-          TextView underView = vh.underviews.get(i);
-          if (i < infoList.size()) {
-            underView.setText(infoList.get(i) + "\n");
-            underView.setVisibility(View.VISIBLE);
-          } else {
-            underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
-          }
+//        for (int i=0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
+//          View underView = vh.underviews.get(i);
+//          if (i < infoList.size()) {
+        if (infoList.size() == 1){
+          TextView tv = underView.findViewById(R.id.descText);
+          tv.setText(infoList.get(0) + "\n");
+          TextView tv2 = underView.findViewById(R.id.descText2);
+          tv2.setVisibility(View.GONE);
+          ImageView speaker2 = underView.findViewById(R.id.speakerImage2);
+          speaker2.setVisibility(View.GONE);
+          underView.setVisibility(View.VISIBLE);
+        }
+        else if (infoList.size() == 2) {
+          TextView tv = underView.findViewById(R.id.descText);
+          tv.setText(infoList.get(0) + "\n");
+          TextView tv2 = underView.findViewById(R.id.descText2);
+          tv2.setText(infoList.get(1) + "\n");
+          ImageView speaker2 = underView.findViewById(R.id.speakerImage2);
+          speaker2.setVisibility(View.VISIBLE);
+
+          underView.setVisibility(View.VISIBLE);
+        }
+        else {
+          underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
         }
       }
     }
@@ -196,7 +216,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     TextView title;
     ImageView calendarImage;
     View landeview;
-    ArrayList<TextView> underviews = new ArrayList<>();
+    ArrayList<View> underviews = new ArrayList<>();
 
     public EkspanderbartListeelemViewholder(View itemView) {
       super(itemView);
