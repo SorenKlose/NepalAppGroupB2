@@ -25,19 +25,51 @@ public class DataFromSheets {
         try {
             data.fromSheets();
 
-            for(String s: data.getWithMonth(Headers.MsgEng, 6)) {
-                System.out.println("hej "+s);
+            for (String s : data.getWithMonth(Headers.MsgEng, 6)) {
+                System.out.println("hej " + s);
             }
+
+            System.out.println("hej: " + data.map.get("Month1"));
+
+            System.out.println(data.getMonths());
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public List<Integer> getMonths() {
+        String keyword = "Month";
+        String key;
+        List<Integer> monthList = new ArrayList<>();
+        try {
+            for (int i = 1; i < map.size(); i++) {
+                key = keyword + i;
+                System.out.println("key er: " + key);
+                System.out.println("map.get = " + map.get(key));
+                if (map.get(key) != null) {
+                    monthList.add((Integer.valueOf(map.get(key))));
+                }
+            }
+        } catch (NullPointerException e) {
+        }
+
+        List<Integer> newList = new ArrayList<>();
+        for (int i : monthList) {
+            if (!newList.contains(i)) {
+                newList.add(i);
+            }
+        }
+
+        return newList;
+    }
+
     /**
      * Finds the value of a header from msgNum. This is being used by "getWithMonth" method
+     *
      * @param headerToGet the header of what value you want. Taken from the Headers enum
-     * @param msgNum at which msgNum it should retrieve the header value from
+     * @param msgNum      at which msgNum it should retrieve the header value from
      * @return a String with the value. If you expect an int you have to parse it yourself
      */
     public String getWithMsgNum(Headers headerToGet, int msgNum) {
@@ -47,8 +79,9 @@ public class DataFromSheets {
 
     /**
      * Get a list of all the header values from a specific month
+     *
      * @param headerToGet the header of what value you want. Taken from the Headers enum
-     * @param month from which month do you want the data
+     * @param month       from which month do you want the data
      * @return a List of Strings with the values for that specific month. Returns null if no matches.
      */
     public List<String> getWithMonth(Headers headerToGet, int month) {
@@ -68,14 +101,13 @@ public class DataFromSheets {
                 }
 
             }
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             //return null if no match for headerToGet in any of the months
-            if(headerList.isEmpty()) return null;
+            if (headerList.isEmpty()) return null;
         }
         //if we found anything before running out of month, we return it
         return headerList;
     }
-
 
 
     /**
@@ -96,6 +128,7 @@ public class DataFromSheets {
     /**
      * Method used to find amount of headers in the Google Sheet.
      * Fx "MsgNum", "Week", "MsgEng" are headers.
+     *
      * @param line a single row from the Google Sheet
      * @return the amount of headers in the Google Sheet as an int
      */
@@ -111,6 +144,7 @@ public class DataFromSheets {
 
     /**
      * The method that save the data from Google Sheet into a HashMap
+     *
      * @throws Exception
      */
     public void fromSheets() throws Exception {
@@ -158,6 +192,7 @@ public class DataFromSheets {
 
     /**
      * To get the size of the HashMap
+     *
      * @return size of HashMap
      */
     public int getMapSize() {
