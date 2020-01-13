@@ -44,25 +44,25 @@ public class DataFromSheets {
         String key;
         List<Integer> monthList = new ArrayList<>();
         try {
+            //traverse the map looking for the key. Fx then i=1 it is "Month1"
             for (int i = 1; i < map.size(); i++) {
                 key = keyword + i;
-                System.out.println("key er: " + key);
-                System.out.println("map.get = " + map.get(key));
+                //if the key we find is not null, we add to the list
                 if (map.get(key) != null) {
                     monthList.add((Integer.valueOf(map.get(key))));
                 }
             }
-        } catch (NullPointerException e) {
-        }
+        } catch (NullPointerException e) {}
 
-        List<Integer> newList = new ArrayList<>();
+        //removing duplicates from the monthList
+        List<Integer> noDuplicates = new ArrayList<>();
         for (int i : monthList) {
-            if (!newList.contains(i)) {
-                newList.add(i);
+            if (!noDuplicates.contains(i)) {
+                noDuplicates.add(i);
             }
         }
 
-        return newList;
+        return noDuplicates;
     }
 
     /**

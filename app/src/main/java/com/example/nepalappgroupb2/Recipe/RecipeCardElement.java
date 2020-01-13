@@ -1,13 +1,31 @@
 package com.example.nepalappgroupb2.Recipe;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class RecipeCardElement {
     private String defaultImg = "madret";
+
+    //searchable
     private String cardTitle;
-    //private ImageView backgroundImage;
+
+    private HashSet<String> allSearchableStrings;
+    private String allSearchablesStringsAsASingleString;
+
+    public RecipeCardElement(String cardTitle, String[] searchables ){
+        this.allSearchableStrings = new HashSet<String>();
+        //hvis søgeordene indeholder duplikater så vil HashSet reducere disse til en.
+        this.allSearchableStrings.addAll(new ArrayList<String>(Arrays.asList(searchables)));
+        this.allSearchableStrings.add(cardTitle);
+        this.allSearchablesStringsAsASingleString = TextUtils.join("", allSearchableStrings);
+        this.cardTitle = cardTitle;
+    }
 
     public RecipeCardElement(String cardTitle) {
         this.cardTitle = cardTitle;
@@ -60,5 +78,12 @@ public class RecipeCardElement {
     }
     public String getDefaultImg() {
         return defaultImg;
+    }
+    public ArrayList<String> getAllSearchableStrings(){
+        return new ArrayList<>( allSearchableStrings);
+    }
+
+    public boolean containsSearchword(CharSequence cs){
+        return allSearchablesStringsAsASingleString.contains(cs.toString().toLowerCase());
     }
 }
