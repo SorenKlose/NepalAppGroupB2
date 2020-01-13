@@ -1,13 +1,14 @@
 package com.example.nepalappgroupb2.Quiz;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.nepalappgroupb2.R;
 
 import java.util.Random;
@@ -16,9 +17,10 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
 
     Button knap1, knap2, knap3, knap4;
     TextView questions;
+    LottieAnimationView checkmark, errorcross;
 
     private QuizQuestionsOne question = new QuizQuestionsOne();
-    private String choise;
+    private String choice;
     private int questionLength = question.questions.length;
 
     Random random;
@@ -39,6 +41,9 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
 
         questions = findViewById(R.id.question);
 
+        checkmark = findViewById(R.id.lottieCheckMark);
+        errorcross = findViewById(R.id.lottieErrorCross);
+
         random = new Random();
         NextRandomQuestion(random.nextInt(questionLength));
     }
@@ -47,52 +52,200 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.knap1:
-                if (knap1.getText() == choise){
-                    Toast.makeText(QuizInner.this, "Correct!", Toast.LENGTH_SHORT).show();
+                if (knap1.getText() == choice){
+                    checkmark.setVisibility(View.VISIBLE);
+                    checkmark.playAnimation();
+
+                    checkmark.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            checkmark.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            checkmark.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                     NextRandomQuestion(random.nextInt(questionLength));
                 }else {
-                    Toast.makeText(QuizInner.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    NextRandomQuestion(random.nextInt(questionLength));
+                    errorcross.setVisibility(View.VISIBLE);
+                    errorcross.playAnimation();
+
+                    errorcross.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            errorcross.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            errorcross.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                 }
                 break;
 
             case R.id.knap2:
-                if (knap2.getText() == choise){
-                    Toast.makeText(QuizInner.this, "Correct!", Toast.LENGTH_SHORT).show();
+                if (knap2.getText() == choice){
+                    checkmark.setVisibility(View.VISIBLE);
+                    checkmark.playAnimation();
+
+                    checkmark.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            checkmark.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            checkmark.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                     NextRandomQuestion(random.nextInt(questionLength));
                 }else {
-                    Toast.makeText(QuizInner.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    NextRandomQuestion(random.nextInt(questionLength));
+                    errorcross.setVisibility(View.VISIBLE);
+                    errorcross.playAnimation();
+
+                    errorcross.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            errorcross.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            errorcross.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                 }
                 break;
 
             case R.id.knap3:
-                if (knap3.getText() == choise){
-                    Toast.makeText(QuizInner.this, "Correct!", Toast.LENGTH_SHORT).show();
+                if (knap3.getText() == choice){
+                    checkmark.setVisibility(View.VISIBLE);
+                    checkmark.playAnimation();
+
+                    checkmark.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            checkmark.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            checkmark.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                     NextRandomQuestion(random.nextInt(questionLength));
                 }else {
-                    Toast.makeText(QuizInner.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    NextRandomQuestion(random.nextInt(questionLength));
+                    errorcross.setVisibility(View.VISIBLE);
+                    errorcross.playAnimation();
+
+                    errorcross.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            errorcross.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            errorcross.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                 }
                 break;
 
             case R.id.knap4:
-                if (knap4.getText() == choise){
-                    Toast.makeText(QuizInner.this, "Correct!", Toast.LENGTH_SHORT).show();
+                if (knap4.getText() == choice){
+                    checkmark.setVisibility(View.VISIBLE);
+                    checkmark.playAnimation();
+
+                    checkmark.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            checkmark.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            checkmark.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                     NextRandomQuestion(random.nextInt(questionLength));
                 }else {
-                    Toast.makeText(QuizInner.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    NextRandomQuestion(random.nextInt(questionLength));
+                    errorcross.setVisibility(View.VISIBLE);
+                    errorcross.playAnimation();
+
+                    errorcross.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            errorcross.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            errorcross.setVisibility(View.GONE);
+                        }
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+
                 }
                 break;
         }
     }
     public void NextRandomQuestion(int number){
         questions.setText(question.getQuestions(number));
-        knap1.setText(question.getChoises1(number));
-        knap2.setText(question.getChoises2(number));
-        knap3.setText(question.getChoises3(number));
-        knap4.setText(question.getChoises4(number));
-        choise = question.getCorrectChoise(number);
+        knap1.setText(question.getChoices1(number));
+        knap2.setText(question.getChoices2(number));
+        knap3.setText(question.getChoices3(number));
+        knap4.setText(question.getChoices4(number));
+        choice = question.getCorrectChoice(number);
     }
 }

@@ -16,20 +16,18 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class RecipeListFragment extends Fragment implements Observer<String>{
+public class RecipeFrag extends Fragment implements Observer<String>{
     RecipeCardElement recipeCardElement = new RecipeCardElement();
 
     private RecyclerView recyclerView;
 
-    List<RecipeCardElement> cardArray = DataService.getListOfRecipes();
+    List<RecipeCardElement> cardArray = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
