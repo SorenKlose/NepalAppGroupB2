@@ -1,3 +1,8 @@
+/*
+Den her klasse startede som en kopi af BenytRecyclerviewEkspanderbar klassen fra android elementer,
+og er siden blevet ændret i, for at tilpasse vores behov.
+*/
+
 package com.example.nepalappgroupb2;
 
 import android.os.AsyncTask;
@@ -29,8 +34,11 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   RecipeCardElement calendarCardElement = new RecipeCardElement();
 
+  List<String> months = new ArrayList<>();
+
+
   static class CalendarInfoData {
-    List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
+//    List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
 
     List<List<String>> info = Arrays.asList(
             Arrays.asList("Congratulations on your pregnancy! During the fourth month of pregnancy, " +
@@ -79,6 +87,18 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       }
     }.execute();
 
+    for (int i = (-7); i < 19; i++){
+      if (i < 0){
+        months.add("" + (i + 10) + " months pregnant");
+      }
+      else if (i < 13){
+        months.add("" + i + " months old");
+      }
+      else{
+        months.add("" + (((i-12)*2)+12) + " months old");
+      }
+    }
+
     View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
 
     recyclerView = layout.findViewById(R.id.calendar_recyclerView);
@@ -86,7 +106,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     recyclerView.setAdapter(adapter);
 
     // Understøttelse for skærmvending - kan evt udelades
-    if (savedInstanceState!=null) {
+    if (savedInstanceState != null) {
       openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
       recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
     }
@@ -104,7 +124,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     @Override
     public int getItemCount()  {
-      return data.months.size();
+      return months.size();
     }
 
     @Override
@@ -129,8 +149,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     @Override
     public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
       boolean åben = openMonths.contains(position);
-      vh.title.setText(data.months.get(position));
-      vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle(""+(position + 1) + " month old", getContext()));
+      vh.title.setText(months.get(position));
+      vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle("" + (position + 1) + " month old", getContext()));
       System.out.println(""+(position + 1) + "month old");
 
       if (!åben) {
@@ -138,7 +158,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       } else {
 
         List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, position);
-        List<String> byerILandet = data.info.get(position);
 
         while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
@@ -191,7 +210,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         adapter.notifyItemChanged(position);
       } else {
         int id = v.getId();
-        Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i "+data.months.get(position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
       }
     }
   }
