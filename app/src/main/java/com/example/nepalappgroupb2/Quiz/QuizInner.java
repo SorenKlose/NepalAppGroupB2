@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +20,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     LottieAnimationView checkmark, errorcross;
 
     private QuizQuestionsOne question = new QuizQuestionsOne();
-    private String choise;
+    private String choice;
     private int questionLength = question.questions.length;
 
     Random random;
@@ -53,7 +52,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.knap1:
-                if (knap1.getText() == choise){
+                if (knap1.getText() == choice){
                     checkmark.setVisibility(View.VISIBLE);
                     checkmark.playAnimation();
 
@@ -100,7 +99,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.knap2:
-                if (knap2.getText() == choise){
+                if (knap2.getText() == choice){
                     checkmark.setVisibility(View.VISIBLE);
                     checkmark.playAnimation();
 
@@ -147,7 +146,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.knap3:
-                if (knap3.getText() == choise){
+                if (knap3.getText() == choice){
                     checkmark.setVisibility(View.VISIBLE);
                     checkmark.playAnimation();
 
@@ -194,7 +193,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.knap4:
-                if (knap4.getText() == choise){
+                if (knap4.getText() == choice){
                     checkmark.setVisibility(View.VISIBLE);
                     checkmark.playAnimation();
 
@@ -243,10 +242,10 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     }
     public void NextRandomQuestion(int number){
         questions.setText(question.getQuestions(number));
-        knap1.setText(question.getChoises1(number));
-        knap2.setText(question.getChoises2(number));
-        knap3.setText(question.getChoises3(number));
-        knap4.setText(question.getChoises4(number));
-        choise = question.getCorrectChoise(number);
+        knap1.setText(question.getChoices1(number));
+        knap2.setText(question.getChoices2(number));
+        knap3.setText(question.getChoices3(number));
+        knap4.setText(question.getChoices4(number));
+        choice = question.getCorrectChoice(number);
     }
 }
