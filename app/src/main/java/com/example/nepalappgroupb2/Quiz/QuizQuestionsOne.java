@@ -4,7 +4,7 @@ public class QuizQuestionsOne {
 
     public String questions[] = {
             "When should you visit the health facility to learn about your childs health?",
-            /*"What is the recommended amount of IFA-tablets per day?",
+            "What is the recommended amount of IFA-tablets per day?",
             "When should you start taking IFA-tablets?",
             "What should you participate in every month during pregnancy?",
             "What should you eat every day?",
@@ -12,13 +12,13 @@ public class QuizQuestionsOne {
             "What should you always do before preparing or eating a meal?",
             "What should you do while pregnant?",
             "How soon should you initiate breatsfeeding after birth?",
-            "When should you visit the health facility after birth?",*/
+            "When should you visit the health facility after birth?",
             ""
     };
 
     public String choices[][] = {
             {"First month", "Second month", "Third month", "Fourth month"},
-            /*{"1 tablet", "2 tablets", "5 tablets", "As many as i want"},
+            {"1 tablet", "2 tablets", "5 tablets", "As many as i want"},
             {"First day of pregnancy", "Fourth month", "Whenever i want", "Never"},
             {"A mothers guide group", "Healthy group for mothers", "Health Mother's Group", "Healthy Child's Group"},
             {"Eggs, meat and milk products", "Fish and egg products", "Noodles and chips", "Meat noodles and chips products"},
@@ -26,13 +26,13 @@ public class QuizQuestionsOne {
             {"Rinse hands with cold water", "Wake up the child", "Wash hands with soap", "Say a prayer"},
             {"Be more active than normal", "Drink alcohol to disinfect", "Do household work yourself", "Rest a lot"},
             {"Within 1 hour", "Within 2 hours", "Within 5 hours", "Within 10 hours"},
-            {"The next day", "Within a month", "Within a week", "It doesn't matter"},*/
+            {"The next day", "Within a month", "Within a week", "It doesn't matter"},
             {"","","",""}
     };
 
     public String correct[] = {
             "Fourth month",
-            /*"1 tablet",
+            "1 tablet",
             "Fourth month",
             "Health Mother's Group",
             "Eggs, meat and milk products",
@@ -40,7 +40,7 @@ public class QuizQuestionsOne {
             "Wash hands with soap",
             "Rest a lot",
             "Within 1 hour",
-            "Within a week",*/
+            "Within a week",
             ""
     };
 
