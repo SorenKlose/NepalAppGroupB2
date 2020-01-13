@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.nepalappgroupb2"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,14 +38,15 @@ dependencies {
     def lottieVersion = "3.3.1"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //for pdf view in recipe
+    implementation "com.pdfview:pdfview-android:1.0.0"
+
 
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'
 
     // Required for instrumented tests
     androidTestImplementation 'com.android.support:support-annotations:24.0.0'
-
-
 
     // Til afprøvning i en emulator (src/androidTest)
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class DataFromSheets {
     private Map<String, String> map;
+
     private enum Headers {
         MsgNum, Week, Month, Goal, MsgNep, MsgEng, RadioTxt, RadioUrl
     }
@@ -25,9 +26,10 @@ public class DataFromSheets {
         try {
             data.fromSheets();
 
-            for(String s: data.getWithMonth(Headers.Week, 24)) {
-                System.out.println(s);
+            for(String s: data.getWithMonth(Headers.MsgEng, 6)) {
+                System.out.println("hej "+s);
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
