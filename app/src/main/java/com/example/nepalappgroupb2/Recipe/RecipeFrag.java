@@ -22,7 +22,7 @@ import com.example.nepalappgroupb2.Domain.searchWordProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recipe extends Fragment implements Observer<String>{
+public class RecipeFrag extends Fragment implements Observer<String>{
     RecipeCardElement recipeCardElement = new RecipeCardElement();
 
     private RecyclerView recyclerView;

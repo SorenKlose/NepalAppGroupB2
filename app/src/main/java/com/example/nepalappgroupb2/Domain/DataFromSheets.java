@@ -25,8 +25,8 @@ public class DataFromSheets {
         try {
             data.fromSheets();
 
-            for(String s: data.getWithMonth(Headers.MsgEng, 1)) {
-                System.out.println("hej: "+s);
+            for(String s: data.getWithMonth(Headers.MsgEng, 6)) {
+                System.out.println("hej "+s);
             }
 
         } catch (Exception e) {

@@ -25,7 +25,7 @@ public class Quiz extends Fragment {
     private RecyclerView recyclerView;
 
     List<RecipeCardElement> cardArray = new ArrayList<>();
-    String[] quizliste = {"Month 1 Quiz", "Month 2 Quiz", "Month 3 Quiz", "Month 4 Quiz", "Month 5 Quiz"};
+    String[] quizliste = {"Quiz 1", "Quiz 2", "Quiz 3", "Quiz 4", "Quiz 5"};
 
     @Nullable
     @Override
