@@ -36,7 +36,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
 
-  ArrayList<String> tempMonths = db.getMonths(); //List of every month that has at least one message.
+  List<Integer> tempMonths; //List of every month that has at least one message.
 
 
   static class CalendarInfoData {
@@ -86,6 +86,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       protected void onPostExecute(Object o) {
         hej = db.getWithMonth(DataFromSheets.Headers.MsgEng, 1);
         for(String s: hej) System.out.println("hej: "+s);
+        tempMonths = db.getMonths();
       }
     }.execute();
 
@@ -159,7 +160,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths(position));
+        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths.get(position));
 
         while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
@@ -174,7 +175,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (int i=0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
           TextView underView = vh.underviews.get(i);
           if (i < infoList.size()) {
-            underView.setText(infoList.get(i));
+            underView.setText(infoList.get(i) + "\n");
             underView.setVisibility(View.VISIBLE);
           } else {
             underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
