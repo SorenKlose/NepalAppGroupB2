@@ -12,10 +12,11 @@ public class QuizQuestionsOne {
             "What should you always do before preparing or eating a meal?",
             "What should you do while pregnant?",
             "How soon should you initiate breatsfeeding after birth?",
-            "When should you visit the health facility after birth?"
+            "When should you visit the health facility after birth?",
+            ""
     };
 
-    public String choises[][] = {
+    public String choices[][] = {
             {"First month", "Second month", "Third month", "Fourth month"},
             {"1 tablet", "2 tablets", "5 tablets", "As many as i want"},
             {"First day of pregnancy", "Fourth month", "Whenever i want", "Never"},
@@ -25,7 +26,8 @@ public class QuizQuestionsOne {
             {"Rinse hands with cold water", "Wake up the child", "Wash hands with soap", "Say a prayer"},
             {"Be more active than normal", "Drink alcohol to disinfect", "Do household work yourself", "Rest a lot"},
             {"Within 1 hour", "Within 2 hours", "Within 5 hours", "Within 10 hours"},
-            {"The next day", "Within a month", "Within a week", "It doesn't matter"}
+            {"The next day", "Within a month", "Within a week", "It doesn't matter"},
+            {"","","",""}
     };
 
     public String correct[] = {
@@ -38,31 +40,32 @@ public class QuizQuestionsOne {
             "Wash hands with soap",
             "Rest a lot",
             "Within 1 hour",
-            "Within a week"
+            "Within a week",
+            ""
     };
 
     public String getQuestions(int i){
         String question = questions[i];
         return question;
     }
-    public String getChoises1(int i){
-        String choice = choises[i][0];
+    public String getChoices1(int i){
+        String choice = choices[i][0];
         return choice;
     }
-    public String getChoises2(int i){
-        String choice = choises[i][1];
+    public String getChoices2(int i){
+        String choice = choices[i][1];
         return choice;
     }
-    public String getChoises3(int i){
-        String choice = choises[i][2];
+    public String getChoices3(int i){
+        String choice = choices[i][2];
         return choice;
     }
-    public String getChoises4(int i){
-        String choice = choises[i][3];
+    public String getChoices4(int i){
+        String choice = choices[i][3];
         return choice;
     }
-    public String getCorrectChoise(int i){
-        String correctChoise = correct[i];
-        return correctChoise;
+    public String getCorrectChoice(int i){
+        String correctChoice = correct[i];
+        return correctChoice;
     }
 }
