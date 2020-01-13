@@ -34,7 +34,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   RecipeCardElement calendarCardElement = new RecipeCardElement();
 
-  List<String> months = new ArrayList<>();
+  List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
+
+  ArrayList<String> tempMonths = db.getMonths(); //List of every month that has at least one message.
 
 
   static class CalendarInfoData {
@@ -157,7 +159,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, position);
+        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths(position));
 
         while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           TextView underView = new TextView(vh.rodLayout.getContext());
