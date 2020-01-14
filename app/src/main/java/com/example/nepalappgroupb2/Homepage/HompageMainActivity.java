@@ -3,10 +3,12 @@ package com.example.nepalappgroupb2.Homepage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
@@ -14,7 +16,12 @@ import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
+import java.sql.SQLOutput;
+
+import io.fabric.sdk.android.Fabric;
+
 public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     ImageView calenderButton;
     ImageView recipesButton;
@@ -26,6 +33,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setCrashReporting();
+
         setContentView(R.layout.activity_main);
 
         calenderButton = (ImageView) findViewById(R.id.calender);
@@ -39,6 +48,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         comicsButton.setOnClickListener(this);
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -63,5 +74,21 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
+    }
+
+    private void setCrashReporting(){
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        System.out.println("this this run on an emulator: "+EMULATOR);
+        if (EMULATOR) {
+            Fabric.with(this, new Crashlytics());
+        }
+
+        // Crashlytics.getInstance().crash(); // forcer et crash
+
+        // hvis emulatoren ikke har adgang til internettet så den kan sende crash-rapporter,
+        // så prøv at lave en 'Cold Boot Now' på emulatoren
+
+
     }
 }
