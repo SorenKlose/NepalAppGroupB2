@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-
-import com.example.nepalappgroupb2.R;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class ImageAdapter extends BaseAdapter {
 

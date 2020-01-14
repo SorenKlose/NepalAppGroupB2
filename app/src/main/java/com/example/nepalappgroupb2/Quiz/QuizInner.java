@@ -17,7 +17,7 @@ import com.example.nepalappgroupb2.R;
 
 import java.util.Random;
 
-public class QuizInner extends AppCompatActivity implements View.OnClickListener {
+public class    QuizInner extends AppCompatActivity implements View.OnClickListener {
 
     Button knap1, knap2, knap3, knap4;
     TextView questions;

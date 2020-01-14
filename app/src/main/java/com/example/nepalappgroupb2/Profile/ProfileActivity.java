@@ -230,6 +230,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.pregnantButton:
                 Intent intent = new Intent(ProfileActivity.this, Profile2Activity.class);
                 startActivity(intent);
+                this.finish();
                 break;
 
             case R.id.diary:
