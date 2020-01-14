@@ -97,6 +97,7 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageAdapter imageAdapter = new ImageAdapter(this);
+
         Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
         imageAdapter.images.add(bitmap);
     }
