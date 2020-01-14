@@ -30,7 +30,8 @@ import java.util.Date;
 public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClickListener {
 
     GridView gridView;
-    Button cameraButton;
+    ImageView test;
+    ImageView cameraButton;
 
 
     String currentImagePath = null;
@@ -40,8 +41,10 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_diary);
 
+        test = (ImageView) findViewById(R.id.test);
+
         gridView = (GridView) findViewById(R.id.gridView);
-        cameraButton = (Button) findViewById(R.id.cameraButton);
+        cameraButton = (ImageView) findViewById(R.id.cameraButton);
         cameraButton.setOnClickListener(this);
 
         gridView.setAdapter(new ImageAdapter(this));
@@ -75,6 +78,7 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
                     "com.example.nepalappgroupb2.fileprovider",
                     imageFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            test.setImageURI(imageUri);
         }
         startActivityForResult(intent, 1);
     }
