@@ -16,7 +16,6 @@ public class DataListofRecipees {
     }
 
     public ArrayList<RecipeCardElement> getData() {
-        System.out.println("hreellloo:          "+data.size());
         if(data.size() < 1 ){
             setData();
         }

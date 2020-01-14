@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
+import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
@@ -71,26 +72,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-
-    new AsyncTask() {
-      @Override
-      protected Object doInBackground(Object[] objects) {
-        try {
-          db.fromSheets();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        return null;
-      }
-
-      @Override
-      protected void onPostExecute(Object o) {
-        hej = db.getWithMonth(DataFromSheets.Headers.MsgEng, 1);
-        for (String s : hej) System.out.println("hej: " + s);
-        tempMonths = db.getMonths();
-      }
-    }.execute();
+      tempMonths = DataService.getMonthsFromData();
 
     for (int i = (-7); i < 19; i++) {
       if (i < 0) {
@@ -162,7 +144,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
           underview.setVisibility(View.GONE); // skjul underelementer
       } else {
 
-        List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths.get(position));
+        List<String> infoList = DataService.getMessageOfMonth("english", tempMonths.get(position));
 
         while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
