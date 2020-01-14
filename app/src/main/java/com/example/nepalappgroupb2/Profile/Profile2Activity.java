@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.R;
 
 public class Profile2Activity extends AppCompatActivity {
 
     private Button momButton;
     SharedPreferences sp;
+    private ProgressBarFragment progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,6 @@ public class Profile2Activity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }});
-
     }
 
     NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener(){
@@ -58,6 +59,8 @@ public class Profile2Activity extends AppCompatActivity {
             editor.putInt("monthsPregnant", i1);
             editor.apply();
             System.out.println(i1);
+            progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
+            progressBar.update();
         }
     };
 }
