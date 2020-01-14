@@ -16,6 +16,8 @@ import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
+import java.sql.SQLOutput;
+
 import io.fabric.sdk.android.Fabric;
 
 public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -75,9 +77,18 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setCrashReporting(){
+
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
-        if (!EMULATOR) {
+        System.out.println("this this run on an emulator: "+EMULATOR);
+        if (EMULATOR) {
             Fabric.with(this, new Crashlytics());
         }
+
+        // Crashlytics.getInstance().crash(); // forcer et crash
+
+        // hvis emulatoren ikke har adgang til internettet så den kan sende crash-rapporter,
+        // så prøv at lave en 'Cold Boot Now' på emulatoren
+
+
     }
 }
