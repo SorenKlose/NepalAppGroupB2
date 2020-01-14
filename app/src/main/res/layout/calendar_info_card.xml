@@ -23,11 +23,11 @@
 
                 <TextView
                     android:id="@+id/descText"
-                    android:layout_width="375dp"
+                    android:layout_width="325dp"
                     android:layout_height="wrap_content"
                     android:text="Remember to check the temperature of your child"
                     android:textColor="#000"
-                    android:textSize="25sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/speakerImage"
@@ -38,26 +38,30 @@
                     app:srcCompat="@drawable/speaker" />
 
             </LinearLayout>
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/descText2"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:text="Remember to check the temperature of your child"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/descImage"
-                android:layout_width="wrap_content"
-                android:layout_height="175dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/baby_temperature" />
+                android:id="@+id/speakerImage2"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/speaker" />
+
 
         </LinearLayout>
+-->        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </LinearLayout>
