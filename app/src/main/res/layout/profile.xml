@@ -4,75 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFF0	"
     tools:context=".Profile.ProfileActivity">
 
-    <ImageView
-        android:id="@+id/imFaneP"
-        android:layout_width="316dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/fane2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <ImageView
-        android:id="@+id/imFaneM"
-        android:layout_width="316dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/fane1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pictureFrame"
+        android:layout_width="139dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="124dp"
         android:src="@drawable/profilepicture"
+        app:civ_border_color="#C7E9E9"
+        app:civ_border_width="3dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/heightInput"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
-        android:hint="cm"
-        android:inputType="text"
-        app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
-
-    <EditText
-        android:id="@+id/weightInput"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
-        android:hint="kg"
-        android:inputType="text"
-        app:fontFamily="@font/roboto_condensed_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightInput" />
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:hint="Date"
-        android:textSize="18dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#C7E9E9"
+        android:textSize="30dp"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameInput" />
@@ -81,23 +39,28 @@
         android:id="@+id/nameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:hint="Name of baby"
-        android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:imeOptions="actionDone"
+        android:inputType="textImeMultiLine"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#C7E9E9"
         app:fontFamily="@font/roboto_condensed_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/progressBar"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="410dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="14dp"
+        android:layout_marginBottom="380dp"
+        app:layout_constraintBottom_toTopOf="@+id/heightInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,20 +68,24 @@
         android:id="@+id/imageView4"
         android:layout_width="106dp"
         android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView11"
         app:srcCompat="@drawable/weight" />
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="95dp"
+        android:layout_width="0dp"
         android:layout_height="57dp"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
+        app:layout_constraintEnd_toStartOf="@+id/heightInput"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView12"
         app:srcCompat="@drawable/height" />
@@ -133,5 +100,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameInput"
         app:srcCompat="@drawable/birthday" />
+
+    <Button
+        android:id="@+id/heightInput"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_rounded"
+        android:text="Height"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/weightInput"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_rounded"
+        android:text="Weight"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.629"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/heightInput"
+        app:layout_constraintVertical_bias="0.108" />
+
+    <Button
+        android:id="@+id/pregnantButton"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_rounded_white"
+        android:text="Pregnant"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <Button
+        android:id="@+id/momButton"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_rounded"
+        android:text="Mom"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pregnantButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.327"
+        app:layout_constraintStart_toEndOf="@+id/pregnantButton" />
+
+    <Button
+        android:id="@+id/diary"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_rounded"
+        android:text="Diary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightInput"
+        app:layout_constraintVertical_bias="0.302" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

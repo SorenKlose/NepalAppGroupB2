@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="false">
+    </uses-feature>
+    <uses-permission android:name="android.permission.Write_external_storage">
+    </uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Profile.PopupImage"></activity>
+        <activity android:name=".Profile.PhotoDiaryActivity" />
         <activity android:name=".Homepage.HompageMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,13 +27,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Quiz.QuizActivity"></activity>
-        <activity android:name=".Profile.ProfileActivity"></activity>
-        <activity android:name=".Profile.Profile2Activity"></activity>
-        <activity android:name=".Comic.ComicActivity" ></activity>
-        <activity android:name=".Recipe.RecipeActivity" ></activity>
-        <activity android:name=".Calendar.CalenderActivity" ></activity>
-        <activity android:name=".Quiz.QuizInner"></activity>
+        <activity android:name=".Quiz.QuizActivity" />
+        <activity android:name=".Profile.ProfileActivity" />
+        <activity android:name=".Profile.Profile2Activity" />
+        <activity android:name=".Comic.ComicActivity" />
+        <activity android:name=".Recipe.RecipeActivity" />
+        <activity android:name=".Calendar.CalenderActivity" />
+        <activity android:name=".Quiz.QuizInner" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.nepalappgroupb2.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+
     </application>
 
 </manifest>

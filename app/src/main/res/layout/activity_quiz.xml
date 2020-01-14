@@ -29,7 +29,7 @@
 
 
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/progressBar"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

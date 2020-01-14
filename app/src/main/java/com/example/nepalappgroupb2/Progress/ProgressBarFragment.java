@@ -25,9 +25,13 @@ public class ProgressBarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_bar, container, false);
-
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+       update();
+        return view;
+    }
 
+
+    public void update(){
 
         SharedPreferences sp = this.getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
 
@@ -43,11 +47,10 @@ public class ProgressBarFragment extends Fragment {
         long currentDate = Calendar.getInstance().getTimeInMillis();
 // 726 er ca. antal dage når 9 måneder fratrækkes 1000 dage. de +30 er for månedsindeksering
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
-                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
 
         double progressInPercent =  (double) progressInDays / (double)726 * 100;
 
         progressBar.setProgress((int)progressInPercent); // progressStatus
-        return view;
     }
 }

@@ -1,25 +1,39 @@
 package com.example.nepalappgroupb2.Profile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nepalappgroupb2.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,40 +41,49 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     final String popUpScreenShownPref = "popupscreen";
 
 
+    String currentImagePath = null;
+
     private TextView mDisplayDate;
     private EditText nameInput;
-    private EditText heightInput;
-    private EditText weightInput;
+    private Button heightInput;
+    private Button weightInput;
+    private ImageView pictureFrame;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private Dialog inputDialog;
+    private Button pregnantButton;
+    private Button diary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+        mDisplayDate = (TextView) findViewById(R.id.date);
         nameInput = (EditText) findViewById(R.id.nameInput);
-        heightInput = (EditText) findViewById(R.id.heightInput);
-        weightInput = (EditText) findViewById(R.id.weightInput);
+        heightInput = (Button) findViewById(R.id.heightInput);
+        weightInput = (Button) findViewById(R.id.weightInput);
+        pictureFrame = (ImageView) findViewById(R.id.pictureFrame);
+        pregnantButton = (Button) findViewById(R.id.pregnantButton);
+        diary = (Button) findViewById(R.id.diary);
 
         nameInput.setOnClickListener(this);
         heightInput.setOnClickListener(this);
         weightInput.setOnClickListener(this);
+        pictureFrame.setOnClickListener(this);
+        pregnantButton.setOnClickListener(this);
+        diary.setOnClickListener(this);
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
-
-
-
+        heightInput.setText(sp.getString("height", "height") + " cm");
+        weightInput.setText(sp.getString("weight", "weight") + " kg");
         nameInput.setText(sp.getString("name", ""));
-        heightInput.setText(sp.getString("height", "0"));
-        weightInput.setText(sp.getString("weight", "0"));
-
 
         int year = sp.getInt("year", 0);
         int month = sp.getInt("month", 0);
         int day = sp.getInt("day", 0);
         String date = day + "/" + month + "/" + year;
         mDisplayDate.setText(date);
+
 
 
 
@@ -95,17 +118,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editor.putBoolean(popUpScreenShownPref, true);
         editor.apply();
 
-        ImageView imFaneM = (ImageView) findViewById(R.id.imFaneM);
-        imFaneM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(ProfileActivity.this, Profile2Activity.class);
-                ProfileActivity.this.startActivity(myIntent);
-                finish();
-            }});
-
-
-
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,23 +149,94 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 editor.putInt("month", month);
                 editor.putInt("day", day);
                 editor.apply();
+
             }
         };
     }
 
     @Override
     public void onClick(View view) {
-        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+        final SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sp.edit();
 
-        if (view == nameInput) {
-            editor.putString("name", nameInput.getText().toString());
-        } else if (view == heightInput) {
-            editor.putString("height", heightInput.getText().toString() + " cm");
-        } else if (view == weightInput) {
-            editor.putString("weight", weightInput.getText().toString() + " kg");
+        switch (view.getId()){
+            case R.id.nameInput:
+                editor.putString("name", nameInput.getText().toString());
+                editor.apply();
+                break;
+
+            case R.id.heightInput:
+                inputDialog = new Dialog(this);
+                inputDialog.setContentView(R.layout.input_popup);
+
+                final NumberPicker heightPicker = inputDialog.findViewById(R.id.heightPicker);
+                heightPicker.setMinValue(0);
+                heightPicker.setMaxValue(100);
+
+                inputDialog.show();
+
+                Button saveHeightButton = (Button) inputDialog.findViewById(R.id.saveHeightButton);
+
+                saveHeightButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editor.putString("height", String.valueOf(heightPicker.getValue()));
+                    editor.apply();
+                    heightInput.setText(String.valueOf(heightPicker.getValue()) + " cm");
+
+                    Toast.makeText(getApplication().getBaseContext(),"Saved",Toast.LENGTH_LONG).show();
+                    inputDialog.cancel();
+                    }
+                });
+                break;
+
+            case R.id.weightInput:
+                inputDialog = new Dialog(this);
+                inputDialog.setContentView(R.layout.weight_input_popup);
+
+                final NumberPicker weightPickerKG = inputDialog.findViewById(R.id.weightPickerKG);
+                weightPickerKG.setMinValue(0);
+                weightPickerKG.setMaxValue(9);
+
+                final NumberPicker weightPickerG = inputDialog.findViewById(R.id.weightPickerG);
+                weightPickerG.setMinValue(0);
+                weightPickerG.setMaxValue(9);
+
+                inputDialog.show();
+
+                Button saveWeightButton = (Button) inputDialog.findViewById(R.id.saveWeightButton);
+
+
+
+                saveWeightButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editor.putString("weight", String.valueOf(weightPickerKG.getValue() +
+                                "." + String.valueOf(weightPickerG.getValue())));
+                        editor.apply();
+                        weightInput.setText(String.valueOf(weightPickerKG.getValue() +
+                                "." + String.valueOf(weightPickerG.getValue())) + " kg");
+
+                        Toast.makeText(getApplication().getBaseContext(),"Saved",Toast.LENGTH_LONG).show();
+                        inputDialog.cancel();
+                    }
+                });
+                break;
+
+           /* case R.id.pictureFrame:
+                savePicture();
+                break;*/
+
+            case R.id.pregnantButton:
+                Intent intent = new Intent(ProfileActivity.this, Profile2Activity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.diary:
+                Intent intent1 = new Intent(ProfileActivity.this, PhotoDiaryActivity.class);
+                startActivity(intent1);
+                break;
         }
-        editor.apply();
     }
 };
 

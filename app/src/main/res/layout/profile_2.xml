@@ -4,17 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFF0"
     tools:context=".Profile.Profile2Activity">
-
-    <ImageView
-        android:id="@+id/imFaneP"
-        android:layout_width="316dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/fane2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -37,8 +28,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/eplisepregnant"
-                />
+        app:srcCompat="@drawable/eplisepregnant" />
 
     <TextView
         android:id="@+id/textView1"
@@ -55,15 +45,16 @@
         android:id="@+id/numberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/progressBar"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
         android:layout_width="410dp"
         android:layout_height="16dp"
@@ -71,6 +62,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"></fragment>
+
+    <Button
+        android:id="@+id/pregnantButton"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_rounded"
+        android:text="Pregnant"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <Button
+        android:id="@+id/momButton"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_rounded_white"
+        android:text="Mom"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pregnantButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toEndOf="@+id/pregnantButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
