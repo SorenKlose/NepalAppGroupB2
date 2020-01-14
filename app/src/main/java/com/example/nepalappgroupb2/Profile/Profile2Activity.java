@@ -17,23 +17,25 @@ import com.example.nepalappgroupb2.R;
 public class Profile2Activity extends AppCompatActivity {
 
     private Button momButton;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_2);
 
+
         momButton = (Button) findViewById(R.id.momButton);
+        sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+
+        NumberPicker numberPicker = findViewById(R.id.numberPicker);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(9);
 
 
+        numberPicker.setValue(sp.getInt("monthsPregnant", 0));
 
-
-
-        NumberPicker np = findViewById(R.id.numberPicker);
-        np.setMinValue(1);
-        np.setMaxValue(9);
-
-        np.setOnValueChangedListener(onValueChangeListener);
+        numberPicker.setOnValueChangedListener(onValueChangeListener);
 
         momButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,15 +52,12 @@ public class Profile2Activity extends AppCompatActivity {
         public void onValueChange(NumberPicker numberPicker, int i, int i1) {
             Toast.makeText(Profile2Activity.this,
                     "selected number "+numberPicker.getValue(), Toast.LENGTH_SHORT);
-            SharedPreferences sp = getSharedPreferences("profile2", Context.MODE_PRIVATE);
+            sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
 
-            editor.putInt("monthPreg", i1);
+            editor.putInt("monthsPregnant", i1);
             editor.apply();
             System.out.println(i1);
-
         }
     };
-
-
 }

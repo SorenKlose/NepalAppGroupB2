@@ -36,18 +36,6 @@
         app:srcCompat="@drawable/componenttitel" />
 
     <ImageView
-        android:id="@+id/recipes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:srcCompat="@drawable/recipes" />
-
-    <ImageView
         android:id="@+id/quiz"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -59,33 +47,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/quiz" />
-
-    <ImageView
-        android:id="@+id/calender"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:srcCompat="@drawable/calendar" />
-
-    <ImageView
-        android:id="@+id/profile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="59dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:layout_constraintVertical_bias="0.060000002"
-        app:srcCompat="@drawable/profile3" />
 
     <ImageView
         android:id="@+id/comics"
@@ -154,6 +115,93 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="76dp"
         app:layout_constraintGuide_percent="0.09"/>
+
+    <Button
+        android:id="@+id/btnCalendar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_rounded"
+        android:drawableTop="@drawable/kalenderlille"
+        android:paddingTop="20dp"
+        android:text="calendar"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <Button
+        android:id="@+id/btnRecipe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_recipe"
+        android:drawableTop="@drawable/recipe"
+        android:paddingTop="20dp"
+        android:text="Recipes"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <Button
+        android:id="@+id/btnQuiz"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_quiz"
+        android:drawableTop="@drawable/quiz"
+        android:paddingTop="20dp"
+        android:text="Quiz"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toBottomOf="@+id/quiz"
+        app:layout_constraintEnd_toEndOf="@+id/quiz"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/quiz" />
+
+    <Button
+        android:id="@+id/btnComics"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_comic"
+        android:drawableTop="@drawable/comics"
+        android:paddingTop="20dp"
+        android:text="Comics"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/comics"
+        app:layout_constraintTop_toTopOf="@+id/comics" />
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="362dp"
+        android:layout_height="54dp"
+        android:background="@drawable/button_profile"
+        android:drawableEnd="@drawable/profileicon"
+        android:text="Profile"
+        android:textColor="#ffff"
+        android:paddingRight="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
