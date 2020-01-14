@@ -38,19 +38,24 @@ public class ProgressBarFragment extends Fragment {
         int year = sp.getInt("year", -1);
         int month = sp.getInt("month", -1);
         int day = sp.getInt("day", -1);
+        int monthsPregnant = sp.getInt("monthsPregnant", -1);
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(year, month, day);
 
+
         long birthDate = calendar.getTimeInMillis();
         long currentDate = Calendar.getInstance().getTimeInMillis();
-// 726 er ca. antal dage når 9 måneder fratrækkes 1000 dage. de +30 er for månedsindeksering
+
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-
-        double progressInPercent =  (double) progressInDays / (double)726 * 100;
-
+        if (progressInDays == 0){
+            progressInDays = monthsPregnant * 30;
+        } else{
+            progressInDays += 9*30;
+        }
+        double progressInPercent =  (double) progressInDays / (double)1000 * 100;
         progressBar.setProgress((int)progressInPercent); // progressStatus
     }
 }
