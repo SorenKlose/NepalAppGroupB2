@@ -13,7 +13,7 @@ import java.util.Map;
 public class DataFromSheets {
     private Map<String, String> map;
     public enum Headers {
-        MsgNum, Week, Month, Goal, MsgNep, MsgEng, RadioTxt, RadioUrl
+        MsgNum, Week, Month, Goal, MsgNep, MsgEng, RadioTxt, RadioUrl, grpB2Sound
     }
 
     /**
@@ -25,13 +25,15 @@ public class DataFromSheets {
         try {
             data.fromSheets();
 
-            for (String s : data.getWithMonth(Headers.MsgEng, 6)) {
-                System.out.println("hej " + s);
-            }
+//            for (String s : data.getWithMonth(Headers.MsgEng, 6)) {
+//                System.out.println("hej " + s);
+//            }
+//
+//            System.out.println("hej: " + data.map.get("Month1"));
+//
+//            System.out.println(data.getMonths());
 
-            System.out.println("hej: " + data.map.get("Month1"));
-
-            System.out.println(data.getMonths());
+            System.out.println("hej: " + data.getMediaPlayer(-6, 1));
 
 
         } catch (Exception e) {
@@ -39,6 +41,14 @@ public class DataFromSheets {
         }
     }
 
+    public String getMediaPlayer(int month, int id) {
+        return getWithMonth(Headers.grpB2Sound, month).get(id);
+    }
+
+    /**
+     *
+     * @return
+     */
     public List<Integer> getMonths() {
         String keyword = "Month";
         String key;

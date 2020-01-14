@@ -5,8 +5,11 @@ og er siden blevet ændret i, for at tilpasse vores behov.
 
 package com.example.nepalappgroupb2;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +35,13 @@ import java.util.List;
 public class BenytRecyclerviewEkspanderbar extends Fragment {
 
   DataFromSheets db = new DataFromSheets();
-
   RecipeCardElement calendarCardElement = new RecipeCardElement();
-
   List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
-
   List<Integer> tempMonths; //List of every month that has at least one message.
-
   ViewGroup vg;
-
+  MediaPlayer month6sound;
 
   static class CalendarInfoData {
-//    List<String> months = Arrays.asList("1 month old", "2 month old", "3 month old", "4 month old");
-
     List<List<String>> info = Arrays.asList(
             Arrays.asList("Congratulations on your pregnancy! During the fourth month of pregnancy, " +
                             "visit the health facility for antenatal care, so that you learn about " +
@@ -74,6 +71,17 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     super.onCreate(savedInstanceState);
       tempMonths = DataService.getMonthsFromData();
 
+/*
+    for (int i = 0; i < tempMonths.size(); i++){
+      if (tempMonths.get(i) < 0){
+        months.add("" + (tempMonths.get(i)+9) + " months pregnant");
+      }
+      else{
+        months.add("" + tempMonths.get(i) + " months old");
+      }
+    }
+*/
+
     for (int i = (-7); i < 19; i++) {
       if (i < 0) {
         months.add("" + (i + 10) + " months pregnant");
@@ -89,6 +97,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     recyclerView = layout.findViewById(R.id.calendar_recyclerView);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
+
+    month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
 
     // Understøttelse for skærmvending - kan evt udelades
     if (savedInstanceState != null) {
@@ -148,8 +158,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
           View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
-          //TextView underView = new TextView(vh.rodLayout.getContext());
-          //underView.setPadding(0, 20, 0, 20);
           underView.setBackgroundResource(android.R.drawable.list_selector_background);
           underView.setOnClickListener(vh);      // lad viewholderen håndtere evt klik
           underView.setId(vh.underviews.size()); // unik ID så vi senere kan se hvilket af underviewne der klikkes på
@@ -163,19 +171,10 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             if (infoList.size() == 1) {
               TextView tv = underView.findViewById(R.id.descText);
               tv.setText(infoList.get(0) + "\n");
-//              TextView tv2 = underView.findViewById(R.id.descText2);
-//              tv2.setVisibility(View.GONE);
-//              ImageView speaker2 = underView.findViewById(R.id.speakerImage2);
-//              speaker2.setVisibility(View.GONE);
               underView.setVisibility(View.VISIBLE);
             } else if (infoList.size() == 2) {
               TextView tv = underView.findViewById(R.id.descText);
               tv.setText(infoList.get(0) + "\n");
-//              TextView tv2 = underView.findViewById(R.id.descText2);
-//              tv2.setText(infoList.get(1) + "\n");
-//              ImageView speaker2 = underView.findViewById(R.id.speakerImage2);
-//              speaker2.setVisibility(View.VISIBLE);
-
               underView.setVisibility(View.VISIBLE);
             } else {
               underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
@@ -215,6 +214,22 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       } else {
         int id = v.getId();
         Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
+//        month6sound.start();
+
+        String soundName = db.getMediaPlayer(tempMonths.get(position), id);
+
+        try {
+          MediaPlayer mp = new MediaPlayer();
+          Uri uri = Uri.parse("android.resource://"+getContext().getPackageName()+ "/raw/" + soundName);
+          mp.setDataSource(getContext(), uri);
+          mp.prepare();
+          mp.start();
+          System.out.println("spiller: " + soundName);
+          System.out.println(mp.getDuration());
+          //SystemClock.sleep(mp.getDuration());
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     }
   }

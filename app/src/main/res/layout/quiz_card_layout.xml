@@ -16,16 +16,16 @@
 
         <TextView
             android:id="@+id/card_title"
-            android:background="#9EC5FF"
-            android:textSize="32sp"
-            android:textColor="#000"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="40dp"
-            android:paddingVertical="10dp"
+            android:layout_width="411dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="Quiz 1" />
+            android:layout_marginHorizontal="40dp"
+            android:background="#C7E9E9"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="Quiz 1"
+            android:textColor="#000"
+            android:textSize="32sp" />
 
     </androidx.cardview.widget.CardView>
 

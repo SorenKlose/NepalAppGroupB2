@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
@@ -22,13 +24,12 @@ import io.fabric.sdk.android.Fabric;
 
 public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-    ImageView calenderButton;
-    ImageView recipesButton;
-    ImageView comicsButton;
-    ImageView quizButton;
-
-    ImageView profileButton;
+    Button calenderButton;
+    Button recipesButton;
+    Button comicsButton;
+    Button quizButton;
+    private ProgressBarFragment progressBar;
+    Button profileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +38,17 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
 
         setContentView(R.layout.activity_main);
 
-        calenderButton = (ImageView) findViewById(R.id.calender);
-        recipesButton = (ImageView) findViewById(R.id.recipes);
-        comicsButton = (ImageView) findViewById(R.id.comics);
-        quizButton = (ImageView) findViewById(R.id.quiz);
-        profileButton = (ImageView) findViewById(R.id.profile);
+        calenderButton = (Button) findViewById(R.id.btnCalendar);
+        recipesButton = (Button) findViewById(R.id.btnRecipe);
+        comicsButton = (Button) findViewById(R.id.btnComics);
+        quizButton = (Button) findViewById(R.id.btnQuiz);
+        profileButton = (Button) findViewById(R.id.btnProfile);
 
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
         comicsButton.setOnClickListener(this);
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -89,6 +88,14 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         // hvis emulatoren ikke har adgang til internettet så den kan sende crash-rapporter,
         // så prøv at lave en 'Cold Boot Now' på emulatoren
 
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
+        progressBar.update();
 
     }
 }
