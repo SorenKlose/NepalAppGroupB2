@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -234,12 +235,17 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
 //        month6sound.start();
 
+        String soundName = db.getMediaPlayer(tempMonths.get(position), id);
+
         try {
           MediaPlayer mp = new MediaPlayer();
-          Uri uri = Uri.parse("android.resource://"+getContext().getPackageName()+ "/raw/" + "six_month_1");
+          Uri uri = Uri.parse("android.resource://"+getContext().getPackageName()+ "/raw/" + soundName);
           mp.setDataSource(getContext(), uri);
           mp.prepare();
           mp.start();
+          System.out.println("spiller: " + soundName);
+          System.out.println(mp.getDuration());
+          //SystemClock.sleep(mp.getDuration());
         } catch (Exception e) {
           e.printStackTrace();
         }
