@@ -27,6 +27,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     private String choice;
     private int questionLength = question.questions.length;
     private int questionNumber = 0;
+    private int correctChoice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
+                    correctChoice++;
                     NextQuestion();
                 }else {
                     errorcross.setVisibility(View.VISIBLE);
@@ -96,6 +98,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
+
+                    NextQuestion();
                 }
                 break;
 
@@ -121,6 +125,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
+                    correctChoice++;
                     NextQuestion();
                 }else {
                     errorcross.setVisibility(View.VISIBLE);
@@ -142,6 +147,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
+
+                    NextQuestion();
                 }
                 break;
 
@@ -167,6 +174,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
+                    correctChoice++;
                     NextQuestion();
                 }else {
                     errorcross.setVisibility(View.VISIBLE);
@@ -188,6 +196,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
+
+                    NextQuestion();
                 }
                 break;
 
@@ -213,6 +223,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
+                    correctChoice++;
                     NextQuestion();
                 }else {
                     errorcross.setVisibility(View.VISIBLE);
@@ -235,6 +246,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
+                    NextQuestion();
                 }
                 break;
         }
@@ -253,7 +265,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
         if (questionNumber == questionLength){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Congratulations!")
-            .setMessage("You have completed this quiz.")
+            .setMessage("You have " +correctChoice+ " out of 10 correct answers!")
             .setNegativeButton("Back", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
