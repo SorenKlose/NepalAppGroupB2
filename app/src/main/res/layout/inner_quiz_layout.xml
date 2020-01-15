@@ -7,7 +7,7 @@
     tools:context=".Quiz.QuizInner">
 
     <Button
-        android:id="@+id/knap1"
+        android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
@@ -21,37 +21,37 @@
         app:layout_constraintVertical_bias="0.528"></Button>
 
     <Button
-        android:id="@+id/knap2"
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Button"
         android:background="#C7E9E9"
-        app:layout_constraintEnd_toEndOf="@+id/knap1"
-        app:layout_constraintStart_toStartOf="@+id/knap1"
-        app:layout_constraintTop_toBottomOf="@+id/knap1" />
+        app:layout_constraintEnd_toEndOf="@+id/button1"
+        app:layout_constraintStart_toStartOf="@+id/button1"
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
 
     <Button
-        android:id="@+id/knap3"
+        android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Button"
         android:background="#C7E9E9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/knap2"
-        app:layout_constraintTop_toBottomOf="@+id/knap2" />
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <Button
-        android:id="@+id/knap4"
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Button"
         android:background="#C7E9E9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/knap3"
-        app:layout_constraintTop_toBottomOf="@+id/knap3" />
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
     <TextView
         android:id="@+id/question"
