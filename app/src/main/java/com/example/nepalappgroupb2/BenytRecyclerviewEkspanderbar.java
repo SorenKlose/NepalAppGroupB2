@@ -129,10 +129,12 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             vh.rodLayout = rodLayout;
             vh.landeview = getLayoutInflater().inflate(R.layout.calender_card_element, parent, false);
             vh.title = vh.landeview.findViewById(R.id.calender_card_title);
-            vh.calendarImage = vh.landeview.findViewById(R.id.image_calender);
+            //vh.calendarImage = vh.landeview.findViewById(R.id.image_calender);
+            vh.titleBackgroundColor = vh.landeview.findViewById(R.id.month_title_backgroundcolor);
             vh.landeview.setOnClickListener(vh);
             vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
-            vh.calendarImage.setOnClickListener(vh);
+            //vh.calendarImage.setOnClickListener(vh);
+            vh.titleBackgroundColor.setOnClickListener(vh);
 //      vh.calendarImage.setBackgroundResource(android.R.drawable.btn_default);
             vh.rodLayout.addView(vh.landeview);
             vg = parent;
@@ -143,7 +145,17 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
             boolean isOpen = openMonths.contains(position);
             vh.title.setText(months.get(position));
-            vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle("" + (position + 1) + " month old", getContext()));
+            //background for elements in recyclerview
+            //vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle("" + (position + 1) + " month old", getContext()));
+
+            //switching the background colors of the cards
+            // TODO: 15-01-2020 måske lave så pregnant har en farve og efter fødslen har det en anden?
+            switch (position % 4) {
+                case 0: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red)); break;
+                case 1: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue)); break;
+                case 2: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange)); break;
+                case 3: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green)); break;
+            }
             System.out.println("" + (position + 1) + "month old");
 
             if (!isOpen) {
@@ -190,7 +202,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
      */
     class EkspanderbartListeelemViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         LinearLayout rodLayout;
-        TextView title;
+        TextView title, titleBackgroundColor;
         ImageView calendarImage;
         View landeview;
         ArrayList<View> underviews = new ArrayList<>();
@@ -203,7 +215,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         public void onClick(View v) {
             final int position = getAdapterPosition();
 
-            if (v == calendarImage || v == landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
+            if (v == titleBackgroundColor || v == landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
                 boolean åben = openMonths.contains(position);
                 if (åben) openMonths.remove(position); // luk
                 else openMonths.add(position); // åbn
