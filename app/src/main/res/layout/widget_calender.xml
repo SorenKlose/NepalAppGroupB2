@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/widget_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Måned 1"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="#ff8a8a"/>
+
+    <TextView
+        android:id="@+id/widget_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dette skal du gøre i måned 1"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="#ff8a8a"/>
+</LinearLayout>

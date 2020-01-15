@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NepalAppGroupB2</string>
+    <string name="progressbar_text">You are %d weeks in your pregnancy</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+
     <string name="loading_text">Loading</string>
 </resources>
