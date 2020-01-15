@@ -21,12 +21,13 @@ import java.util.concurrent.TimeUnit;
 public class ProgressBarFragment extends Fragment {
 
     private ProgressBar progressBar;
+    
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_bar, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-       update();
+        update();
         return view;
     }
 
@@ -42,8 +43,8 @@ public class ProgressBarFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
-        calendar.set(year, month, day);
 
+        calendar.set(year, month, day);
 
         long birthDate = calendar.getTimeInMillis();
         long currentDate = Calendar.getInstance().getTimeInMillis();
@@ -52,8 +53,8 @@ public class ProgressBarFragment extends Fragment {
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
         if (progressInDays == 0){
             progressInDays = monthsPregnant * 30;
-        } else{
-            progressInDays += 9*30;
+        } else {
+            progressInDays += 9*30; // ikke helt præcist men også ligegyldigt da forholdet er så stort
         }
         double progressInPercent =  (double) progressInDays / (double)1000 * 100;
         progressBar.setProgress((int)progressInPercent); // progressStatus

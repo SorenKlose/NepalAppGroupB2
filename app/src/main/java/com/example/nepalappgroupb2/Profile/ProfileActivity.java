@@ -3,6 +3,7 @@ package com.example.nepalappgroupb2.Profile;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -24,9 +25,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.R;
 
 import java.io.File;
@@ -40,9 +43,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     SharedPreferences mPrefs;
     final String popUpScreenShownPref = "popupscreen";
 
-
-    String currentImagePath = null;
-
     private TextView mDisplayDate;
     private EditText nameInput;
     private Button heightInput;
@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Dialog inputDialog;
     private Button pregnantButton;
     private Button diary;
+    private ProgressBarFragment progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         pictureFrame = (ImageView) findViewById(R.id.pictureFrame);
         pregnantButton = (Button) findViewById(R.id.pregnantButton);
         diary = (Button) findViewById(R.id.diary);
+
 
         nameInput.setOnClickListener(this);
         heightInput.setOnClickListener(this);
@@ -114,6 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
         }
+
         SharedPreferences.Editor editor = mPrefs.edit();
         editor.putBoolean(popUpScreenShownPref, true);
         editor.apply();
@@ -149,6 +152,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 editor.putInt("month", month);
                 editor.putInt("day", day);
                 editor.apply();
+                progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
+                progressBar.update();
 
             }
         };
@@ -222,10 +227,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 });
                 break;
-
-           /* case R.id.pictureFrame:
-                savePicture();
-                break;*/
 
             case R.id.pregnantButton:
                 Intent intent = new Intent(ProfileActivity.this, Profile2Activity.class);

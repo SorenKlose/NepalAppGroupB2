@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
@@ -21,7 +22,7 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     Button recipesButton;
     Button comicsButton;
     Button quizButton;
-
+    private ProgressBarFragment progressBar;
     Button profileButton;
 
     @Override
@@ -40,6 +41,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         comicsButton.setOnClickListener(this);
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -64,5 +67,13 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
+        progressBar.update();
+
     }
 }
