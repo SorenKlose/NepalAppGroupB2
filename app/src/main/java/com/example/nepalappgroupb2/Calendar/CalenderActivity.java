@@ -20,7 +20,7 @@ public class CalenderActivity extends AppCompatActivity implements searchWordPro
         setContentView(R.layout.calender_card_layout);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())
+                .replace(R.id.calendar_framelayout, new CalendarLoading())
                 .commit();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }

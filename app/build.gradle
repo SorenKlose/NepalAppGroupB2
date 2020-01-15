@@ -43,6 +43,9 @@ dependencies {
     //for pdf view in recipe
     implementation "com.pdfview:pdfview-android:1.0.0"
 
+    //for loading icon as gif
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'
