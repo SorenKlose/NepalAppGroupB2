@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,11 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.nepalappgroupb2.R;
 
+import java.util.Locale;
+
 public class QuizInner extends AppCompatActivity implements View.OnClickListener {
 
     Button button1, button2, button3, button4;
     TextView questions;
     LottieAnimationView checkmark, errorcross;
+    TextToSpeech textToSpeech;
 
     private QuizQuestionsOne question = new QuizQuestionsOne();
     private String choice;
@@ -88,6 +92,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
         button3.setText(question.getChoices3(questionNumber));
         button4.setText(question.getChoices4(questionNumber));
         choice = question.getCorrectChoice(questionNumber);
+        TTS(question.getQuestions(questionNumber));
 
         questionNumber++;
 
@@ -155,5 +160,27 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             }
         });
         nextQuestion();
+    }
+
+    public void TTS(final String text){
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR){
+                    textToSpeech.setLanguage(Locale.ENGLISH);
+
+                    textToSpeech.speak(text,TextToSpeech.QUEUE_FLUSH,null,"1");
+                    }
+                }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        if (textToSpeech != null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onPause();
     }
 }
