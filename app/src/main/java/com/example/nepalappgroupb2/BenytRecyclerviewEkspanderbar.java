@@ -27,6 +27,7 @@ import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -67,20 +68,19 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     List<String> hej;
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-      tempMonths = DataService.getMonthsFromData();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        tempMonths = DataService.getMonthsFromData();
 
 
-    for (int i = 0; i < tempMonths.size(); i++){
-      if (tempMonths.get(i) < 0){
-        months.add("" + (tempMonths.get(i)+9) + " months pregnant");
-      }
-      else{
-        months.add("" + tempMonths.get(i) + " months old");
-      }
-    }
+        for (int i = 0; i < tempMonths.size(); i++) {
+            if (tempMonths.get(i) < 0) {
+                months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
+            } else {
+                months.add("" + tempMonths.get(i) + " months old");
+            }
+        }
 
         View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
 
@@ -144,19 +144,28 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             //switching the background colors of the cards
             // TODO: 15-01-2020 måske lave så pregnant har en farve og efter fødslen har det en anden?
             switch (position % 4) {
-                case 0: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red)); break;
-                case 1: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue)); break;
-                case 2: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange)); break;
-                case 3: vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green)); break;
+                case 0:
+                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
+                    break;
+                case 1:
+                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue));
+                    break;
+                case 2:
+                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange));
+                    break;
+                case 3:
+                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green));
+                    break;
             }
             System.out.println("" + (position + 1) + "month old");
 
             if (!isOpen) {
-                for (View underview : vh.underviews)
+                for (View underview : vh.underviews) {
                     underview.setVisibility(View.GONE); // skjul underelementer
+                }
             } else {
 
-        List<String> infoList = DataService.getMessageOfMonth("english", tempMonths.get(position));
+                List<String> infoList = DataService.getMessageOfMonth("english", tempMonths.get(position));
 
                 while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
                     View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
@@ -168,8 +177,15 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                 }
 
                 for (int i = 0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
-                    View underView = vh.underviews.get(i);
                     if (i < infoList.size()) {
+                        // TODO: 16-01-2020 lav et lidt bedre fix, så dette ikke sker
+                        //hot fix: if there is more underviews than info in infolist then we remove the views
+                        if(vh.underviews.size() > infoList.size()) {
+                            for (View underview : vh.underviews) {
+                                underview.setVisibility(View.GONE); // skjul underelementer
+                            }
+                        }
+                        View underView = vh.underviews.get(i);
                         TextView tv = underView.findViewById(R.id.descText);
                         tv.setText(infoList.get(i) + "\n");
                         underView.setVisibility(View.VISIBLE);
@@ -178,6 +194,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             }
         }
     };
+
+
 
 
     /**
