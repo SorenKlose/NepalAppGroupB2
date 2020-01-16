@@ -10,13 +10,14 @@
     <fragment
         android:id="@+id/progressBar"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="410dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Titel" />
+        app:layout_constraintTop_toTopOf="@+id/guideline35" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -63,16 +64,16 @@
         android:id="@+id/Titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/progressbar_text"
         android:layout_marginTop="5dp"
+        android:text="@string/progressbar_text"
         android:textColor="#7D7D7E"
         android:textSize="18sp"
         app:fontFamily="sans-serif-condensed-light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline35"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -200,8 +201,8 @@
         android:layout_marginBottom="2dp"
         android:background="@drawable/button_profile"
         android:drawableEnd="@drawable/profileicon"
-        android:text="@string/profile_homepage"
         android:paddingRight="70dp"
+        android:text="@string/profile_homepage"
         android:textColor="#ffff"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
@@ -222,7 +223,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.05"/>
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -230,7 +231,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.95"/>
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.04"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
