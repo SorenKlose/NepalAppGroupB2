@@ -72,7 +72,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     super.onCreate(savedInstanceState);
       tempMonths = DataService.getMonthsFromData();
 
-/*
+
     for (int i = 0; i < tempMonths.size(); i++){
       if (tempMonths.get(i) < 0){
         months.add("" + (tempMonths.get(i)+9) + " months pregnant");
@@ -82,17 +82,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
       }
     }
 
-
-    for (int i = (-7); i < 19; i++) {
-      if (i < 0) {
-        months.add("" + (i + 10) + " months pregnant");
-      } else if (i < 13) {
-        months.add("" + i + " months old");
-      } else {
-        months.add("" + (((i - 12) * 2) + 12) + " months old");
-      }
-    }
-*/
         View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
 
         recyclerView = layout.findViewById(R.id.calendar_recyclerView);
