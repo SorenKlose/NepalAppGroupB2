@@ -30,23 +30,32 @@
                 android:resource="@xml/calender_widget_info" />
         </receiver>
 
-        <activity android:name=".Profile.PopupImage" />
-        <activity android:name=".Profile.PhotoDiaryActivity" />
-        <activity android:name=".Homepage.HompageMainActivity">
+        <activity android:name=".Profile.PopupImage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile.PhotoDiaryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Homepage.HompageMainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Quiz.QuizActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Profile.ProfileActivity" />
-        <activity android:name=".Profile.Profile2Activity" />
-        <activity android:name=".Comic.ComicActivity" />
-        <activity android:name=".Recipe.RecipeActivity" />
-        <activity android:name=".Calendar.CalenderActivity" />
-        <activity android:name=".Quiz.QuizInner" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile.Profile2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Comic.ComicActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Recipe.RecipeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Calendar.CalenderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Quiz.QuizInner"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

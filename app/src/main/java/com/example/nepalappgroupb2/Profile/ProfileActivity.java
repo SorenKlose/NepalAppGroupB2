@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -76,8 +77,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         diary.setOnClickListener(this);
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
-        heightInput.setText(sp.getString("height", "height") + " cm");
-        weightInput.setText(sp.getString("weight", "weight") + " kg");
+        String heightAsString = sp.getString("height", "height");
+        heightInput.setText(String.format(getString(R.string.height), heightAsString));
+        String weightAsString = sp.getString("weight", "weight");
+        weightInput.setText(String.format(getString(R.string.weight), weightAsString));
+
         nameInput.setText(sp.getString("name", ""));
 
         int year = sp.getInt("year", 0);
@@ -89,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-  //FORSØG PÅ POPUP DER KUN KOMMER EN GANG
+        //FORSØG PÅ POPUP DER KUN KOMMER EN GANG
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean popUpScreenShown = mPrefs.getBoolean(popUpScreenShownPref, false);
 

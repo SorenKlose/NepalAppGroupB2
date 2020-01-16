@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NepalAppGroupB2</string>
+    <string name="calendar_homepage">kalender</string>
+    <string name="chosen_language">dansk</string>
+    <string name="comics_homepage">Tegneserie</string>
+    <string name="loading_text">Henter</string>
+    <string name="profile_homepage">Profil</string>
+    <string name="progressbar_text">Du er %d uger i graviditeten</string>
+    <string name="quiz_homepage">Quiz</string>
+    <string name="recipes_homepage">Opskrifter</string>
+    <string name="mom">Mor</string>
+    <string name="name_of_baby">Barnets navn</string>
+    <string name="pregnant">Gravid</string>
+    <string name="weight">%s kg</string>
+    <string name="height">%s cm</string>
+    <string name="diary">Dagbog</string>
+    <string name="date">Dato</string>
+    <string name="how_many_month">Hvor mange måneder er du henne?</string>
+</resources>
