@@ -177,17 +177,9 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                 for (int i = 0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
                     View underView = vh.underviews.get(i);
                     if (i < infoList.size()) {
-                        if (infoList.size() == 1) {
-                            TextView tv = underView.findViewById(R.id.descText);
-                            tv.setText(infoList.get(0) + "\n");
-                            underView.setVisibility(View.VISIBLE);
-                        } else if (infoList.size() == 2) {
-                            TextView tv = underView.findViewById(R.id.descText);
-                            tv.setText(infoList.get(0) + "\n");
-                            underView.setVisibility(View.VISIBLE);
-                        } else {
-                            underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
-                        }
+                        TextView tv = underView.findViewById(R.id.descText);
+                        tv.setText(infoList.get(i) + "\n");
+                        underView.setVisibility(View.VISIBLE);
                     }
                 }
             }
