@@ -22,7 +22,7 @@ public class RecipePdfViewFrag extends Fragment {
         View layout = inflater.inflate(R.layout.frag_recipe_pdf, container, false);
 
         pdfView = layout.findViewById(R.id.recipe_pdfview_test);
-        pdfView.fromAsset("recipe1.pdf").show();
+        pdfView.fromAsset(getArguments().getString("filename")).show();
 
         return layout;
     }

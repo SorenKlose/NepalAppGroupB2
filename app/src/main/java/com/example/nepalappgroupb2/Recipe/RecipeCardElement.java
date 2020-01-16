@@ -17,14 +17,16 @@ public class RecipeCardElement {
 
     private HashSet<String> allSearchableStrings;
     private String allSearchablesStringsAsASingleString;
+    private String pdfName;
 
-    public RecipeCardElement(String cardTitle, String[] searchables ){
+    public RecipeCardElement(String cardTitle, String pdfName, String[] searchables ){
         this.allSearchableStrings = new HashSet<String>();
         //hvis søgeordene indeholder duplikater så vil HashSet reducere disse til en.
         this.allSearchableStrings.addAll(new ArrayList<String>(Arrays.asList(searchables)));
         this.allSearchableStrings.add(cardTitle);
         this.allSearchablesStringsAsASingleString = TextUtils.join("", allSearchableStrings);
         this.cardTitle = cardTitle;
+        this.pdfName = pdfName;
     }
 
     public RecipeCardElement(String cardTitle) {
@@ -81,6 +83,9 @@ public class RecipeCardElement {
     }
     public ArrayList<String> getAllSearchableStrings(){
         return new ArrayList<>( allSearchableStrings);
+    }
+    public String getPdfName() {
+        return pdfName;
     }
 
     public boolean containsSearchword(CharSequence cs){

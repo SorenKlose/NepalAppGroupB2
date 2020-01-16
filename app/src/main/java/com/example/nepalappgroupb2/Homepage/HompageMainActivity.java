@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
@@ -28,6 +30,10 @@ import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
 import java.util.Date;
+
+import java.sql.SQLOutput;
+
+import io.fabric.sdk.android.Fabric;
 
 public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String CHANNEL_ID = "channel";
@@ -51,6 +57,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
 
 
         super.onCreate(savedInstanceState);
+        setCrashReporting();
+
         setContentView(R.layout.activity_main);
 
         notiManager = NotificationManagerCompat.from(this);
@@ -93,6 +101,22 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
+    }
+
+    private void setCrashReporting(){
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        System.out.println("this this run on an emulator: "+EMULATOR);
+        if (EMULATOR) {
+            Fabric.with(this, new Crashlytics());
+        }
+
+        // Crashlytics.getInstance().crash(); // forcer et crash
+
+        // hvis emulatoren ikke har adgang til internettet så den kan sende crash-rapporter,
+        // så prøv at lave en 'Cold Boot Now' på emulatoren
+
+
     }
 
     @Override

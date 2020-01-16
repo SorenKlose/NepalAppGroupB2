@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nepalappgroupb2.Calendar.CalendarLoading;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
+import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
@@ -66,28 +67,20 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     List<String> hej;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+      tempMonths = DataService.getMonthsFromData();
 
-        //adding titles to all the indices in the recyclerview
-        for (int i = 0; i < tempMonths.size(); i++) {
-            if (tempMonths.get(i) < 0) {
-                months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
-            } else {
-                months.add("" + tempMonths.get(i) + " months old");
-            }
-        }
 
-//        for (int i = (-7); i < 19; i++) {
-//            if (i < 0) {
-//                months.add("" + (i + 10) + " months pregnant");
-//            } else if (i < 13) {
-//                months.add("" + i + " months old");
-//            } else {
-//                months.add("" + (((i - 12) * 2) + 12) + " months old");
-//            }
-//        }
+    for (int i = 0; i < tempMonths.size(); i++){
+      if (tempMonths.get(i) < 0){
+        months.add("" + (tempMonths.get(i)+9) + " months pregnant");
+      }
+      else{
+        months.add("" + tempMonths.get(i) + " months old");
+      }
+    }
 
         View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
 
@@ -163,7 +156,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                     underview.setVisibility(View.GONE); // skjul underelementer
             } else {
 
-                List<String> infoList = db.getWithMonth(DataFromSheets.Headers.MsgEng, tempMonths.get(position));
+        List<String> infoList = DataService.getMessageOfMonth("english", tempMonths.get(position));
 
                 while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
                     View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);

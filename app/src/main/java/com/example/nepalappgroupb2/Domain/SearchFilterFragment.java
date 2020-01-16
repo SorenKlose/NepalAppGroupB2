@@ -51,7 +51,15 @@ public class SearchFilterFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                //enten er parent en activity eller en fragment
+                if(getParentFragment() == null) {
                     ((searchWordProvider)getActivity()).getSearchWord().setValue(s.toString());
+
+                }else{
+                    ((searchWordProvider)getParentFragment()).getSearchWord().setValue(s.toString());
+
+                }
+
 
             }
         });
