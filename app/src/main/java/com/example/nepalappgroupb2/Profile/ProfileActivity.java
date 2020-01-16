@@ -40,8 +40,7 @@ import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    SharedPreferences mPrefs;
-    final String popUpScreenShownPref = "popupscreen";
+
 
     private TextView mDisplayDate;
     private EditText nameInput;
@@ -88,20 +87,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-
   //FORSØG PÅ POPUP DER KUN KOMMER EN GANG
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean popUpScreenShown = mPrefs.getBoolean(popUpScreenShownPref, false);
+        SharedPreferences mPrefs = getSharedPreferences("popupscreen",Context.MODE_PRIVATE);
+        Boolean popUpScreenShown = mPrefs.getBoolean("popupscreen", false);
 
         if (!popUpScreenShown) {
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
             View mView = getLayoutInflater().inflate(R.layout.popup, null);
-            final ImageView mom = (ImageView) mView.findViewById(R.id.iwMom);
-            final ImageView pregnate = (ImageView) mView.findViewById(R.id.iwPregnate);
-            mBuilder.setView(mView);
+            Button mom = (Button) mView.findViewById(R.id.btnMom);
+            Button pregnate = (Button) mView.findViewById(R.id.btnPreg);
             mBuilder.setView(mView);
             final AlertDialog dialog = mBuilder.create();
             dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             mom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -118,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putBoolean(popUpScreenShownPref, true);
+        editor.putBoolean("popupscreen", true);
         editor.apply();
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
