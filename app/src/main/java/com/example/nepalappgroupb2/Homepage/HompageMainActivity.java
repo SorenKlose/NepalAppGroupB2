@@ -101,6 +101,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         progressBar.update();
 
     }
+
+    //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet.
     public void sendNoti() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
