@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class ProgressBarFragment extends Fragment {
 
     private ProgressBar progressBar;
-    
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +50,7 @@ public class ProgressBarFragment extends Fragment {
 
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+        // kontroller om datasetter står på 0/0/0
         if (progressInDays == 0){
             progressInDays = monthsPregnant * 30;
         } else {

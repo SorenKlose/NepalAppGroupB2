@@ -2,11 +2,15 @@ package com.example.nepalappgroupb2.Profile;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.example.nepalappgroupb2.R;
+
 import java.util.ArrayList;
 
 
@@ -24,12 +28,6 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c){
         context = c;
-       /* images.add(R.drawable.birthday);
-        images.add(R.drawable._2_month_old);
-        images.add(R.drawable._1_month_old);
-        images.add(R.drawable._3_month_old);
-        images.add(R.drawable.baby_temperature);
-*/
     }
     @Override
     public int getCount() {
