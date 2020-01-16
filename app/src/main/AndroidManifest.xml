@@ -36,7 +36,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Quiz.QuizActivity" />
+        <activity android:name=".Quiz.QuizActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".Profile.Profile2Activity" />
         <activity android:name=".Comic.ComicActivity" />
