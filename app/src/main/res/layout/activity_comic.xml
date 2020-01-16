@@ -7,9 +7,10 @@
     tools:context=".Comic.ComicActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="190dp">
 
@@ -55,6 +56,5 @@
                 app:srcCompat="@drawable/comic6" />
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
