@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "754082533350",
+    "firebase_url": "https://nepalappgroupb2.firebaseio.com",
+    "project_id": "nepalappgroupb2",
+    "storage_bucket": "nepalappgroupb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754082533350:android:3df3df8b98b1848318d027",
+        "android_client_info": {
+          "package_name": "com.example.nepalappgroupb2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754082533350-s2uhucmem8ubq01r6g896efgco1v20su.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-XNT_u-P-1JVW1cP8OC8wh5K_rcTxZx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754082533350-s2uhucmem8ubq01r6g896efgco1v20su.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

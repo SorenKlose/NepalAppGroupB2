@@ -6,4 +6,9 @@
 
 
     <string name="loading_text">Loading</string>
+    <string name="calendar_homepage">calendar</string>
+    <string name="recipes_homepage">Recipes</string>
+    <string name="quiz_homepage">Quiz</string>
+    <string name="comics_homepage">Comics</string>
+    <string name="profile_homepage">Profile</string>
 </resources>

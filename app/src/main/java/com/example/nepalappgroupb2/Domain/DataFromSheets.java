@@ -206,7 +206,15 @@ public class DataFromSheets {
      * @return size of HashMap
      */
     public int getMapSize() {
-        return map.size();
+        try{
+            return map.size();
+        }catch(NullPointerException e){
+            System.out.println("DataFromSheets.getMapSize() threw a nullpointerexception, " +
+                    "proberly because data is not downloaded yet. \n " +
+                    "download it first with DataFromSheets.fromSheets()");
+            return -1;
+        }
+
     }
 
 }

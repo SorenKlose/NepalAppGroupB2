@@ -1,5 +1,6 @@
 package com.example.nepalappgroupb2.Calendar;
 
+import android.animation.Animator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.bumptech.glide.Glide;
 import com.example.nepalappgroupb2.BenytRecyclerviewEkspanderbar;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
@@ -31,7 +33,9 @@ public class CalendarLoading extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.calendar_loading_screen, container, false);
 
+        //starting the loading animation
         loading = layout.findViewById(R.id.lottie_loading);
+        loading.loop(true);
         loading.playAnimation();
 
         //loading data from sheet and showing loading screen
@@ -40,7 +44,7 @@ public class CalendarLoading extends Fragment {
             protected Object doInBackground(Object[] objects) {
                 try {
                     db.fromSheets();
-                    //SystemClock.sleep(2000);
+                    //SystemClock.sleep(4000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -50,6 +54,7 @@ public class CalendarLoading extends Fragment {
             //open new fragment when finish loading
             @Override
             protected void onPostExecute(Object o) {
+                loading.cancelAnimation();
                 monthList = db.getMonths();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())

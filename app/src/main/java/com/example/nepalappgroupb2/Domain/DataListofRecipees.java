@@ -16,8 +16,7 @@ public class DataListofRecipees {
     }
 
     public ArrayList<RecipeCardElement> getData() {
-        System.out.println("hreellloo:          "+data.size());
-        if(data.size() < 1 ){
+        if (data.size() < 1) {
             setData();
         }
         return data;
@@ -26,11 +25,32 @@ public class DataListofRecipees {
     private void setData() {
         // TODO: implement fetching of remote Recipe data
 
-        String[] test = {"Dal Bhat", "Food", "madopskrift", "Peda", "god mad"};
+        String[][][] test = {
+                new String[][]{
+                        new String[]{"Dal Bhat", "test_pdf.pdf"},
+                        new String[]{"banan"}
+                },
+                new String[][]{
+                        new String[]{"Food", "test_pdf.pdf"},
+                        new String[]{ "Ingredienses" }
+                },
+                new String[][]{
+                        new String[]{"madopskrift", "test_pdf.pdf"},
+                        new String[]{ "salt"}
+                },
+                new String[][]{
+                        new String[]{"Peda", "test_pdf.pdf"},
+                        new String[]{ "nødder"}
+                },
+                new String[][]{
+                        new String[]{"god mad", "test_pdf.pdf"},
+                        new String[]{"sovs"}
+                }
+        };
 
         //creating cardElements for the data
-        for(int i = 0; i < test.length; i++) {
-            data.add(new RecipeCardElement(test[i], new String[]{test[i].toLowerCase()} ) );
+        for (int i = 0; i < test.length; i++) {
+            data.add(new RecipeCardElement(test[i][0][0].toLowerCase(), test[i][0][1].toLowerCase(), test[i][1]));
         }
 
     }
