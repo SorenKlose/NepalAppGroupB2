@@ -117,6 +117,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     }
 
     public void answerCorrect(){
+        errorStop();
+
         checkmark.setVisibility(View.VISIBLE);
         checkmark.playAnimation();
 
@@ -131,6 +133,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             }
             @Override
             public void onAnimationCancel(Animator animation) {
+                checkmark.clearAnimation();
             }
             @Override
             public void onAnimationRepeat(Animator animation) {
@@ -142,6 +145,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     }
 
     public void answerIncorrect(){
+        checkStop();
+
         errorcross.setVisibility(View.VISIBLE);
         errorcross.playAnimation();
 
@@ -156,6 +161,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             }
             @Override
             public void onAnimationCancel(Animator animation) {
+
             }
             @Override
             public void onAnimationRepeat(Animator animation) {
@@ -180,6 +186,18 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
         if (textToSpeech != null){
             textToSpeech.stop();
             textToSpeech.shutdown();
+        }
+    }
+    public void errorStop(){
+        if (errorcross.isAnimating()){
+            errorcross.cancelAnimation();
+            errorcross.setVisibility(View.INVISIBLE);
+        }
+    }
+    public void checkStop() {
+        if (checkmark.isAnimating()) {
+            checkmark.cancelAnimation();
+            checkmark.setVisibility(View.INVISIBLE);
         }
     }
 
