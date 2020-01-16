@@ -33,6 +33,7 @@ public class CalendarLoading extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.calendar_loading_screen, container, false);
 
+        //starting the loading animation
         loading = layout.findViewById(R.id.lottie_loading);
         loading.loop(true);
         loading.playAnimation();
@@ -53,6 +54,7 @@ public class CalendarLoading extends Fragment {
             //open new fragment when finish loading
             @Override
             protected void onPostExecute(Object o) {
+                loading.cancelAnimation();
                 monthList = db.getMonths();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())
