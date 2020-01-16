@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +31,7 @@ import java.util.Date;
 public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClickListener {
 
     GridView gridView;
-    ImageView test;
+    //ImageView test;
     ImageView cameraButton;
 
 
@@ -41,10 +42,11 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_diary);
 
-        test = (ImageView) findViewById(R.id.test);
+        //test = (ImageView) findViewById(R.id.test);
 
         gridView = (GridView) findViewById(R.id.gridView);
         cameraButton = (ImageView) findViewById(R.id.cameraButton);
+
         cameraButton.setOnClickListener(this);
 
         gridView.setAdapter(new ImageAdapter(this));
@@ -54,6 +56,7 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), PopupImage.class);
                 intent.putExtra("id", i);
+                // skal ikke være currentImagePath
                 intent.putExtra("image_path", currentImagePath);
                 startActivity(intent);
             }
@@ -63,6 +66,11 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         savePicture();
+        ImageAdapter imageAdapter = new ImageAdapter(this);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra(MediaStore.EXTRA_OUTPUT));
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.birthday);
+        imageAdapter.images.add(bitmap1);
     }
 
     public void savePicture(){
@@ -78,7 +86,6 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
                     "com.example.nepalappgroupb2.fileprovider",
                     imageFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            test.setImageURI(imageUri);
         }
         startActivityForResult(intent, 1);
     }
@@ -96,9 +103,14 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageAdapter imageAdapter = new ImageAdapter(this);
+        if (requestCode == Activity.RESULT_OK) {
+            ImageAdapter imageAdapter = new ImageAdapter(this);
 
-        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
-        imageAdapter.images.add(bitmap);
+            Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra(MediaStore.EXTRA_OUTPUT));
+            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.birthday);
+            imageAdapter.images.add(bitmap1);
+            //test.setImageBitmap(bitmap1);
+            System.out.println(imageAdapter.getCount());
+        }
     }
 }
