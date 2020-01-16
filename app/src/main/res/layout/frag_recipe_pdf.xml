@@ -9,10 +9,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+<!--        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hej med dig" />
+            android:text="hej med dig" />-->
 
         <com.pdfview.PDFView
             android:id="@+id/recipe_pdfview_test"
