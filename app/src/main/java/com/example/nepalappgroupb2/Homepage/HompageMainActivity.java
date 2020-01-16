@@ -54,6 +54,12 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         Date hej = new Date(System.currentTimeMillis());
         System.out.println("måneder siden 1970: ");
 
+        //HVIS I GERNE VIL HAVE PROFILE DIALOGGEN TIL AT KOMME FREM HVER GANG; SÅ SKAL NEDESTÅENDE KØRES - A
+        SharedPreferences mPrefs = getSharedPreferences("popupscreen",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        //editor.clear();
+        //editor.commit();
+
 
 
         super.onCreate(savedInstanceState);
