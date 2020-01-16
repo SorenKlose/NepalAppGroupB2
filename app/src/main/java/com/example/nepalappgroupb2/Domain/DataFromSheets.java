@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataFromSheets {
-    private Map<String, String> map;
+    public static Map<String, String> map;
     public enum Headers {
         MsgNum, Week, Month, Goal, MsgNep, MsgEng, RadioTxt, RadioUrl, grpB2Sound
     }

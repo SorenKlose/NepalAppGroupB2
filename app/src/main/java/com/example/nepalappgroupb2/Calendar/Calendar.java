@@ -62,7 +62,8 @@ public class Calendar extends Fragment implements Observer<String>{
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
             //finding the views
             final TextView title = holder.itemView.findViewById(R.id.calender_card_title);
-            ImageView bgImage = holder.itemView.findViewById(R.id.image_calender);
+            //ImageView bgImage = holder.itemView.findViewById(R.id.image_calender);
+            TextView bgImage = holder.itemView.findViewById(R.id.month_title_backgroundcolor);
 
             //setting title and background image for each of the cards
             title.setText(cardArray.get(position).getCardTitle());
@@ -80,13 +81,13 @@ public class Calendar extends Fragment implements Observer<String>{
                 }
             });
 
-            int resID = recipeCardElement.getBgImgIDFromTitle(cardArray.get(position).getCardTitle(), getContext());
-            if(resID != 0) {
-                bgImage.setImageResource(resID);
-            } else {
-                //if the image does not exist in "drawable" we assign a default image
-                bgImage.setImageResource(recipeCardElement.getBgImgIDFromTitle(recipeCardElement.getDefaultImg(), getContext()));
-            }
+//            int resID = recipeCardElement.getBgImgIDFromTitle(cardArray.get(position).getCardTitle(), getContext());
+//            if(resID != 0) {
+//                bgImage.setImageResource(resID);
+//            } else {
+//                //if the image does not exist in "drawable" we assign a default image
+//                bgImage.setImageResource(recipeCardElement.getBgImgIDFromTitle(recipeCardElement.getDefaultImg(), getContext()));
+//            }
         }
 
         @Override

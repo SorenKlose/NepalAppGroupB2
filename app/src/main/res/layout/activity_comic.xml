@@ -7,9 +7,10 @@
     tools:context=".Comic.ComicActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="190dp">
 
@@ -56,14 +57,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <fragment
-        android:id="@+id/progressBar"
-        android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

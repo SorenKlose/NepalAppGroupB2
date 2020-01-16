@@ -6,10 +6,9 @@
 
     <uses-feature
         android:name="android.hardware.Camera"
-        android:required="false">
-    </uses-feature>
-    <uses-permission android:name="android.permission.Write_external_storage">
-    </uses-permission>
+        android:required="false"></uses-feature>
+
+    <uses-permission android:name="android.permission.Write_external_storage"></uses-permission>
 
     <meta-data
         android:name="firebase_crashlytics_collection_enabled"
@@ -21,7 +20,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile.PopupImage"></activity>
+        <receiver android:name=".CalenderWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/calender_widget_info" />
+        </receiver>
+
+        <activity android:name=".Profile.PopupImage" />
         <activity android:name=".Profile.PhotoDiaryActivity" />
         <activity android:name=".Homepage.HompageMainActivity">
             <intent-filter>
@@ -38,7 +47,6 @@
         <activity android:name=".Calendar.CalenderActivity" />
         <activity android:name=".Quiz.QuizInner" />
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.nepalappgroupb2.fileprovider"
@@ -48,7 +56,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
     </application>
 
 </manifest>
