@@ -92,6 +92,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
         button3.setText(question.getChoices3(questionNumber));
         button4.setText(question.getChoices4(questionNumber));
         choice = question.getCorrectChoice(questionNumber);
+
+        TTSstop();
         TTS(question.getQuestions(questionNumber));
 
         questionNumber++;
@@ -173,6 +175,12 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                     }
                 }
         });
+    }
+    public void TTSstop(){
+        if (textToSpeech != null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
     }
 
     @Override
