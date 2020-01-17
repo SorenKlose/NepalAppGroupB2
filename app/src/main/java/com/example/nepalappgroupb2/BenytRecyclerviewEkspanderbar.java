@@ -42,6 +42,8 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     List<Integer> tempMonths = CalendarLoading.monthList; //List of every month that has at least one message.
     ViewGroup vg;
     MediaPlayer month6sound;
+    MediaPlayer mp = new MediaPlayer();
+
 
     static class CalendarInfoData {
         List<List<String>> info = Arrays.asList(
@@ -165,7 +167,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                 }
             } else {
 
-                List<String> infoList = DataService.getMessageOfMonth("english", tempMonths.get(position));
+                List<String> infoList = DataService.getMessageOfMonth("nepali", tempMonths.get(position));
 
                 while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
                     View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
@@ -226,19 +228,26 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             } else {
                 int id = v.getId();
                 Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
-//        month6sound.start();
 
                 String soundName = db.getMediaPlayer(tempMonths.get(position), id);
-
+                Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
                 try {
-                    MediaPlayer mp = new MediaPlayer();
-                    Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
-                    mp.setDataSource(getContext(), uri);
-                    mp.prepare();
-                    mp.start();
-                    System.out.println("spiller: " + soundName);
-                    System.out.println(mp.getDuration());
-                    //SystemClock.sleep(mp.getDuration());
+                    if (!mp.isPlaying()) {
+                        mp.setDataSource(getContext(), uri);
+                        mp.prepare();
+                        mp.start();
+                        System.out.println("spiller: " + soundName);
+                    }
+                    else{
+                        mp.stop();
+                        mp.release();
+                        mp = new MediaPlayer();
+                        mp.setDataSource(getContext(), uri);
+                        mp.prepare();
+                        mp.start();
+                        System.out.println("spiller: " + soundName);
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

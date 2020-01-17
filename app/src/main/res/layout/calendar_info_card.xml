@@ -27,7 +27,8 @@
                     android:layout_height="wrap_content"
                     android:text="Remember to check the temperature of your child"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:padding="3dp"/>
 
                 <ImageView
                     android:id="@+id/speakerImage"

@@ -59,7 +59,7 @@ public class DataService {
             case "english":
                 list.addAll(dataFromSheets.getWithMonth(DataFromSheets.Headers.MsgEng, monthnumber));
                 break;
-            case "1337":
+            case "nepali":
             default:
                 list.addAll(dataFromSheets.getWithMonth(DataFromSheets.Headers.MsgNep, monthnumber));
                 break;
