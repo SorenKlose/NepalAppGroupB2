@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class DataService {
 
 
     public static List<Integer> getMonthsFromData() {
-        // TODO: Find how to get some data from DataFromSheets instead of:
+
         final List<Integer> returnList = new ArrayList<>();
         if (dataFromSheets.getMapSize() > 0) {
             returnList.addAll(dataFromSheets.getMonths());

@@ -112,14 +112,14 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     private void setCrashReporting(){
 
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
-        System.out.println("this this run on an emulator: "+EMULATOR);
+        System.out.println("this is an emulator: "+EMULATOR);
         if (EMULATOR) {
             Fabric.with(this, new Crashlytics());
         }
 
         // Crashlytics.getInstance().crash(); // forcer et crash
 
-        // hvis emulatoren ikke har adgang til internettet så den kan sende crash-rapporter,
+        // hvis emulatoren ikke har adgang til internettet så den ikke kan sende crash-rapporter,
         // så prøv at lave en 'Cold Boot Now' på emulatoren
 
 

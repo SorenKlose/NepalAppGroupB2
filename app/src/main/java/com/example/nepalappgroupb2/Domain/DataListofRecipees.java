@@ -5,8 +5,6 @@ import android.util.ArrayMap;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class DataListofRecipees {
     private ArrayList<RecipeCardElement> data;
