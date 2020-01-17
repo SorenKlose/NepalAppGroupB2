@@ -69,4 +69,6 @@ public class DataService {
     public static List<RecipeCardElement> getListOfRecipes() {
         return dataRecipees.getData();
     }
+
+
 }

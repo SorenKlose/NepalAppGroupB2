@@ -39,7 +39,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     DataFromSheets db = new DataFromSheets();
     RecipeCardElement calendarCardElement = new RecipeCardElement();
     List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
-    List<Integer> tempMonths = CalendarLoading.monthList; //List of every month that has at least one message.
+    List<Integer> tempMonths ; //List of every month that has at least one message.
     ViewGroup vg;
     MediaPlayer month6sound;
     MediaPlayer mp = new MediaPlayer();

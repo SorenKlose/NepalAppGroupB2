@@ -26,7 +26,6 @@ public class CalendarLoading extends Fragment {
     private DataFromSheets db = new DataFromSheets();
 
     private LottieAnimationView loading;
-    public static List<Integer> monthList;
 
     @Nullable
     @Override
@@ -55,7 +54,6 @@ public class CalendarLoading extends Fragment {
             @Override
             protected void onPostExecute(Object o) {
                 loading.cancelAnimation();
-                monthList = db.getMonths();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.calendar_framelayout, new BenytRecyclerviewEkspanderbar())
                         .commit();

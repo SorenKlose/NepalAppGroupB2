@@ -211,7 +211,7 @@ public class DataFromSheets {
         }catch(NullPointerException e){
             System.out.println("DataFromSheets.getMapSize() threw a nullpointerexception, " +
                     "proberly because data is not downloaded yet. \n " +
-                    "download it first with DataFromSheets.fromSheets()");
+                    "download it first with DataService.retrieveData()");
             return -1;
         }
 
