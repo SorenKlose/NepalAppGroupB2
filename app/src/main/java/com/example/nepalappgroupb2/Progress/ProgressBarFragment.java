@@ -57,6 +57,7 @@ public class ProgressBarFragment extends Fragment {
             progressInDays += 9*30; // ikke helt præcist men også ligegyldigt da forholdet er så stort
         }
         double progressInPercent =  (double) progressInDays / (double)1000 * 100;
+
         progressBar.setProgress((int)progressInPercent); // progressStatus
     }
 }

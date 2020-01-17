@@ -17,6 +17,6 @@
     <string name="weight">%s kg</string>
     <string name="pregnant">Pregnant</string>
     <string name="mom">Mom</string>
-    <string name="diary">Diary</string>
+    <string name="diary">diary</string>
     <string name="how_many_month">How many months are you due?</string>
 </resources>

@@ -14,7 +14,8 @@
             android:id="@+id/month_title_backgroundcolor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"/>
+            android:background="#fff"
+            android:alpha=".7"/>
 
         <TextView
             android:id="@+id/calender_card_title"
@@ -27,7 +28,10 @@
             android:paddingVertical="10dp"
             android:text="1 month old"
             android:textColor="#000"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            android:fontFamily="@font/corben"
+
+            />
 
     </androidx.cardview.widget.CardView>
 

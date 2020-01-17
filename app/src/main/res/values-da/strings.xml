@@ -14,7 +14,7 @@
     <string name="pregnant">Gravid</string>
     <string name="weight">%s kg</string>
     <string name="height">%s cm</string>
-    <string name="diary">Dagbog</string>
+    <string name="diary">dagbog</string>
     <string name="date">Dato</string>
     <string name="how_many_month">Hvor mange måneder er du henne?</string>
 </resources>
