@@ -43,6 +43,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     ViewGroup vg;
     MediaPlayer month6sound;
     MediaPlayer mp = new MediaPlayer();
+    int soundPlaying;
 
 
     static class CalendarInfoData {
@@ -197,8 +198,16 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         }
     };
 
+    @Override
+    public void onPause() {
+        super.onPause();
 
-
+        if (mp.isPlaying()){
+            mp.stop();
+            mp.release();
+            mp = new MediaPlayer();
+        }
+    }
 
     /**
      * En Viewholder husker forskellige views i et listeelement, sådan at søgninger i viewhierakiet
@@ -222,7 +231,14 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
             if (v == titleBackgroundColor || v == landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
                 boolean åben = openMonths.contains(position);
-                if (åben) openMonths.remove(position); // luk
+                if (åben){
+                    openMonths.remove(position); // luk
+                    if (mp.isPlaying() && soundPlaying == position){
+                        mp.stop();
+                        mp.release();
+                        mp = new MediaPlayer();
+                    }
+                }
                 else openMonths.add(position); // åbn
                 adapter.notifyItemChanged(position);
             } else {
@@ -236,6 +252,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                         mp.setDataSource(getContext(), uri);
                         mp.prepare();
                         mp.start();
+                        soundPlaying = position;
                         System.out.println("spiller: " + soundName);
                     }
                     else{
@@ -245,6 +262,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                         mp.setDataSource(getContext(), uri);
                         mp.prepare();
                         mp.start();
+                        soundPlaying = position;
                         System.out.println("spiller: " + soundName);
 
                     }

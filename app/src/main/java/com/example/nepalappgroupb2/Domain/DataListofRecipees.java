@@ -1,7 +1,5 @@
 package com.example.nepalappgroupb2.Domain;
 
-import android.util.ArrayMap;
-
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
@@ -25,23 +23,23 @@ public class DataListofRecipees {
 
         String[][][] test = {
                 new String[][]{
-                        new String[]{"Dal Bhat", "test_pdf.pdf"},
+                        new String[]{"Dal Bhat", "recipenepal_pdf.pdf"},
                         new String[]{"banan"}
                 },
                 new String[][]{
-                        new String[]{"Food", "test_pdf.pdf"},
+                        new String[]{"Food", "recipenepal_pdf.pdf"},
                         new String[]{ "Ingredienses" }
                 },
                 new String[][]{
-                        new String[]{"madopskrift", "test_pdf.pdf"},
+                        new String[]{"madopskrift", "recipenepal_pdf.pdf"},
                         new String[]{ "salt"}
                 },
                 new String[][]{
-                        new String[]{"Peda", "test_pdf.pdf"},
+                        new String[]{"Peda", "recipenepal_pdf.pdf"},
                         new String[]{ "nødder"}
                 },
                 new String[][]{
-                        new String[]{"god mad", "test_pdf.pdf"},
+                        new String[]{"god mad", "recipenepal_pdf.pdf"},
                         new String[]{"sovs"}
                 }
         };
