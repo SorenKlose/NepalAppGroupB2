@@ -54,30 +54,42 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+
+        //Nedenstående 5 linjer om animation er taget fra Jakobs rettelser sendt i mail.
+        Button[] knapper = new Button[] {button1, button2, button3, button4};
+        for (final Button knap : knapper) if (choice.equals(knap.getText())) {
+            knap.animate().scaleX(1.5f).scaleY(1.5f).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    knap.animate().scaleX(1).scaleY(1);
+                }
+            });
+        }
+
         switch (v.getId()){
             case R.id.button1:
-                if (button1.getText() == choice){
+                if (button1.getText().equals(choice)){
                  answerCorrect();
                 } else {
                     answerIncorrect();
                 } break;
 
             case R.id.button2:
-                if (button2.getText() == choice){
+                if (button2.getText().equals(choice)){
                    answerCorrect();
                 }else {
                     answerIncorrect();
                 } break;
 
             case R.id.button3:
-                if (button3.getText() == choice){
+                if (button3.getText().equals(choice)){
                     answerCorrect();
                 }else {
                     answerIncorrect();
                 } break;
 
             case R.id.button4:
-                if (button4.getText() == choice){
+                if (button4.getText().equals(choice)){
                     answerCorrect();
                 }else {
                     answerIncorrect();
@@ -130,6 +142,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onAnimationEnd(Animator animation) {
                 checkmark.setVisibility(View.GONE);
+                nextQuestion();
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -139,9 +152,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             public void onAnimationRepeat(Animator animation) {
             }
         });
-
         correctChoice++;
-        nextQuestion();
     }
 
     public void answerIncorrect(){
@@ -158,6 +169,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onAnimationEnd(Animator animation) {
                 errorcross.setVisibility(View.GONE);
+                nextQuestion();
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -167,7 +179,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             public void onAnimationRepeat(Animator animation) {
             }
         });
-        nextQuestion();
     }
 
     public void TTS(final String text){
