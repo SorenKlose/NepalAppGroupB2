@@ -54,10 +54,12 @@ public class DataService {
     public static List<String> getMessageOfMonth(String language, int monthnumber) {
         List<String> list = new ArrayList<String>();
         switch (language) {
-
+            //for english or danish we show the english text
             case "english":
+            case "danish":
                 list.addAll(dataFromSheets.getWithMonth(DataFromSheets.Headers.MsgEng, monthnumber));
                 break;
+            //for nepali and any other language we show the nepali text
             case "nepali":
             default:
                 list.addAll(dataFromSheets.getWithMonth(DataFromSheets.Headers.MsgNep, monthnumber));

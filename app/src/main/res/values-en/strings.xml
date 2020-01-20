@@ -17,5 +17,6 @@
     <string name="recipes_homepage">Recipes</string>
     <string name="weight">%s kg</string>
     <string name="date">Date</string>
-    <string name="month">måneder</string>
+    <string name="month">month</string>
+    <string name="month_preg">months pregnant</string>
 </resources>

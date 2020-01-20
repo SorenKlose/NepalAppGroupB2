@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">NepalAppGroupB2</string>
     <string name="calendar_homepage">kalender</string>
-    <string name="chosen_language">dansk</string>
+    <string name="chosen_language">danish</string>
     <string name="comics_homepage">Tegneserie</string>
     <string name="loading_text">Henter</string>
     <string name="profile_homepage">Profil</string>
@@ -17,5 +17,6 @@
     <string name="diary">dagbog</string>
     <string name="date">Dato</string>
     <string name="how_many_month">Hvor mange måneder er du henne?</string>
-    <string name="month">months</string>
+    <string name="month">måned</string>
+    <string name="month_preg">måneder gravid</string>
 </resources>

@@ -149,21 +149,31 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         for (int i = 0; i < tempMonths.size(); i++) {
             if (tempMonths.get(i) < 0) {
                 try {
-                    if (!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
+                    //check for default language (napali)
+                    if (!Locale.getDefault().getDisplayLanguage().equals("dansk") && !Locale.getDefault().getDisplayLanguage().equals("English")) {
                         months.add(getNepaliNum(tempMonths.get(i + 10)) + " " + getString(R.string.month) + " " + getString(R.string.pregnant));
+                        System.out.println("sprog: " + Locale.getDefault().getDisplayLanguage());
                     }
+                    //if not nepali - show other supported language (with western numbers)
+                    else {
+                        months.add("" + (tempMonths.get(i) + 10) + " " + getString(R.string.month_preg));
+                    }
+                    //if the napali number is not found we show supported language text
                 } catch (Resources.NotFoundException e) {
-                    months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
+                    months.add("" + (tempMonths.get(i) + 10) + " " + getString(R.string.month_preg));
                 }
             } else {
                 try {
                     //check if the language is not danish or english (default is napali)
-                    if (!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
+                    if (!Locale.getDefault().getDisplayLanguage().equals("dansk") && !Locale.getDefault().getDisplayLanguage().equals("English")) {
                         months.add(getNepaliNum(tempMonths.get(i)) + " " + getString(R.string.month));
+                    } else {
+                        //if not nepali - show other supported language (with western numbers)
+                        months.add(tempMonths.get(i) + " " + getString(R.string.month));
                     }
-                    //if the napali number is not found we show english text
+                    //if the napali number is not found we show supported language text
                 } catch (Resources.NotFoundException e) {
-                    months.add("" + tempMonths.get(i) + " months old");
+                    months.add(tempMonths.get(i) + " " + getString(R.string.month));
                 }
             }
         }
@@ -251,7 +261,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                 }
             } else {
 
-                List<String> infoList = DataService.getMessageOfMonth("nepali", tempMonths.get(position));
+                List<String> infoList = DataService.getMessageOfMonth(getString(R.string.chosen_language), tempMonths.get(position));
 
                 while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews
                     View underView = getLayoutInflater().inflate(R.layout.calendar_info_card, vg, false);
