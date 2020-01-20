@@ -17,6 +17,13 @@
             android:background="#fff"
             android:alpha=".7"/>
 
+        <ImageView
+            android:id="@+id/image_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".6"
+            android:scaleType="centerCrop"/>
+
         <TextView
             android:id="@+id/calender_card_title"
             android:layout_width="match_parent"

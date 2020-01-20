@@ -188,15 +188,15 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
 
-        //scrolling to correct month text
-        int scrollToIndex = scrollToMonth(5);
-        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
-
-        // Understøttelse for skærmvending - kan evt udelades
-        if (savedInstanceState != null) {
-            openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
-            recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
-        }
+//        //scrolling to correct month text
+//        int scrollToIndex = scrollToMonth(5);
+//        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
+//
+//        // Understøttelse for skærmvending - kan evt udelades
+//        if (savedInstanceState != null) {
+//            openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
+//            recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
+//        }
         return layout;
     }
 
@@ -244,7 +244,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             vh.rodLayout = rodLayout;
             vh.landeview = getLayoutInflater().inflate(R.layout.calender_card_element, parent, false);
             vh.title = vh.landeview.findViewById(R.id.calender_card_title);
-            //vh.calendarImage = vh.landeview.findViewById(R.id.image_calender);
+            vh.calendarImage = vh.landeview.findViewById(R.id.image_calendar);
             vh.titleBackgroundColor = vh.landeview.findViewById(R.id.month_title_backgroundcolor);
             vh.landeview.setOnClickListener(vh);
             vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
@@ -261,24 +261,49 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             boolean isOpen = openMonths.contains(position);
             vh.title.setText(months.get(position));
             //background for elements in recyclerview
-            //vh.calendarImage.setImageResource(calendarCardElement.getBgImgIDFromTitle("" + (position + 1) + " month old", getContext()));
+            //vh.calendarImage.setImageResource(calendarCardElement.getImgIdFromString("" + (position + 1) + " month old", getContext()));
+
+            /**
+             * setting images and background colors on the months
+             */
+            String imgToFind;
+            //for pregnant
+            if(tempMonths.get(position) < 0) {
+                imgToFind = (tempMonths.get(position) + 10) + " month preg";
+            //child is born
+            } else {
+                imgToFind = "" + tempMonths.get(position) + " month old";
+            }
+            //getting the resID for the img
+            int imgId = calendarCardElement.getImgIdFromString(imgToFind, getContext());
+            //method returning 0 if it does not find anything
+            if(imgId != 0) {
+                //setting the img and background color to white (otherwise we get red as it reuses the views)
+                vh.calendarImage.setImageResource(imgId);
+                vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.white));
+            } else {
+                //clearing imageview and setting the background color to red
+                vh.calendarImage.setImageResource(0);
+                vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
+            }
+
 
             //switching the background colors of the cards
-            // TODO: 15-01-2020 måske lave så pregnant har en farve og efter fødslen har det en anden?
-            switch (position % 4) {
-                case 0:
-                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
-                    break;
-                case 1:
-                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue));
-                    break;
-                case 2:
-                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange));
-                    break;
-                case 3:
-                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green));
-                    break;
-            }
+//            // TODO: 15-01-2020 måske lave så pregnant har en farve og efter fødslen har det en anden?
+//            switch (position % 4) {
+//                case 0:
+//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
+//                    break;
+//                case 1:
+//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue));
+//                    break;
+//                case 2:
+//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange));
+//                    break;
+//                case 3:
+//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green));
+//                    break;
+//            }
             System.out.println("" + (position + 1) + "month old");
 
             if (!isOpen) {

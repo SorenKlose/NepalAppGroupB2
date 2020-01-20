@@ -62,12 +62,12 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
             //setting title and background image for each of the cards
             holder.title.setText(cardArray.get(position).getCardTitle());
 
-            int resID = recipeCardElement.getBgImgIDFromTitle(cardArray.get(position).getCardTitle(), getContext());
+            int resID = recipeCardElement.getImgIdFromString(cardArray.get(position).getCardTitle(), getContext());
             if(resID != 0) {
                 holder.bgImage.setImageResource(resID);
             } else {
                 //if the image does not exist in "drawable" we assign a default image
-                holder.bgImage.setImageResource(recipeCardElement.getBgImgIDFromTitle(recipeCardElement.getDefaultImg(), getContext()));
+                holder.bgImage.setImageResource(recipeCardElement.getImgIdFromString(recipeCardElement.getDefaultImg(), getContext()));
             }
         }
 

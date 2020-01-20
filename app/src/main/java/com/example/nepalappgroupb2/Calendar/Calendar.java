@@ -81,12 +81,12 @@ public class Calendar extends Fragment implements Observer<String>{
                 }
             });
 
-//            int resID = recipeCardElement.getBgImgIDFromTitle(cardArray.get(position).getCardTitle(), getContext());
+//            int resID = recipeCardElement.getImgIdFromString(cardArray.get(position).getCardTitle(), getContext());
 //            if(resID != 0) {
 //                bgImage.setImageResource(resID);
 //            } else {
 //                //if the image does not exist in "drawable" we assign a default image
-//                bgImage.setImageResource(recipeCardElement.getBgImgIDFromTitle(recipeCardElement.getDefaultImg(), getContext()));
+//                bgImage.setImageResource(recipeCardElement.getImgIdFromString(recipeCardElement.getDefaultImg(), getContext()));
 //            }
         }
 
