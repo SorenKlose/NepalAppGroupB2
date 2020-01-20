@@ -5,6 +5,7 @@ og er siden blevet ændret i, for at tilpasse vores behov.
 
 package com.example.nepalappgroupb2;
 
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 
 public class BenytRecyclerviewEkspanderbar extends Fragment {
@@ -71,6 +73,51 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     List<String> hej;
 
+    /**
+     * combining nepali numbers to get bigger numbers. Assuming all nepali numbers can be found by
+     * combining them. Fx if we have 123 then we find 1, 2, and 3 in nepali and combining them
+     * @param num the number to translate to nepali
+     * @return the nepali number as a String
+     */
+    private String getNepaliNum(int num) {
+        System.out.println("num er: " + num);
+        StringBuilder valueName = new StringBuilder();
+        String numbAsString = Integer.toString(num);
+        int[] splitNum = new int[numbAsString.length()];
+        for(int i = 0; i < numbAsString.length(); i++) {
+            splitNum[i] = Character.getNumericValue(numbAsString.charAt(i));
+        }
+        System.out.println("mit array: "+Arrays.toString(splitNum));
+        for(int i: splitNum) {
+            valueName.append(getNepaliNumFromResource(i));
+        }
+        return valueName.toString();
+    }
+
+    /**
+     * finds the nepali num as a String
+     * @param num the number to translate to nepali
+     * @return nepali number as a String
+     */
+    private String getNepaliNumFromResource(int num) {
+        String stringValueName = "";
+        switch (num) {
+            case 0: stringValueName = "zero_num"; break;
+            case 1: stringValueName = "one_num"; break;
+            case 2: stringValueName = "two_num"; break;
+            case 3: stringValueName = "three_num"; break;
+            case 4: stringValueName = "four_num"; break;
+            case 5: stringValueName = "five_num"; break;
+            case 6: stringValueName = "six_num"; break;
+            case 7: stringValueName = "seven_num"; break;
+            case 8: stringValueName = "eight_num"; break;
+            case 9: stringValueName = "nine_num"; break;
+        }
+        int idOfNum = getContext().getApplicationContext().getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
+        //int idOfNum = getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
+        return getString(idOfNum);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +128,16 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             if (tempMonths.get(i) < 0) {
                 months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
             } else {
-                months.add("" + tempMonths.get(i) + " months old");
+                try {
+                    //check if the language is not danish or english (default is napali)
+                    if(!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
+                        months.add(getNepaliNum(tempMonths.get(i)) + " " + getString(R.string.month));
+                        System.out.println("hej: " + months);
+                    }
+                    //if the napali number is not found we show english text
+                } catch (Resources.NotFoundException e) {
+                    months.add("" + tempMonths.get(i) + " months old");
+                }
             }
         }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NepalAppGroupB2</string>
+    <string name="calendar_homepage">calendar</string>
+    <string name="chosen_language">english</string>
+    <string name="comics_homepage">Comics</string>
+    <string name="diary">Diary</string>
+    <string name="height">%s cm</string>
+    <string name="how_many_month">How many months are you due?</string>
+    <string name="loading_text">Loading</string>
+    <string name="mom">Mom</string>
+    <string name="name_of_baby">Name of baby</string>
+    <string name="pregnant">Pregnant</string>
+    <string name="profile_homepage">Profile</string>
+    <string name="progressbar_text">You are %d weeks in your pregnancy</string>
+    <string name="quiz_homepage">Quiz</string>
+    <string name="recipes_homepage">Recipes</string>
+    <string name="weight">%s kg</string>
+    <string name="date">Date</string>
+    <string name="month">måneder</string>
+</resources>

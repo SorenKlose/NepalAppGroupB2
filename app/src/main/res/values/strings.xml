@@ -3,14 +3,14 @@
     <string name="progressbar_text">You are %d weeks in your pregnancy</string>
     <string name="appwidget_text" translatable="false">EXAMPLE</string>
     <string name="add_widget" translatable="false">Add widget</string>
-    <string name="chosen_language">english</string>
+    <string name="chosen_language">nepali</string>
 
     <string name="loading_text">Loading</string>
-    <string name="calendar_homepage">calendar</string>
-    <string name="recipes_homepage">Recipes</string>
-    <string name="quiz_homepage">Quiz</string>
+    <string name="calendar_homepage">स्वस्थ विकास</string>
+    <string name="recipes_homepage">बनाउने तरिका</string>
+    <string name="quiz_homepage">प्रश्न उत्तर</string>
     <string name="comics_homepage">Comics</string>
-    <string name="profile_homepage">Profile</string>
+    <string name="profile_homepage">व्यक्तिगत विवरण</string>
     <string name="name_of_baby">Name of baby</string>
     <string name="date">Date</string>
     <string name="height">%s cm</string>
@@ -19,4 +19,15 @@
     <string name="mom">Mom</string>
     <string name="diary">diary</string>
     <string name="how_many_month">How many months are you due?</string>
+    <string name="month">महिना</string>
+    <string name="one_num">१</string>
+    <string name="two_num">२</string>
+    <string name="three_num">३</string>
+    <string name="zero_num">०</string>
+    <string name="four_num">४</string>
+    <string name="five_num">५</string>
+    <string name="six_num">६</string>
+    <string name="seven_num">७</string>
+    <string name="eight_num">८</string>
+    <string name="nine_num">९</string>
 </resources>
