@@ -151,5 +151,6 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),60000L,pendingIntent);
+        alarmManager.cancel(pendingIntent);
           }
 }

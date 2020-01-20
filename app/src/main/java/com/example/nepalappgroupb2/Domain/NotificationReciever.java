@@ -31,6 +31,7 @@ public class NotificationReciever extends BroadcastReceiver {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
                     "Channel",
                     NotificationManager.IMPORTANCE_HIGH
             );
