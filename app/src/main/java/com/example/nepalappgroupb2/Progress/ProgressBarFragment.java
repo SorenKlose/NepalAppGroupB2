@@ -3,6 +3,7 @@ package com.example.nepalappgroupb2.Progress;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,10 @@ public class ProgressBarFragment extends Fragment {
 
         long birthDate = calendar.getTimeInMillis();
         long currentDate = Calendar.getInstance().getTimeInMillis();
+
+        System.out.println("bday: " + birthDate + "\ntid nu: " + currentDate);
+        System.out.println("tiden i ms: "+(currentDate - birthDate));
+        System.out.println("måneder: " + calendar.get(Calendar.MONTH));
 
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);

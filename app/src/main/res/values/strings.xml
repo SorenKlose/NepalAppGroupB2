@@ -9,13 +9,13 @@
     <string name="calendar_homepage">स्वस्थ विकास</string>
     <string name="recipes_homepage">बनाउने तरिका</string>
     <string name="quiz_homepage">प्रश्न उत्तर</string>
-    <string name="comics_homepage">Comics</string>
+    <string name="comics_homepage">हास्य</string>
     <string name="profile_homepage">व्यक्तिगत विवरण</string>
     <string name="name_of_baby">Name of baby</string>
     <string name="date">Date</string>
     <string name="height">%s cm</string>
     <string name="weight">%s kg</string>
-    <string name="pregnant">Pregnant</string>
+    <string name="pregnant">गर्भवती</string>
     <string name="mom">Mom</string>
     <string name="diary">diary</string>
     <string name="how_many_month">How many months are you due?</string>

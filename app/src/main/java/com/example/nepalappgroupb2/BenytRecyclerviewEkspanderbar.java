@@ -41,7 +41,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     DataFromSheets db = new DataFromSheets();
     RecipeCardElement calendarCardElement = new RecipeCardElement();
     List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
-    List<Integer> tempMonths ; //List of every month that has at least one message.
+    List<Integer> tempMonths; //List of every month that has at least one message.
     ViewGroup vg;
     MediaPlayer month6sound;
     MediaPlayer mp = new MediaPlayer();
@@ -76,6 +76,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     /**
      * combining nepali numbers to get bigger numbers. Assuming all nepali numbers can be found by
      * combining them. Fx if we have 123 then we find 1, 2, and 3 in nepali and combining them
+     *
      * @param num the number to translate to nepali
      * @return the nepali number as a String
      */
@@ -84,11 +85,11 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         StringBuilder valueName = new StringBuilder();
         String numbAsString = Integer.toString(num);
         int[] splitNum = new int[numbAsString.length()];
-        for(int i = 0; i < numbAsString.length(); i++) {
+        for (int i = 0; i < numbAsString.length(); i++) {
             splitNum[i] = Character.getNumericValue(numbAsString.charAt(i));
         }
-        System.out.println("mit array: "+Arrays.toString(splitNum));
-        for(int i: splitNum) {
+        System.out.println("mit array: " + Arrays.toString(splitNum));
+        for (int i : splitNum) {
             valueName.append(getNepaliNumFromResource(i));
         }
         return valueName.toString();
@@ -96,22 +97,43 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
     /**
      * finds the nepali num as a String
+     *
      * @param num the number to translate to nepali
      * @return nepali number as a String
      */
     private String getNepaliNumFromResource(int num) {
         String stringValueName = "";
         switch (num) {
-            case 0: stringValueName = "zero_num"; break;
-            case 1: stringValueName = "one_num"; break;
-            case 2: stringValueName = "two_num"; break;
-            case 3: stringValueName = "three_num"; break;
-            case 4: stringValueName = "four_num"; break;
-            case 5: stringValueName = "five_num"; break;
-            case 6: stringValueName = "six_num"; break;
-            case 7: stringValueName = "seven_num"; break;
-            case 8: stringValueName = "eight_num"; break;
-            case 9: stringValueName = "nine_num"; break;
+            case 0:
+                stringValueName = "zero_num";
+                break;
+            case 1:
+                stringValueName = "one_num";
+                break;
+            case 2:
+                stringValueName = "two_num";
+                break;
+            case 3:
+                stringValueName = "three_num";
+                break;
+            case 4:
+                stringValueName = "four_num";
+                break;
+            case 5:
+                stringValueName = "five_num";
+                break;
+            case 6:
+                stringValueName = "six_num";
+                break;
+            case 7:
+                stringValueName = "seven_num";
+                break;
+            case 8:
+                stringValueName = "eight_num";
+                break;
+            case 9:
+                stringValueName = "nine_num";
+                break;
         }
         int idOfNum = getContext().getApplicationContext().getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
         //int idOfNum = getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
@@ -126,13 +148,18 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         for (int i = 0; i < tempMonths.size(); i++) {
             if (tempMonths.get(i) < 0) {
-                months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
+                try {
+                    if (!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
+                        months.add(getNepaliNum(tempMonths.get(i + 10)) + " " + getString(R.string.month) + " " + getString(R.string.pregnant));
+                    }
+                } catch (Resources.NotFoundException e) {
+                    months.add("" + (tempMonths.get(i) + 10) + " months pregnant");
+                }
             } else {
                 try {
                     //check if the language is not danish or english (default is napali)
-                    if(!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
+                    if (!Locale.getDefault().getDisplayLanguage().equals("da") || !Locale.getDefault().getDisplayLanguage().equals("en")) {
                         months.add(getNepaliNum(tempMonths.get(i)) + " " + getString(R.string.month));
-                        System.out.println("hej: " + months);
                     }
                     //if the napali number is not found we show english text
                 } catch (Resources.NotFoundException e) {
@@ -239,7 +266,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                     if (i < infoList.size()) {
                         // TODO: 16-01-2020 lav et lidt bedre fix, så dette ikke sker
                         //hot fix: if there is more underviews than info in infolist then we remove the views
-                        if(vh.underviews.size() > infoList.size()) {
+                        if (vh.underviews.size() > infoList.size()) {
                             for (View underview : vh.underviews) {
                                 underview.setVisibility(View.GONE); // skjul underelementer
                             }
@@ -258,7 +285,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
     public void onPause() {
         super.onPause();
 
-        if (mp.isPlaying()){
+        if (mp.isPlaying()) {
             mp.stop();
             mp.release();
             mp = new MediaPlayer();
@@ -287,15 +314,14 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
             if (v == titleBackgroundColor || v == landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
                 boolean åben = openMonths.contains(position);
-                if (åben){
+                if (åben) {
                     openMonths.remove(position); // luk
-                    if (mp.isPlaying() && soundPlaying == position){
+                    if (mp.isPlaying() && soundPlaying == position) {
                         mp.stop();
                         mp.release();
                         mp = new MediaPlayer();
                     }
-                }
-                else openMonths.add(position); // åbn
+                } else openMonths.add(position); // åbn
                 adapter.notifyItemChanged(position);
             } else {
                 int id = v.getId();
@@ -310,8 +336,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                         mp.start();
                         soundPlaying = position;
                         System.out.println("spiller: " + soundName);
-                    }
-                    else{
+                    } else {
                         mp.stop();
                         mp.release();
                         mp = new MediaPlayer();
