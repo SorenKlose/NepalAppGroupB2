@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -186,12 +188,36 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
 
+        //scrolling to correct month text
+        int scrollToIndex = scrollToMonth(5);
+        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
+
         // Understøttelse for skærmvending - kan evt udelades
         if (savedInstanceState != null) {
             openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
             recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
         }
         return layout;
+    }
+
+    /**
+     * scroll to the text in calendar that is useful for the user
+     * @param inputMonth the amount of month since the conception of the pregnancy
+     * @return the index of which the calendar has to scroll to
+     */
+    private int scrollToMonth(int inputMonth) {
+        int temp = 0; //to save index
+        for(int i = 0; i < tempMonths.size(); i++) {
+            int curMonth = tempMonths.get(i) + 10;
+            //because of jumps in month in sheets we store the index if our input is >=
+            if(inputMonth >= curMonth) {
+                temp = i;
+            //if our input is larger current month we return the previous index
+            } else {
+                return temp;
+            }
+        }
+        return temp;
     }
 
     @Override
@@ -231,7 +257,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
+        public void onBindViewHolder(EkspanderbartListeelemViewholder vh, final int position) {
             boolean isOpen = openMonths.contains(position);
             vh.title.setText(months.get(position));
             //background for elements in recyclerview
@@ -260,7 +286,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                     underview.setVisibility(View.GONE); // skjul underelementer
                 }
             } else {
-
                 List<String> infoList = DataService.getMessageOfMonth(getString(R.string.chosen_language), tempMonths.get(position));
 
                 while (vh.underviews.size() < infoList.size()) { // sørg for at der er nok underviews

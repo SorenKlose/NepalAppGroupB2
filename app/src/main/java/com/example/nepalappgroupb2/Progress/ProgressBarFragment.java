@@ -55,6 +55,7 @@ public class ProgressBarFragment extends Fragment {
 
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+        System.out.println("progress i days: " + progressInDays);
         // kontroller om datasetter står på 0/0/0
         if (progressInDays == 0){
             progressInDays = monthsPregnant * 30;
