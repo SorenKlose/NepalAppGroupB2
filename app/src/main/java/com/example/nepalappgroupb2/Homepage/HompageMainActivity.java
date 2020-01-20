@@ -86,7 +86,7 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         profileButton.setOnClickListener(this);
 
         //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
-       // sendNoti();
+        sendNoti();
 
 
 
@@ -153,4 +153,6 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),60000L,pendingIntent);
         alarmManager.cancel(pendingIntent);
           }
+
+
 }
