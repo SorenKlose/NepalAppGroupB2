@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -23,12 +24,14 @@ import android.widget.ImageView;
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
+import com.example.nepalappgroupb2.Domain.NotificationReciever;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import java.sql.SQLOutput;
@@ -42,8 +45,10 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     Button comicsButton;
     Button quizButton;
     private ProgressBarFragment progressBar;
-    Button profileButton;
     private NotificationManagerCompat notiManager;
+    Button profileButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +85,9 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
-        sendNoti();
+        //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
+       // sendNoti();
+
 
 
     }
@@ -133,34 +140,16 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet.
+    //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
     public void sendNoti() {
+        java.util.Calendar calendar = Calendar.getInstance();
 
-        Intent intent = new Intent(this,CalenderActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+       //  calendar.set(Calendar.HOUR_OF_DAY,16);
+       //  calendar.set(Calendar.MINUTE,(int) minuteFromNow);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Channel",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel.setDescription("Channel");
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.push_icon)
-                .setContentTitle("NEW")
-                .setContentText("You have something new in calendar")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        notiManager.notify(1, notification);
+        Intent intent = new Intent(getApplicationContext(), NotificationReciever.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),60000L,pendingIntent);
           }
-
 }

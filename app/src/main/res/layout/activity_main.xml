@@ -62,12 +62,12 @@
 
     <TextView
         android:id="@+id/Titel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:text="@string/progressbar_text"
         android:textColor="#7D7D7E"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:fontFamily="sans-serif-condensed-light"
         app:layout_constraintBottom_toTopOf="@+id/guideline35"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
