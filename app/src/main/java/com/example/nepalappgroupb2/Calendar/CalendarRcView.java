@@ -181,18 +181,18 @@ public class CalendarRcView extends Fragment {
      * @return the index of which the calendar has to scroll to
      */
     public int scrollToMonth(int inputMonth, List<Integer> monthsWithText) {
-        int temp = 0; //to save index
+        int lastIndex = 0; //to save index
         for(int i = 0; i < monthsWithText.size(); i++) {
             int curMonth = monthsWithText.get(i) + 10;
             //because of jumps in month in sheets we store the index if our input is >=
             if(inputMonth >= curMonth) {
-                temp = i;
+                lastIndex = i;
             //if our input is larger current month we return the previous index
             } else {
-                return temp;
+                return lastIndex;
             }
         }
-        return temp;
+        return lastIndex;
     }
 
     @Override

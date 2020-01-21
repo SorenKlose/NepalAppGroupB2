@@ -142,7 +142,6 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
         //updating the widget with possible new text
         int month = progressBar.monthsOld(this);
-        if(month == 0) month = 3;
         System.out.println("month er her: " + month);
         widgetLogic.updateWidget(this, month);
     }

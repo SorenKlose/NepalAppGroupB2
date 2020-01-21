@@ -5,6 +5,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.RemoteViews;
+
+import com.example.nepalappgroupb2.Calendar.CalendarRcView;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
 import java.util.List;
@@ -13,8 +15,9 @@ import java.util.concurrent.ExecutionException;
 public class CalendarWidgetLogic {
 
     DataFromSheets db = new DataFromSheets();
+    CalendarRcView calendar = new CalendarRcView();
 
-    private String getWidgetText(final Context context, int month) {
+    private String getWidgetText(final Context context, int monthIndex) {
         try {
             new AsyncTask() {
                 @Override
@@ -34,8 +37,9 @@ public class CalendarWidgetLogic {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
         //finding the month info to show
-        List<String> texts = DataService.getMessageOfMonth(context.getString(R.string.chosen_language), month-10);
+        List<String> texts = DataService.getMessageOfMonth(context.getString(R.string.chosen_language), monthIndex);
         System.out.println("listen er: " + texts);
         //List<String> texts = db.getWithMonth(DataFromSheets.Headers.MsgEng, month-10);
         //showing the text as one string on the widget
@@ -53,13 +57,34 @@ public class CalendarWidgetLogic {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_calender);
         ComponentName thisWidget = new ComponentName(context, CalenderWidget.class);
+
+        //setting text on widget
+        setWidgetText(context, remoteViews, month);
+
+        //updating the widget
+        System.out.println("updater i logic");
+        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
+    }
+
+    public void setWidgetText(Context context, RemoteViews remoteViews, int month) {
+        List<Integer> monthList = DataService.getMonthsFromData(context);
+        int monthIndex = calendar.scrollToMonth(month, monthList);
+        int monthToShow = monthList.get(monthIndex);
+
         //setting text for widget title
-        remoteViews.setTextViewText(R.id.widget_title, month + " " + context.getString(R.string.month));
-        String widgetText = getWidgetText(context, month);
+//        String titleText = db.getWithMonth(DataFromSheets.Headers.Month, month).get(0);
+//        remoteViews.setTextViewText(R.id.widget_title, titleText + " " + context.getString(R.string.month));
+        String titleText;
+        if(monthToShow < 0) {
+            titleText = (monthToShow+10) + " " + context.getString(R.string.month_preg);
+        } else {
+            titleText = monthToShow + " " + context.getString(R.string.month);
+        }
+        remoteViews.setTextViewText(R.id.widget_title, titleText);
+
+        String widgetText = getWidgetText(context, monthToShow);
         //setting text for widget description (info for the month)
         remoteViews.setTextViewText(R.id.widget_desc, widgetText);
-        //updating the widget
-        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
     }
 
 }

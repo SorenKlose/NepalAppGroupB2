@@ -39,7 +39,6 @@ public class CalenderWidget extends AppWidgetProvider {
         }
 
         int month = progressBar.monthsOld(context);
-        if(month == 0) month = 3;
         System.out.println("måned widget: " + month);
 
         try {
@@ -60,15 +59,25 @@ public class CalenderWidget extends AppWidgetProvider {
             e.printStackTrace();
         }
         System.out.println("er done");
-//        List<Integer> monthList = DataService.getMonthsFromData(context);
-//        int monthToShow = calendar.scrollToMonth(month, monthList);
-//        List<String> hej = db.getWithMonth(DataFromSheets.Headers.MsgEng, month);
-        List<String> texts = DataService.getMessageOfMonth(context.getString(R.string.chosen_language), month-10);
+        List<Integer> monthList = DataService.getMonthsFromData(context);
+        int monthIndex = calendar.scrollToMonth(month, monthList);
+        int monthToShow = monthList.get(monthIndex);
+        System.out.println("monthindex i widget: " + monthIndex);
+        System.out.println("monthtoshow i widget: " + monthToShow);
+        List<String> texts = DataService.getMessageOfMonth(context.getString(R.string.chosen_language), monthToShow);
         System.out.println("widget: " + texts);
 
         for(int id: appWidgetIds) {
+            System.out.println("jeg er her");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_calender);
-            views.setTextViewText(R.id.widget_title, month + " " + context.getString(R.string.month));
+
+            String titleText;
+            if(monthToShow < 0) {
+                titleText = (monthToShow+10) + " " + context.getString(R.string.month_preg);
+            } else {
+                titleText = monthToShow + " " + context.getString(R.string.month);
+            }
+            views.setTextViewText(R.id.widget_title, titleText);
 
             StringBuilder textToShow = new StringBuilder();
             for(int i = 0; i < texts.size(); i++) {
