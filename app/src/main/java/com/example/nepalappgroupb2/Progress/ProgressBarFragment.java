@@ -32,15 +32,20 @@ public class ProgressBarFragment extends Fragment {
 
 
     public void update(){
-        int progressInDays = monthsOld()*30;
+        int progressInDays = monthsOld(getContext())*30;
         double progressInPercent =  (double) progressInDays / (double)1000 * 100;
         progressBar.setProgress((int)progressInPercent); // progressStatus
         System.out.println(progressInDays);
-        System.out.println(monthsOld());
+        System.out.println(monthsOld(getContext()));
     }
 
-    public int monthsOld() {
-        SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+    /**
+     * Finds how many months in the pregnancy the mom is
+     * @param context the context of where it's called from
+     * @return the pregnancy in months
+     */
+    public int monthsOld(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("profile", Context.MODE_PRIVATE);
 
         int year = sp.getInt("year", 0);
         int month = sp.getInt("month", 0);
@@ -49,7 +54,6 @@ public class ProgressBarFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
-
 
         if (year == 0 && month == 0 && day == 0) {
             return 0;

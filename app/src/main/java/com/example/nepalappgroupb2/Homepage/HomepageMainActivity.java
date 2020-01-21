@@ -57,18 +57,11 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
-        int month = sp.getInt("month", -1);
-        System.out.println("her er måned: " + month);
-        Date hej = new Date(System.currentTimeMillis());
-        System.out.println("måneder siden 1970: ");
-
         //HVIS I GERNE VIL HAVE PROFILE DIALOGGEN TIL AT KOMME FREM HVER GANG; SÅ SKAL NEDESTÅENDE KØRES - A
         SharedPreferences mPrefs = getSharedPreferences("popupscreen",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         //editor.clear();
         //editor.commit();
-
-
 
         super.onCreate(savedInstanceState);
         setCrashReporting();
@@ -90,39 +83,41 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
-
-
         //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
         sendNoti();
     }
 
-    public int monthsOld(){
-        SharedPreferences sp = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
-
-        int year = sp.getInt("year", -1);
-        int month = sp.getInt("month", -1);
-        int day = sp.getInt("day", -1);
-        int monthsPregnant = sp.getInt("monthsPregnant", -1);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-
-        calendar.set(year, month, day);
-
-        long birthDate = calendar.getTimeInMillis();
-        long currentDate = Calendar.getInstance().getTimeInMillis();
-
-        long progressInDays = TimeUnit.MILLISECONDS.toDays(
-                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-
-        if (progressInDays == 0){
-            return monthsPregnant;
-        } else {
-            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
-            long months = 9 + progressInDays/30;
-            return (int) months;
-        }
-    }
+//    public int monthsOld(Context context){
+//        SharedPreferences sp = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
+//        SharedPreferences hej = context.getSharedPreferences("profile", Context.MODE_PRIVATE)
+//
+//        int year = sp.getInt("year", 0);
+//        int month = sp.getInt("month", 0);
+//        int day = sp.getInt("day", 0);
+//        int monthsPregnant = sp.getInt("monthsPregnant", 0);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.clear();
+//
+//        if (year == 0 && month == 0 && day == 0) {
+//            return 0;
+//        } else {
+//            calendar.set(year, month, day);
+//            long birthDate = calendar.getTimeInMillis();
+//            long currentDate = Calendar.getInstance().getTimeInMillis();
+//
+//            long progressInDays = TimeUnit.MILLISECONDS.toDays(
+//                    currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+//
+//            if (progressInDays == 0) {
+//                return monthsPregnant;
+//            } else {
+//                // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+//                long months = 9 + progressInDays / 30;
+//                return (int) months;
+//            }
+//        }
+//    }
 
     @Override
     public void onClick(View view) {
@@ -167,7 +162,7 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     protected void onPostResume() {
         super.onPostResume();
         //sets the top text on the homepage
-        pregnancyText.setText(String.format(getString(R.string.progressbar_text), monthsOld()));
+        pregnancyText.setText(String.format(getString(R.string.progressbar_text), progressBar.monthsOld(this)));
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
         progressBar.update();
     }
