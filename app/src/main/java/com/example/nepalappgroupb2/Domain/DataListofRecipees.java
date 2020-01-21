@@ -23,23 +23,23 @@ public class DataListofRecipees {
 
         String[][][] test = {
                 new String[][]{
-                        new String[]{"Dal Bhat", "recipenepal_pdf.pdf"},
+                        new String[]{"Jaulo", "jaulo.pdf"},
                         new String[]{"banan"}
                 },
                 new String[][]{
-                        new String[]{"Food", "recipenepal_pdf.pdf"},
+                        new String[]{"Nimki", "nikmi.pdf"},
                         new String[]{ "Ingredienses" }
                 },
                 new String[][]{
-                        new String[]{"madopskrift", "recipenepal_pdf.pdf"},
+                        new String[]{"Sarbottam Pitho", "sarbottam_pitho.pdf"},
                         new String[]{ "salt"}
                 },
                 new String[][]{
-                        new String[]{"Peda", "recipenepal_pdf.pdf"},
+                        new String[]{"recipe 4", "recipenepal_pdf.pdf"},
                         new String[]{ "nødder"}
                 },
                 new String[][]{
-                        new String[]{"god mad", "recipenepal_pdf.pdf"},
+                        new String[]{"recipe 5", "recipenepal_pdf.pdf"},
                         new String[]{"sovs"}
                 }
         };
