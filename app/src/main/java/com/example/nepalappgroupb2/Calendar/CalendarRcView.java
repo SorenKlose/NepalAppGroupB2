@@ -3,9 +3,12 @@ Den her klasse startede som en kopi af CalendarRcView klassen fra android elemen
 og er siden blevet ændret i, for at tilpasse vores behov.
 */
 
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Calendar;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,24 +24,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
+import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
 public class CalendarRcView extends Fragment {
 
     DataFromSheets db = new DataFromSheets();
     RecipeCardElement calendarCardElement = new RecipeCardElement();
+
     List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
     List<Integer> tempMonths; //List of every month that has at least one message.
     ViewGroup vg;
     MediaPlayer month6sound;
     MediaPlayer mp = new MediaPlayer();
     int soundPlaying;
+    ProgressBarFragment progressBarFragment = new ProgressBarFragment();
 
     HashSet<Integer> openMonths = new HashSet<>(); // Which months are currently open
 
@@ -156,11 +164,41 @@ public class CalendarRcView extends Fragment {
 
         month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
 
-//        //scrolling to correct month text
-//        int scrollToIndex = scrollToMonth(5);
-//        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
+        //scrolling to correct month text
+       // int num = progressBarFragment.monthsOld();
+        int scrollToIndex = scrollToMonth(monthsOld());
+
+        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;
     }
+    public int monthsOld(){
+        SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+
+        int year = sp.getInt("year", -1);
+        int month = sp.getInt("month", -1);
+        int day = sp.getInt("day", -1);
+        int monthsPregnant = sp.getInt("monthsPregnant", -1);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+
+        calendar.set(year, month, day);
+
+        long birthDate = calendar.getTimeInMillis();
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+
+        long progressInDays = TimeUnit.MILLISECONDS.toDays(
+                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+
+        if (progressInDays == 0){
+            return monthsPregnant;
+        } else {
+            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+            long months = 9 + progressInDays/30;
+            return (int) months;
+        }
+    }
+
 
     /**
      * scroll to the text in calendar that is useful for the user
