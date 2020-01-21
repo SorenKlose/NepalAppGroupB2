@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            card_view:srcCompat="@drawable/dal_bhat"
-            tools:srcCompat="@drawable/dal_bhat"
+            card_view:srcCompat="@drawable/jaulo"
+            tools:srcCompat="@drawable/jaulo"
             android:alpha=".55"/>/>
 
         <TextView
