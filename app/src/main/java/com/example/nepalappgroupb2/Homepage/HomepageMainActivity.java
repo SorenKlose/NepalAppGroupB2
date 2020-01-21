@@ -1,28 +1,16 @@
 package com.example.nepalappgroupb2.Homepage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import android.app.AlarmManager;
-import android.app.ActionBar;
-import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
@@ -32,7 +20,6 @@ import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -81,7 +68,6 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         profileButton = (Button) findViewById(R.id.btnProfile);
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
 
-
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
         comicsButton.setOnClickListener(this);
@@ -90,8 +76,6 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
         //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
         sendNoti();
-
-
     }
 
     @Override
@@ -137,22 +121,19 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     protected void onPostResume() {
         super.onPostResume();
         progressBar.update();
-
     }
 
     //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
     public void sendNoti() {
         java.util.Calendar calendar = Calendar.getInstance();
 
-       //  calendar.set(Calendar.HOUR_OF_DAY,16);
-       //  calendar.set(Calendar.MINUTE,(int) minuteFromNow);
+        //  calendar.set(Calendar.HOUR_OF_DAY,16);
+        //  calendar.set(Calendar.MINUTE,(int) minuteFromNow);
 
         Intent intent = new Intent(getApplicationContext(), NotificationReciever.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),60000L,pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000L, pendingIntent);
         alarmManager.cancel(pendingIntent);
-          }
-
-
+    }
 }
