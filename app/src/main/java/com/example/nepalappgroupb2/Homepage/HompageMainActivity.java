@@ -22,6 +22,7 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
@@ -37,6 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import java.sql.SQLOutput;
+import java.util.concurrent.TimeUnit;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -49,6 +51,7 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     private ProgressBarFragment progressBar;
     private NotificationManagerCompat notiManager;
     Button profileButton;
+    TextView pregnancyText;
 
 
 
@@ -80,6 +83,7 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         comicsButton = (Button) findViewById(R.id.btnComics);
         quizButton = (Button) findViewById(R.id.btnQuiz);
         profileButton = (Button) findViewById(R.id.btnProfile);
+        pregnancyText = findViewById(R.id.homepageTitel);
 
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
@@ -87,10 +91,38 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
+
+
         //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
         sendNoti();
+    }
 
+    public int monthsOld(){
+        SharedPreferences sp = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
 
+        int year = sp.getInt("year", -1);
+        int month = sp.getInt("month", -1);
+        int day = sp.getInt("day", -1);
+        int monthsPregnant = sp.getInt("monthsPregnant", -1);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+
+        calendar.set(year, month, day);
+
+        long birthDate = calendar.getTimeInMillis();
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+
+        long progressInDays = TimeUnit.MILLISECONDS.toDays(
+                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+
+        if (progressInDays == 0){
+            return monthsPregnant;
+        } else {
+            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+            long months = 9 + progressInDays/30;
+            return (int) months;
+        }
     }
 
     @Override
@@ -135,6 +167,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        //sets the top text on the homepage
+        pregnancyText.setText(String.format(getString(R.string.progressbar_text), monthsOld()));
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
         progressBar.update();
 

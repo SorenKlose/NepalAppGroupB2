@@ -6,7 +6,7 @@
     <string name="comics_homepage">Tegneserie</string>
     <string name="loading_text">Henter</string>
     <string name="profile_homepage">Profil</string>
-    <string name="progressbar_text">Du er %d uger i graviditeten</string>
+    <string name="progressbar_text">Du er %d måneder i graviditeten</string>
     <string name="quiz_homepage">Quiz</string>
     <string name="recipes_homepage">Opskrifter</string>
     <string name="mom">Mor</string>

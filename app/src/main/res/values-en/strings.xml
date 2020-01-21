@@ -12,7 +12,7 @@
     <string name="name_of_baby">Name of baby</string>
     <string name="pregnant">Pregnant</string>
     <string name="profile_homepage">Profile</string>
-    <string name="progressbar_text">You are %d weeks in your pregnancy</string>
+    <string name="progressbar_text">You are %d months in your pregnancy</string>
     <string name="quiz_homepage">Quiz</string>
     <string name="recipes_homepage">Recipes</string>
     <string name="weight">%s kg</string>
