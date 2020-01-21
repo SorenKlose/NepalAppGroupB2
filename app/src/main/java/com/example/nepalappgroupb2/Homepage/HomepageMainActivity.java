@@ -36,11 +36,10 @@ import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 import java.util.Calendar;
 import java.util.Date;
 
-import java.sql.SQLOutput;
 
 import io.fabric.sdk.android.Fabric;
 
-public class HompageMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomepageMainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String CHANNEL_ID = "channel";
     Button calenderButton;
     Button recipesButton;
@@ -80,6 +79,8 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         comicsButton = (Button) findViewById(R.id.btnComics);
         quizButton = (Button) findViewById(R.id.btnQuiz);
         profileButton = (Button) findViewById(R.id.btnProfile);
+        progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
+
 
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
@@ -135,7 +136,6 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
         progressBar.update();
 
     }

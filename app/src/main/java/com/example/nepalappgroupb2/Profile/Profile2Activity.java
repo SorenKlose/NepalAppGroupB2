@@ -8,10 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
+import com.example.nepalappgroupb2.Homepage.HomepageMainActivity;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.R;
 
@@ -39,7 +38,6 @@ public class Profile2Activity extends AppCompatActivity {
 
 
         numberPicker.setValue(sp.getInt("monthsPregnant", 0));
-// fjern her
         momButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +57,7 @@ public class Profile2Activity extends AppCompatActivity {
                 System.out.println(numberPicker.getValue());
                 progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
                 progressBar.update();
-                Intent intent = new Intent(Profile2Activity.this, ProfileActivity.class);
+                Intent intent = new Intent(Profile2Activity.this, HomepageMainActivity.class);
                 startActivity(intent);
                 finish();
             }

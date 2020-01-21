@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.nepalappgroupb2.Calendar.CalenderActivity;
 import com.example.nepalappgroupb2.R;
 
-import static com.example.nepalappgroupb2.Homepage.HompageMainActivity.CHANNEL_ID;
+import static com.example.nepalappgroupb2.Homepage.HomepageMainActivity.CHANNEL_ID;
 
 public class NotificationReciever extends BroadcastReceiver {
     private NotificationManagerCompat notiManager;
