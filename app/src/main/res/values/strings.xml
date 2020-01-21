@@ -33,4 +33,5 @@
     <string name="month_preg">months pregnant</string>
     <string name="a_mom">आमा</string>
     <string name="i_am">म हुँ</string>
+    <string name="key_map_to_sharedprefs">MAP_SAVE_KEY</string>
 </resources>

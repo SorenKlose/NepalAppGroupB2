@@ -1,8 +1,16 @@
 package com.example.nepalappgroupb2.Domain;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.nepalappgroupb2.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +31,7 @@ public class DataFromSheets {
     public static void main(String[] args) {
         DataFromSheets data = new DataFromSheets();
         try {
-            data.fromSheets();
+            //data.fromSheets();
 
 //            for (String s : data.getWithMonth(Headers.MsgEng, 6)) {
 //                System.out.println("hej " + s);
@@ -46,7 +54,7 @@ public class DataFromSheets {
     }
 
     /**
-     *
+     * getting a list of all non-duplicated months from Google sheet
      * @return
      */
     public List<Integer> getMonths() {
@@ -154,10 +162,31 @@ public class DataFromSheets {
 
     /**
      * The method that save the data from Google Sheet into a HashMap
-     *
      * @throws Exception
      */
-    public void fromSheets() throws Exception {
+    public void fromSheets(Context context) throws Exception {
+        Map<String, String> mapFromSharedPrefs = getMapFromSharedPrefs(context.getString(R.string.key_map_to_sharedprefs), context);
+
+        //if the map is NOT already in sharedprefs, we download it from Google sheets
+        if(!isMapDownloaded(mapFromSharedPrefs)) {
+            System.out.println("henter nyt");
+            makeMap(context);
+        } else {
+            System.out.println("henter IKKE nyt");
+            map = mapFromSharedPrefs;
+        }
+    }
+
+    public boolean isMapDownloaded(Map<String, String> mapToCheck) {
+        return (!mapToCheck.isEmpty() );
+    }
+
+    /**
+     * The method that save the data from Google Sheet into a HashMap
+     * @param context context from where it's called
+     * @throws Exception
+     */
+    public void makeMap(Context context) throws Exception{
         String id = "1XV2U8gztCXR4BmPuLT1eQBxYUx0GFPDJp9S8YqRn92A";
 
         System.out.println("Henter ord");
@@ -196,13 +225,32 @@ public class DataFromSheets {
                 }
             }
         }
-
         System.out.println(map);
+
+        saveMapToSharedPrefs(map, context.getString(R.string.key_map_to_sharedprefs), context);
+    }
+
+    public void saveMapToSharedPrefs(Map<String, String> map, String key, Context context) {
+        SharedPreferences sp = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String mapAsJson = gson.toJson(map);
+        editor.putString(key, mapAsJson);
+        editor.apply();
+    }
+
+    public Map<String, String> getMapFromSharedPrefs(String key, Context context) {
+        SharedPreferences sp = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String mapAsString = sp.getString(key, "empty");
+        Type type = new TypeToken<Map<String, String>>() {}.getType();
+        if(mapAsString.equals("empty"))
+            return new HashMap<>();
+        return gson.fromJson(mapAsString, type);
     }
 
     /**
      * To get the size of the HashMap
-     *
      * @return size of HashMap
      */
     public int getMapSize() {

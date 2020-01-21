@@ -34,7 +34,7 @@ public class CalendarLoading extends Fragment {
             @Override
             protected Object doInBackground(Object[] objects) {
                 try {
-                    db.fromSheets();
+                    db.fromSheets(getContext());
                     //SystemClock.sleep(4000);
                 } catch (Exception e) {
                     e.printStackTrace();

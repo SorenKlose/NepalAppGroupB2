@@ -123,7 +123,7 @@ public class CalendarRcView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tempMonths = DataService.getMonthsFromData();
+        tempMonths = DataService.getMonthsFromData(getContext());
 
 
         for (int i = 0; i < tempMonths.size(); i++) {
@@ -168,7 +168,7 @@ public class CalendarRcView extends Fragment {
 
         //scrolling to correct month text
        // int num = progressBarFragment.monthsOld();
-        int scrollToIndex = scrollToMonth(progressBar.monthsOld(getContext()));
+        int scrollToIndex = scrollToMonth(progressBar.monthsOld(getContext()), tempMonths);
 
         recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;
@@ -180,10 +180,10 @@ public class CalendarRcView extends Fragment {
      * @param inputMonth the amount of month since the conception of the pregnancy
      * @return the index of which the calendar has to scroll to
      */
-    private int scrollToMonth(int inputMonth) {
+    public int scrollToMonth(int inputMonth, List<Integer> monthsWithText) {
         int temp = 0; //to save index
-        for(int i = 0; i < tempMonths.size(); i++) {
-            int curMonth = tempMonths.get(i) + 10;
+        for(int i = 0; i < monthsWithText.size(); i++) {
+            int curMonth = monthsWithText.get(i) + 10;
             //because of jumps in month in sheets we store the index if our input is >=
             if(inputMonth >= curMonth) {
                 temp = i;
@@ -295,8 +295,7 @@ public class CalendarRcView extends Fragment {
 
                 for (int i = 0; i < vh.underviews.size(); i++) { // sæt underviews til at vise det rigtige indhold
                     if (i < infoList.size()) {
-                        // TODO: 16-01-2020 lav et lidt bedre fix, så dette ikke sker
-                        //hot fix: if there is more underviews than info in infolist then we remove the views
+                        //if there is more underviews than info in infolist then we remove the views
                         if (vh.underviews.size() > infoList.size()) {
                             for (View underview : vh.underviews) {
                                 underview.setVisibility(View.GONE); // skjul underelementer

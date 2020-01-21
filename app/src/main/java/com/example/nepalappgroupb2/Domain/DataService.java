@@ -1,5 +1,6 @@
 package com.example.nepalappgroupb2.Domain;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.crashlytics.android.Crashlytics;
@@ -7,6 +8,8 @@ import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /* Denne Class er tiltængt at skulle agere kobling mellem Frontend Class'  (Activitys og Fragments )
  og så Class' der håndterer kommunikationen med backenden f.eks. "DataFromSheets".
@@ -20,8 +23,7 @@ public class DataService {
     private DataService() {
     }
 
-
-    public static List<Integer> getMonthsFromData() {
+    public static List<Integer> getMonthsFromData(final Context context) {
 
         final List<Integer> returnList = new ArrayList<>();
         if (dataFromSheets.getMapSize() > 0) {
@@ -32,7 +34,7 @@ public class DataService {
                 @Override
                 protected Object doInBackground(Object[] objects) {
                     try {
-                        dataFromSheets.fromSheets();
+                        dataFromSheets.fromSheets(context);
                     } catch (Exception e) {
                         e.printStackTrace();
                         //sendes til 'non-fatal issues' i Crashlytics-console
@@ -52,7 +54,7 @@ public class DataService {
     }
 
     public static List<String> getMessageOfMonth(String language, int monthnumber) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         switch (language) {
             //for english or danish we show the english text
             case "english":

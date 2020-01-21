@@ -1,31 +1,23 @@
 package com.example.nepalappgroupb2.Homepage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import android.app.AlarmManager;
-import android.app.ActionBar;
-import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.crashlytics.android.Crashlytics;
+import com.example.nepalappgroupb2.CalendarWidgetLogic;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
+import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.NotificationReciever;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
@@ -33,12 +25,10 @@ import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 import java.util.Calendar;
-import java.util.Date;
-
-import java.sql.SQLOutput;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.Fabric;
+
 
 public class HomepageMainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String CHANNEL_ID = "channel";
@@ -50,8 +40,8 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     private NotificationManagerCompat notiManager;
     Button profileButton;
     TextView pregnancyText;
-
-
+    CalendarWidgetLogic widgetLogic = new CalendarWidgetLogic();
+    DataFromSheets db = new DataFromSheets();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,39 +75,23 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
         //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
         sendNoti();
-    }
 
-//    public int monthsOld(Context context){
-//        SharedPreferences sp = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
-//        SharedPreferences hej = context.getSharedPreferences("profile", Context.MODE_PRIVATE)
-//
-//        int year = sp.getInt("year", 0);
-//        int month = sp.getInt("month", 0);
-//        int day = sp.getInt("day", 0);
-//        int monthsPregnant = sp.getInt("monthsPregnant", 0);
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.clear();
-//
-//        if (year == 0 && month == 0 && day == 0) {
-//            return 0;
-//        } else {
-//            calendar.set(year, month, day);
-//            long birthDate = calendar.getTimeInMillis();
-//            long currentDate = Calendar.getInstance().getTimeInMillis();
-//
-//            long progressInDays = TimeUnit.MILLISECONDS.toDays(
-//                    currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-//
-//            if (progressInDays == 0) {
-//                return monthsPregnant;
-//            } else {
-//                // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
-//                long months = 9 + progressInDays / 30;
-//                return (int) months;
-//            }
-//        }
-//    }
+        try {
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    try {
+                        db.fromSheets(getBaseContext());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return 0;
+                }
+            }.execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -165,6 +139,12 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         pregnancyText.setText(String.format(getString(R.string.progressbar_text), progressBar.monthsOld(this)));
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
         progressBar.update();
+
+        //updating the widget with possible new text
+        int month = progressBar.monthsOld(this);
+        if(month == 0) month = 3;
+        System.out.println("month er her: " + month);
+        widgetLogic.updateWidget(this, month);
     }
 
     //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
