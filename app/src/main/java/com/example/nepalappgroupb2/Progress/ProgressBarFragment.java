@@ -40,7 +40,7 @@ public class ProgressBarFragment extends Fragment {
     }
 
     public int monthsOld(){
-        SharedPreferences sp = this.getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
 
         int year = sp.getInt("year", -1);
         int month = sp.getInt("month", -1);

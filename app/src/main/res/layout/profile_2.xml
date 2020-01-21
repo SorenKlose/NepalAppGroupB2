@@ -74,7 +74,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_rounded"
@@ -197,5 +196,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent=".01"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rounded"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
