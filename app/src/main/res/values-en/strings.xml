@@ -19,4 +19,6 @@
     <string name="date">Date</string>
     <string name="month">month</string>
     <string name="month_preg">months pregnant</string>
+    <string name="a_mom">Mom</string>
+    <string name="i_am">I am</string>
 </resources>
