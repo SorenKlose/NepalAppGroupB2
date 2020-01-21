@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
@@ -62,6 +63,8 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     knap.animate().scaleX(1).scaleY(1);
+
+                    knap.animate().setDuration(1000);
                 }
             });
         }
@@ -142,7 +145,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onAnimationEnd(Animator animation) {
                 checkmark.setVisibility(View.GONE);
-                nextQuestion();
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -153,6 +155,13 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             }
         });
         correctChoice++;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextQuestion();
+            }
+        },2500);
     }
 
     public void answerIncorrect(){
@@ -169,7 +178,6 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onAnimationEnd(Animator animation) {
                 errorcross.setVisibility(View.GONE);
-                nextQuestion();
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -179,6 +187,13 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
             public void onAnimationRepeat(Animator animation) {
             }
         });
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextQuestion();
+            }
+        },2500);
     }
 
     public void TTS(final String text){
