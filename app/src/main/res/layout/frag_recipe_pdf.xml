@@ -17,7 +17,7 @@
         <com.pdfview.PDFView
             android:id="@+id/recipe_pdfview_test"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/avatars" />
 
     </LinearLayout>

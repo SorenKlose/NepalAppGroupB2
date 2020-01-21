@@ -86,6 +86,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         int year = sp.getInt("year", 0);
         int month = sp.getInt("month", 0);
         int day = sp.getInt("day", 0);
+
+        if(year == 0 || month == 0 || day == 0){
+            Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH) + 1;
+            day = c.get(Calendar.DAY_OF_MONTH);
+        }
         String date = day + "/" + month + "/" + year;
         mDisplayDate.setText(date);
 
@@ -156,6 +163,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 editor.apply();
                 progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
                 progressBar.update();
+                System.out.println(day + ", " + month + ", " + year);
 
             }
         };

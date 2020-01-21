@@ -3,7 +3,6 @@ package com.example.nepalappgroupb2.Progress;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,15 @@ public class ProgressBarFragment extends Fragment {
 
 
     public void update(){
+        int progressInDays = monthsOld()*30;
+        double progressInPercent =  (double) progressInDays / (double)1000 * 100;
+        progressBar.setProgress((int)progressInPercent); // progressStatus
+        System.out.println(progressInDays);
+        System.out.println(monthsOld());
+    }
 
-        SharedPreferences sp = this.getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+    public int monthsOld(){
+        SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
 
         int year = sp.getInt("year", -1);
         int month = sp.getInt("month", -1);
@@ -49,21 +55,15 @@ public class ProgressBarFragment extends Fragment {
         long birthDate = calendar.getTimeInMillis();
         long currentDate = Calendar.getInstance().getTimeInMillis();
 
-        System.out.println("bday: " + birthDate + "\ntid nu: " + currentDate);
-        System.out.println("tiden i ms: "+(currentDate - birthDate));
-        System.out.println("måneder: " + calendar.get(Calendar.MONTH));
-
         long progressInDays = TimeUnit.MILLISECONDS.toDays(
                 currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-        System.out.println("progress i days: " + progressInDays);
-        // kontroller om datasetter står på 0/0/0
-        if (progressInDays == 0){
-            progressInDays = monthsPregnant * 30;
-        } else {
-            progressInDays += 9*30; // ikke helt præcist men også ligegyldigt da forholdet er så stort
-        }
-        double progressInPercent =  (double) progressInDays / (double)1000 * 100;
 
-        progressBar.setProgress((int)progressInPercent); // progressStatus
+        if (progressInDays == 0){
+            return monthsPregnant;
+        } else {
+            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+            long months = 9 + progressInDays/30;
+            return (int) months;
+        }
     }
 }

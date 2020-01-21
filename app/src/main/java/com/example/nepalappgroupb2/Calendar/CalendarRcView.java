@@ -1,17 +1,17 @@
 /*
-Den her klasse startede som en kopi af BenytRecyclerviewEkspanderbar klassen fra android elementer,
+Den her klasse startede som en kopi af CalendarRcView klassen fra android elementer,
 og er siden blevet ændret i, for at tilpasse vores behov.
 */
 
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Calendar;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,61 +19,38 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.nepalappgroupb2.Calendar.CalendarLoading;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
+import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
-public class BenytRecyclerviewEkspanderbar extends Fragment {
+public class CalendarRcView extends Fragment {
 
     DataFromSheets db = new DataFromSheets();
     RecipeCardElement calendarCardElement = new RecipeCardElement();
+
     List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
     List<Integer> tempMonths; //List of every month that has at least one message.
     ViewGroup vg;
     MediaPlayer month6sound;
     MediaPlayer mp = new MediaPlayer();
     int soundPlaying;
-
-
-    static class CalendarInfoData {
-        List<List<String>> info = Arrays.asList(
-                Arrays.asList("Congratulations on your pregnancy! During the fourth month of pregnancy, " +
-                                "visit the health facility for antenatal care, so that you learn about " +
-                                "your and child’s health.\n",
-                        "One IFA per day starting from the fourth " +
-                                "month of pregnancy will reduce your risk for anemia. IFA is available " +
-                                "free of cost at health facilities or from the FCHV.\n"),
-                Arrays.asList("As the child in the womb also receives nutrition from mother's food, " +
-                                "the pregnant woman should eat one more meal than usual daily and should " +
-                                "eat nutritious foods including eggs, fish and meat.\n",
-                        "During pregnancy, participating in FCHV led Health Mother's Group meetings is an opportunity to learn many things about your and your child’s health. Therefore, go every month.\n"),
-
-                Arrays.asList("For further information on your and the child’s health, listen to Bhanchhin Aama radio program from your local FM every Sunday morning at 7.30 hrs, afternoon at 13:00 hrs and at night at 9:15pm.\n", "Please eat eggs, meat and milk products every day for health and nutrition of both you and your child.\n"),
-                Arrays.asList("Always only drink water after boiling or filtering to prevent diarrheal diseases, typhoid and malnutrition.\n", "Hope you have not forgotten to take an IFA every day?\n"));
-    }
-
-    CalendarInfoData data = new CalendarInfoData();
+    ProgressBarFragment progressBarFragment = new ProgressBarFragment();
 
     HashSet<Integer> openMonths = new HashSet<>(); // Which months are currently open
 
     RecyclerView recyclerView;
-
-    List<String> hej;
 
     /**
      * combining nepali numbers to get bigger numbers. Assuming all nepali numbers can be found by
@@ -138,7 +115,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
                 break;
         }
         int idOfNum = getContext().getApplicationContext().getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
-        //int idOfNum = getResources().getIdentifier(stringValueName, "string", getContext().getPackageName());
         return getString(idOfNum);
     }
 
@@ -188,17 +164,41 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
         month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
 
-//        //scrolling to correct month text
-//        int scrollToIndex = scrollToMonth(5);
-//        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
-//
-//        // Understøttelse for skærmvending - kan evt udelades
-//        if (savedInstanceState != null) {
-//            openMonths = (HashSet<Integer>) savedInstanceState.getSerializable("openMonths");
-//            recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
-//        }
+        //scrolling to correct month text
+       // int num = progressBarFragment.monthsOld();
+        int scrollToIndex = scrollToMonth(monthsOld());
+
+        recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;
     }
+    public int monthsOld(){
+        SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+
+        int year = sp.getInt("year", -1);
+        int month = sp.getInt("month", -1);
+        int day = sp.getInt("day", -1);
+        int monthsPregnant = sp.getInt("monthsPregnant", -1);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+
+        calendar.set(year, month, day);
+
+        long birthDate = calendar.getTimeInMillis();
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+
+        long progressInDays = TimeUnit.MILLISECONDS.toDays(
+                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+
+        if (progressInDays == 0){
+            return monthsPregnant;
+        } else {
+            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+            long months = 9 + progressInDays/30;
+            return (int) months;
+        }
+    }
+
 
     /**
      * scroll to the text in calendar that is useful for the user
@@ -242,16 +242,14 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
             rodLayout.setLayoutParams(lp);
             EkspanderbartListeelemViewholder vh = new EkspanderbartListeelemViewholder(rodLayout);
             vh.rodLayout = rodLayout;
-            vh.landeview = getLayoutInflater().inflate(R.layout.calender_card_element, parent, false);
-            vh.title = vh.landeview.findViewById(R.id.calender_card_title);
-            vh.calendarImage = vh.landeview.findViewById(R.id.image_calendar);
-            vh.titleBackgroundColor = vh.landeview.findViewById(R.id.month_title_backgroundcolor);
-            vh.landeview.setOnClickListener(vh);
-            vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
-            //vh.calendarImage.setOnClickListener(vh);
+            vh.monthview = getLayoutInflater().inflate(R.layout.calender_card_element, parent, false);
+            vh.title = vh.monthview.findViewById(R.id.calender_card_title);
+            vh.calendarImage = vh.monthview.findViewById(R.id.image_calendar);
+            vh.titleBackgroundColor = vh.monthview.findViewById(R.id.month_title_backgroundcolor);
+            vh.monthview.setOnClickListener(vh);
+            vh.monthview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
             vh.titleBackgroundColor.setOnClickListener(vh);
-//      vh.calendarImage.setBackgroundResource(android.R.drawable.btn_default);
-            vh.rodLayout.addView(vh.landeview);
+            vh.rodLayout.addView(vh.monthview);
             vg = parent;
             return vh;
         }
@@ -260,8 +258,6 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         public void onBindViewHolder(EkspanderbartListeelemViewholder vh, final int position) {
             boolean isOpen = openMonths.contains(position);
             vh.title.setText(months.get(position));
-            //background for elements in recyclerview
-            //vh.calendarImage.setImageResource(calendarCardElement.getImgIdFromString("" + (position + 1) + " month old", getContext()));
 
             /**
              * setting images and background colors on the months
@@ -361,7 +357,7 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         LinearLayout rodLayout;
         TextView title, titleBackgroundColor;
         ImageView calendarImage;
-        View landeview;
+        View monthview;
         ArrayList<View> underviews = new ArrayList<>();
 
         public EkspanderbartListeelemViewholder(View itemView) {
@@ -372,16 +368,16 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
         public void onClick(View v) {
             final int position = getAdapterPosition();
 
-            if (v == titleBackgroundColor || v == landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
+            if (v == titleBackgroundColor || v == monthview) { // Clicking on a month, opens/closes the list of info for that motnh.
                 boolean åben = openMonths.contains(position);
                 if (åben) {
-                    openMonths.remove(position); // luk
+                    openMonths.remove(position); // close
                     if (mp.isPlaying() && soundPlaying == position) {
                         mp.stop();
                         mp.release();
                         mp = new MediaPlayer();
                     }
-                } else openMonths.add(position); // åbn
+                } else openMonths.add(position); // open
                 adapter.notifyItemChanged(position);
             } else {
                 int id = v.getId();
@@ -389,14 +385,14 @@ public class BenytRecyclerviewEkspanderbar extends Fragment {
 
                 String soundName = db.getMediaPlayer(tempMonths.get(position), id);
                 Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
-                try {
-                    if (!mp.isPlaying()) {
+                try { // Checks if the Mediaplayer is already playing.
+                    if (!mp.isPlaying()) { // If not, starts playing.
                         mp.setDataSource(getContext(), uri);
                         mp.prepare();
                         mp.start();
                         soundPlaying = position;
                         System.out.println("spiller: " + soundName);
-                    } else {
+                    } else { // If it is playing, it stops the current sound, and starts the new sound.
                         mp.stop();
                         mp.release();
                         mp = new MediaPlayer();

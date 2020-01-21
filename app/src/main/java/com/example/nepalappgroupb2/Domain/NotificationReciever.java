@@ -20,10 +20,10 @@ import static com.example.nepalappgroupb2.Homepage.HompageMainActivity.CHANNEL_I
 public class NotificationReciever extends BroadcastReceiver {
     private NotificationManagerCompat notiManager;
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         notiManager = NotificationManagerCompat.from(context);
-
         Intent repeatingIntent = new Intent(context, CalenderActivity.class);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -50,5 +50,5 @@ public class NotificationReciever extends BroadcastReceiver {
                 .build();
             notiManager.notify(100,notification);
     }
-
 }
+

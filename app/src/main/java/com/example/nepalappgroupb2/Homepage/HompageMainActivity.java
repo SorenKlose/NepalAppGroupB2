@@ -5,6 +5,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
+import android.app.ActionBar;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -89,7 +91,6 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         sendNoti();
 
 
-
     }
 
     @Override
@@ -121,15 +122,14 @@ public class HompageMainActivity extends AppCompatActivity implements View.OnCli
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
         System.out.println("this is an emulator: "+EMULATOR);
         if (EMULATOR) {
-            Fabric.with(this, new Crashlytics());
-        }
 
-        // Crashlytics.getInstance().crash(); // forcer et crash
+            Crashlytics.setBool("emulator",true);
+        }
+        Fabric.with(this, new Crashlytics());
+        //Crashlytics.getInstance().crash(); // forcer et crash
 
         // hvis emulatoren ikke har adgang til internettet så den ikke kan sende crash-rapporter,
         // så prøv at lave en 'Cold Boot Now' på emulatoren
-
-
     }
 
     @Override
