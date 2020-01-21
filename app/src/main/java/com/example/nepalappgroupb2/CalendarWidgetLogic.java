@@ -72,8 +72,6 @@ public class CalendarWidgetLogic {
         int monthToShow = monthList.get(monthIndex);
 
         //setting text for widget title
-//        String titleText = db.getWithMonth(DataFromSheets.Headers.Month, month).get(0);
-//        remoteViews.setTextViewText(R.id.widget_title, titleText + " " + context.getString(R.string.month));
         String titleText;
         if(monthToShow < 0) {
             titleText = (monthToShow+10) + " " + context.getString(R.string.month_preg);

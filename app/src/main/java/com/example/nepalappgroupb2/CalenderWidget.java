@@ -59,11 +59,14 @@ public class CalenderWidget extends AppWidgetProvider {
             e.printStackTrace();
         }
         System.out.println("er done");
+        //finding indices for the info text
         List<Integer> monthList = DataService.getMonthsFromData(context);
         int monthIndex = calendar.scrollToMonth(month, monthList);
         int monthToShow = monthList.get(monthIndex);
         System.out.println("monthindex i widget: " + monthIndex);
         System.out.println("monthtoshow i widget: " + monthToShow);
+
+        //all the info text for the given month
         List<String> texts = DataService.getMessageOfMonth(context.getString(R.string.chosen_language), monthToShow);
         System.out.println("widget: " + texts);
 
@@ -71,6 +74,7 @@ public class CalenderWidget extends AppWidgetProvider {
             System.out.println("jeg er her");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_calender);
 
+            //setting the title of the widget
             String titleText;
             if(monthToShow < 0) {
                 titleText = (monthToShow+10) + " " + context.getString(R.string.month_preg);
@@ -79,6 +83,7 @@ public class CalenderWidget extends AppWidgetProvider {
             }
             views.setTextViewText(R.id.widget_title, titleText);
 
+            //combining the info texts to a single string
             StringBuilder textToShow = new StringBuilder();
             for(int i = 0; i < texts.size(); i++) {
                 if(i > 0) {
