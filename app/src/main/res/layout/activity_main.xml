@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFF0"
-    tools:context=".Homepage.HompageMainActivity">
+    tools:context=".Homepage.HomepageMainActivity">
 
     <fragment
         android:id="@+id/progressBar"

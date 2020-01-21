@@ -39,31 +39,35 @@ public class ProgressBarFragment extends Fragment {
         System.out.println(monthsOld());
     }
 
-    public int monthsOld(){
+    public int monthsOld() {
         SharedPreferences sp = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
 
-        int year = sp.getInt("year", -1);
-        int month = sp.getInt("month", -1);
-        int day = sp.getInt("day", -1);
-        int monthsPregnant = sp.getInt("monthsPregnant", -1);
+        int year = sp.getInt("year", 0);
+        int month = sp.getInt("month", 0);
+        int day = sp.getInt("day", 0);
+        int monthsPregnant = sp.getInt("monthsPregnant", 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
 
-        calendar.set(year, month, day);
 
-        long birthDate = calendar.getTimeInMillis();
-        long currentDate = Calendar.getInstance().getTimeInMillis();
-
-        long progressInDays = TimeUnit.MILLISECONDS.toDays(
-                currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-
-        if (progressInDays == 0){
-            return monthsPregnant;
+        if (year == 0 && month == 0 && day == 0) {
+            return 0;
         } else {
-            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
-            long months = 9 + progressInDays/30;
-            return (int) months;
+            calendar.set(year, month, day);
+            long birthDate = calendar.getTimeInMillis();
+            long currentDate = Calendar.getInstance().getTimeInMillis();
+
+            long progressInDays = TimeUnit.MILLISECONDS.toDays(
+                    currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
+
+            if (progressInDays == 0) {
+                return monthsPregnant;
+            } else {
+                // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+                long months = 9 + progressInDays / 30;
+                return (int) months;
+            }
         }
     }
 }

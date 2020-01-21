@@ -37,7 +37,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Profile.PhotoDiaryActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Homepage.HompageMainActivity"
+        <activity android:name=".Homepage.HomepageMainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
