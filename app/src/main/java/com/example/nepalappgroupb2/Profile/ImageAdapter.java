@@ -37,11 +37,11 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int position, View view, ViewGroup viewGroup) {
         ImageView imageView = new ImageView(context);
-        imageView.setImageBitmap(images.get(i));
+        imageView.setImageBitmap(images.get(position));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setLayoutParams(new GridView.LayoutParams(240,240));
+        imageView.setLayoutParams(new GridView.LayoutParams(250,250));
         return imageView;
     }
 }
