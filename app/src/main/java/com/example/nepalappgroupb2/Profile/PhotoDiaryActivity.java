@@ -77,7 +77,7 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File imageFile = null;
         try{
-            imageFile = getImageFile();
+            imageFile = makeImageFile();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         startActivityForResult(intent, 1);
     }
 
-    private File getImageFile() throws IOException {
+    private File makeImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageName = "jpg_" + timeStamp + "_";
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -105,12 +105,8 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Activity.RESULT_OK) {
             ImageAdapter imageAdapter = new ImageAdapter(this);
-
             Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra(MediaStore.EXTRA_OUTPUT));
-            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.birthday);
-            imageAdapter.images.add(bitmap1);
-            //test.setImageBitmap(bitmap1);
-            System.out.println(imageAdapter.getCount());
+            imageAdapter.images.add(bitmap);
         }
     }
 }

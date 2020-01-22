@@ -34,7 +34,7 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inner_quiz_layout);
+        setContentView(R.layout.quiz_inner_quiz_layout);
 
         button1 = findViewById(R.id.button1);
         button1.setOnClickListener(this);
