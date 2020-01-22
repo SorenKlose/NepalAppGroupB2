@@ -55,6 +55,21 @@ public class CalendarRcView extends Fragment {
     RecyclerView recyclerView;
 
     /**
+     * A save check for numbers. Will return nepalise numbers if
+     * language is NOT danish or endlish
+     * @param num number you want to use
+     * @param language language running on the phone (Locale.getDefault().getDisplayLanguage())
+     * @return the number as a String either as western number or nepali number
+     */
+    public String getNumForCurLanguage(int num, String language) {
+        if(!language.equals("dansk") && !language.equals("English")) {
+            return getNepaliNum(num);
+        } else {
+            return String.valueOf(num);
+        }
+    }
+
+    /**
      * combining nepali numbers to get bigger numbers. Assuming all nepali numbers can be found by
      * combining them. Fx if we have 123 then we find 1, 2, and 3 in nepali and combining them
      *
@@ -125,37 +140,17 @@ public class CalendarRcView extends Fragment {
         super.onCreate(savedInstanceState);
         tempMonths = DataService.getMonthsFromData(getContext());
 
+        //setting the language for the views
+        String language = Locale.getDefault().getDisplayLanguage();
+        for(int i = 0; i < tempMonths.size(); i++) {
+            int curMonth = tempMonths.get(i);
 
-        for (int i = 0; i < tempMonths.size(); i++) {
-            if (tempMonths.get(i) < 0) {
-                try {
-                    //check for default language (napali)
-                    if (!Locale.getDefault().getDisplayLanguage().equals("dansk") && !Locale.getDefault().getDisplayLanguage().equals("English")) {
-                        months.add(getNepaliNum(tempMonths.get(i + 10)) + " " + getString(R.string.month) + " " + getString(R.string.pregnant));
-                        System.out.println("sprog: " + Locale.getDefault().getDisplayLanguage());
-                    }
-                    //if not nepali - show other supported language (with western numbers)
-                    else {
-                        months.add("" + (tempMonths.get(i) + 10) + " " + getString(R.string.month_preg));
-                    }
-                    //if the napali number is not found we show supported language text
-                } catch (Resources.NotFoundException e) {
-                    months.add("" + (tempMonths.get(i) + 10) + " " + getString(R.string.month_preg));
-                }
-            } else {
-                try {
-                    //check if the language is not danish or english (default is napali)
-                    if (!Locale.getDefault().getDisplayLanguage().equals("dansk") && !Locale.getDefault().getDisplayLanguage().equals("English")) {
-                        months.add(getNepaliNum(tempMonths.get(i)) + " " + getString(R.string.month));
-                    } else {
-                        //if not nepali - show other supported language (with western numbers)
-                        months.add(tempMonths.get(i) + " " + getString(R.string.month));
-                    }
-                    //if the napali number is not found we show supported language text
-                } catch (Resources.NotFoundException e) {
-                    months.add(tempMonths.get(i) + " " + getString(R.string.month));
-                }
-            }
+            //if pregnant
+            if(curMonth < 0)
+                months.add(getNumForCurLanguage(curMonth+10, language) + " " + getString(R.string.month_preg));
+            //if born
+            else
+                months.add((getNumForCurLanguage(curMonth, language)) + " " + getString(R.string.month));
         }
 
         View layout = inflater.inflate(R.layout.calendar_recyclerview, container, false);
