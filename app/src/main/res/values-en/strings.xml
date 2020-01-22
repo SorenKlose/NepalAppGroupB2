@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NepalAppGroupB2</string>
-    <string name="calendar_homepage">calendar</string>
+    <string name="calendar_homepage">Calendar</string>
     <string name="chosen_language">english</string>
     <string name="comics_homepage">Comics</string>
     <string name="diary">Diary</string>

@@ -67,7 +67,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/progressbar_text"
         android:textColor="#7D7D7E"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:fontFamily="sans-serif-condensed-light"
         app:layout_constraintBottom_toTopOf="@+id/guideline35"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
