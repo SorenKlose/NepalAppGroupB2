@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.nepalappgroupb2.Domain.DataFromSheets;
-import com.example.nepalappgroupb2.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.nepalappgroupb2.Domain.DataFromSheets;
+import com.example.nepalappgroupb2.R;
 
 public class CalendarLoading extends Fragment {
     private DataFromSheets db = new DataFromSheets();

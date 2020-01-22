@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -13,30 +14,35 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nepalappgroupb2.Domain.DataService;
-import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Domain.searchWordProvider;
+import com.example.nepalappgroupb2.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeFrag extends Fragment implements Observer<String>, searchWordProvider{
+public class RecipeFrag extends Fragment implements Observer<String>, searchWordProvider, View.OnFocusChangeListener {
     RecipeCardElement recipeCardElement = new RecipeCardElement();
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     private RecyclerView recyclerView;
 
     List<RecipeCardElement> cardArray = DataService.getListOfRecipes();
     final List<RecipeCardElement> originalCardArray = cardArray;
+
+    EditText searcField;
+    TextView titleView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View layout = inflater.inflate(R.layout.recipe_card_layout, container, false);
 
         getSearchWord().observe( getActivity(), this);
 
+        searcField = layout.findViewById(R.id.searchWordEditText);
+        searcField.setOnFocusChangeListener(this);
+        titleView = layout.findViewById(R.id.textView6);
         recyclerView = layout.findViewById(R.id.quiz_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -142,4 +148,11 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
     public void onChanged(String s) {
         adapter.getFilter().filter(s);
     }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        titleView.setVisibility(View.GONE);
+        titleView.setHeight(0);
+    }
+
 }

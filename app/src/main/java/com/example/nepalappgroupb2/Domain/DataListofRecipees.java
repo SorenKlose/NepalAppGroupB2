@@ -24,23 +24,23 @@ public class DataListofRecipees {
         String[][][] test = {
                 new String[][]{
                         new String[]{"Jaulo", "jaulo.pdf"},
-                        new String[]{"banan"}
+                        new String[]{"Daal","Rice", " Vegetables"}
                 },
                 new String[][]{
                         new String[]{"Nimki", "nikmi.pdf"},
-                        new String[]{ "Ingredienses" }
+                        new String[]{ "Wheat", "Flour", "Maida", "Ajwain", "Onion Seeds", "Baking Soda", "Oil", "Ghee", "Frying" }
                 },
                 new String[][]{
                         new String[]{"Sarbottam Pitho", "sarbottam_pitho.pdf"},
-                        new String[]{ "salt"}
+                        new String[]{ "Soybean", "Wheat", "Maize", "milk" }
                 },
                 new String[][]{
                         new String[]{"recipe 4", "recipenepal_pdf.pdf"},
-                        new String[]{ "nødder"}
+                        new String[]{ "Daal","Rice", " Vegetables", "Wheat", "Flour", "Maida", "Ajwain", "Onion Seeds", "Baking Soda", "Oil", "Ghee", "Frying","Soybean", "Wheat", "Maize", "milk"  }
                 },
                 new String[][]{
                         new String[]{"recipe 5", "recipenepal_pdf.pdf"},
-                        new String[]{"sovs"}
+                        new String[]{ "Daal","Rice", " Vegetables", "Wheat", "Flour", "Maida", "Ajwain", "Onion Seeds", "Baking Soda", "Oil", "Ghee", "Frying","Soybean", "Wheat", "Maize", "milk" }
                 }
         };
 

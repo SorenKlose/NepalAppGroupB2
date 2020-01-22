@@ -5,11 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <include layout="@layout/search_filter_fragment"
-        android:id="@+id/searchBar"
+    <fragment
+        android:id="@+id/searchWordFragment"
+        android:name="com.example.nepalappgroupb2.Domain.SearchFilterFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />-->
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/quiz_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView6" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quiz_recyclerView"
@@ -17,7 +23,7 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/searchWordFragment"
         tools:layout_editor_absoluteX="182dp" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -31,8 +37,7 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/corben"
         android:gravity="center|top"
         android:text="@string/recipes_homepage"

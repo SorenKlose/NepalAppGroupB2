@@ -1,8 +1,8 @@
 package com.example.nepalappgroupb2.Comic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nepalappgroupb2.R;
 

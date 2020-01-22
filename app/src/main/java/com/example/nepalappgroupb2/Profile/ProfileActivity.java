@@ -1,7 +1,6 @@
 package com.example.nepalappgroupb2.Profile;
 
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -22,8 +21,12 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.R;
+
 import java.util.Calendar;
 
 

@@ -1,12 +1,11 @@
 package com.example.nepalappgroupb2.Recipe;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.nepalappgroupb2.R;
-import com.example.nepalappgroupb2.Domain.searchWordProvider;
 
 public class RecipeActivity extends AppCompatActivity {
 
