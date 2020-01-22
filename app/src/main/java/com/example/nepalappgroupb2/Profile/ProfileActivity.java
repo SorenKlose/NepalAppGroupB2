@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button diary;
     private ProgressBarFragment progressBar;
 
-    public static String imagePath = null;
+   // public static String imagePath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,7 +264,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if(imagePath != null){
+       /* if(imagePath != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            pictureFrame.setImageBitmap(bitmap);
+        }*/
+        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+        if(sp.getString("profilePic", null) != null) {
+            String imagePath = sp.getString("profilePic", null);
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             pictureFrame.setImageBitmap(bitmap);
         }

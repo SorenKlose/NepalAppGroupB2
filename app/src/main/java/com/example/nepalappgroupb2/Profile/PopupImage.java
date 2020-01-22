@@ -1,6 +1,8 @@
 package com.example.nepalappgroupb2.Profile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -34,10 +36,20 @@ public class PopupImage extends AppCompatActivity {
 
         imageView.setImageBitmap(bitmap);
 
+        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("profilePic", imagePath);
+
         saveAsProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProfileActivity.imagePath = imagePath;
+                //ProfileActivity.imagePath = imagePath;
+
+                SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("profilePic", imagePath);
+                editor.apply();
+
                 Toast.makeText(getApplication().getBaseContext(),"Saved",Toast.LENGTH_LONG).show();
             }
         });
