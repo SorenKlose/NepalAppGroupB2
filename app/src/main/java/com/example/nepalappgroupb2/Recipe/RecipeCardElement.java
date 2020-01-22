@@ -22,7 +22,7 @@ public class RecipeCardElement {
         //hvis søgeordene indeholder duplikater så vil HashSet reducere disse til en.
         this.allSearchableStrings.addAll(new ArrayList<String>(Arrays.asList(searchables)));
         this.allSearchableStrings.add(cardTitle);
-        this.allSearchablesStringsAsASingleString = TextUtils.join("", allSearchableStrings);
+        this.allSearchablesStringsAsASingleString = TextUtils.join("", allSearchableStrings).toLowerCase();
         this.cardTitle = cardTitle;
         this.pdfName = pdfName;
     }
