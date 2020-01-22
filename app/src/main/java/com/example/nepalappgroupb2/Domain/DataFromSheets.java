@@ -31,19 +31,7 @@ public class DataFromSheets {
     public static void main(String[] args) {
         DataFromSheets data = new DataFromSheets();
         try {
-            //data.fromSheets();
-
-//            for (String s : data.getWithMonth(Headers.MsgEng, 6)) {
-//                System.out.println("hej " + s);
-//            }
-//
-//            System.out.println("hej: " + data.map.get("Month1"));
-//
-//            System.out.println(data.getMonths());
-
-            System.out.println("hej: " + data.getMediaPlayer(-6, 1));
-
-
+            //for testing
         } catch (Exception e) {
             e.printStackTrace();
         }

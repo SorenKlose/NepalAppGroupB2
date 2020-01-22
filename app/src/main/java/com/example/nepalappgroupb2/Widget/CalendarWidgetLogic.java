@@ -54,6 +54,10 @@ public class CalendarWidgetLogic {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_calender);
         ComponentName thisWidget = new ComponentName(context, CalenderWidget.class);
+        /**
+         * These 3 lines is how you can update a widget from an activity.
+         * Taken from src= https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+         */
 
         //setting text on widget
         setWidgetText(context, remoteViews, month);
