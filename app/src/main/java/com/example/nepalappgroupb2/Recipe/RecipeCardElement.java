@@ -37,7 +37,7 @@ public class RecipeCardElement {
      * This method takes a string and finds the correct image in drawable.
      * Example:
      * imgName = "Dal Bhat"
-     * The method search for "dal_bhat" (underscore insted of space and toLowerCase) in drawable folder.
+     * The method search for "dal_bhat" (underscore instead of space and toLowerCase) in drawable folder.
      * @param imgName is the title for the card
      * @param context is the context for the card. Simply write "getContex()" when using. A View always knows its contex.
      * @return the id for the resource. An int.
