@@ -17,11 +17,6 @@ public class ImageAdapter extends BaseAdapter {
 
     public ArrayList<Bitmap> images = new ArrayList<>();
 
-    /*{R.drawable.birthday, R.drawable.baby_temperature,
-                                R.drawable._2_month_old, R.drawable._1_month_old,
-                                R.drawable._3_month_old};
-*/
-
 
     public ImageAdapter(Context c){
         context = c;

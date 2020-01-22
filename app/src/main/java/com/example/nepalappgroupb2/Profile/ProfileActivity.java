@@ -95,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (!popUpScreenShown) {
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
-            View mView = getLayoutInflater().inflate(R.layout.popup, null);
+            View mView = getLayoutInflater().inflate(R.layout.profile_weightinput_popup, null);
             Button mom = (Button) mView.findViewById(R.id.btnMom);
             Button pregnate = (Button) mView.findViewById(R.id.btnPreg);
             mBuilder.setView(mView);
@@ -174,7 +174,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.heightInput:
                 inputDialog = new Dialog(this);
-                inputDialog.setContentView(R.layout.input_popup);
+                inputDialog.setContentView(R.layout.profile_heightinput_popup);
 
                 final NumberPicker heightPicker = inputDialog.findViewById(R.id.heightPicker);
                 heightPicker.setMinValue(0);
