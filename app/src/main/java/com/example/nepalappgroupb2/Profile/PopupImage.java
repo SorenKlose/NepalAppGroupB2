@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,15 +31,15 @@ public class PopupImage extends AppCompatActivity {
 
         final String imagePath = intent.getExtras().getString("image_path");
         final Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
         imageView.setImageBitmap(bitmap);
 
         saveAsProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProfileActivity.imagePath = imagePath;
+                Toast.makeText(getApplication().getBaseContext(),"Saved",Toast.LENGTH_LONG).show();
             }
         });
     }
-
-
 }

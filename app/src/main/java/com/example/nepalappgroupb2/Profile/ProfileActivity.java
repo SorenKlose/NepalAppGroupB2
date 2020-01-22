@@ -34,8 +34,6 @@ import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-
     private TextView mDisplayDate;
     private EditText nameInput;
     private Button heightInput;
