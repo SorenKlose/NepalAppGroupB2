@@ -41,29 +41,27 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_photo_diary);
         imageAdapter = new ImageAdapter(this);
 
-        //herfra
         sp = getSharedPreferences("images", Context.MODE_PRIVATE);
-        Map<String,?> keys = sp.getAll();
+        final Map<String,?> keys = sp.getAll();
         for(Map.Entry<String,?> entry : keys.entrySet()) {
             String imagePath = entry.getValue().toString();
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             imageAdapter.images.add(bitmap);
         }
-        // hertil
+
         gridView = (GridView) findViewById(R.id.gridView);
         cameraButton = (ImageView) findViewById(R.id.cameraButton);
 
         cameraButton.setOnClickListener(this);
-
         gridView.setAdapter(imageAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), PopupImage.class);
-                intent.putExtra("position", position);
-                // skal ikke være currentImagePath
-                intent.putExtra("image_path", currentImagePath);
+
+                String imagePath = sp.getString(String.valueOf(position),null);
+                intent.putExtra("image_path", imagePath );
                 startActivity(intent);
             }
         });
@@ -71,10 +69,6 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        savePicture();
-    }
-
-    public void savePicture(){
         try{
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             File imageFile = null;
@@ -112,13 +106,12 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
             imageAdapter.images.add(bitmap);
             imageAdapter.notifyDataSetChanged();
 
-            //herfra
+            String index = String.valueOf(imageAdapter.images.indexOf(bitmap));
+
             sp = getSharedPreferences("images", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putString(currentImagePath, currentImagePath);
+            editor.putString(index, currentImagePath);
             editor.apply();
-            // overvej om den så skal added direkte fem linjer oppe
-            // husk apply
         }
     }
 }
