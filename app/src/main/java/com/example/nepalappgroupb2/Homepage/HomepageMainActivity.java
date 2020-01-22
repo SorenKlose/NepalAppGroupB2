@@ -17,7 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Calendar.CalenderActivity;
-import com.example.nepalappgroupb2.CalendarWidgetLogic;
+import com.example.nepalappgroupb2.Widget.CalendarWidgetLogic;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.NotificationReciever;
