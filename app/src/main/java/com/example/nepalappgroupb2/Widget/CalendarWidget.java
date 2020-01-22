@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Implementation of App Widget functionality.
  */
-public class CalenderWidget extends AppWidgetProvider {
+public class CalendarWidget extends AppWidgetProvider {
     ProgressBarFragment progressBar = new ProgressBarFragment();
     CalendarWidgetLogic widgetLogic = new CalendarWidgetLogic();
 

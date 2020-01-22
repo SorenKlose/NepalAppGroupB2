@@ -9,6 +9,7 @@ public class CalendarLogic {
     /**
      * A save check for numbers. Will return nepalise numbers if
      * language is NOT danish or endlish
+     * @param context the context from there it's called
      * @param num number you want to use
      * @param language language running on the phone (Locale.getDefault().getDisplayLanguage())
      * @return the number as a String either as western number or nepali number
@@ -25,6 +26,7 @@ public class CalendarLogic {
      * combining nepali numbers to get bigger numbers. Assuming all nepali numbers can be found by
      * combining them. Fx if we have 123 then we find 1, 2, and 3 in nepali and combining them
      *
+     * @param context the context from there it's called
      * @param num the number to translate to nepali
      * @return the nepali number as a String
      */
@@ -47,6 +49,7 @@ public class CalendarLogic {
     /**
      * finds the nepali num as a String
      *
+     * @param context the context from there it's called
      * @param num the number to translate to nepali
      * @return nepali number as a String
      */
@@ -91,6 +94,7 @@ public class CalendarLogic {
     /**
      * scroll to the text in calendar that is useful for the user
      * @param inputMonth the amount of month since the conception of the pregnancy
+     * @param monthsWithText a list of all the months which has info text associated with it
      * @return the index of which the calendar has to scroll to
      */
     public int scrollToMonth(int inputMonth, List<Integer> monthsWithText) {
