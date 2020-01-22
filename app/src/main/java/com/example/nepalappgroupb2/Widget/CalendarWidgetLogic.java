@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.RemoteViews;
 
+import com.example.nepalappgroupb2.Calendar.CalendarLogic;
 import com.example.nepalappgroupb2.Calendar.CalendarRcView;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
@@ -18,6 +19,7 @@ public class CalendarWidgetLogic {
 
     DataFromSheets db = new DataFromSheets();
     CalendarRcView calendar = new CalendarRcView();
+    CalendarLogic calendarActLogic = new CalendarLogic();
 
     public String getWidgetInfoText(final Context context, int monthToShow) {
         try {
@@ -69,7 +71,7 @@ public class CalendarWidgetLogic {
     //set text on both the widget title and the description
     public void setWidgetText(Context context, RemoteViews remoteViews, int month) {
         List<Integer> monthList = DataService.getMonthsFromData(context);
-        int monthIndex = calendar.scrollToMonth(month, monthList);
+        int monthIndex = calendarActLogic.scrollToMonth(month, monthList);
         int monthToShow = monthList.get(monthIndex);
 
         //setting text for widget title
