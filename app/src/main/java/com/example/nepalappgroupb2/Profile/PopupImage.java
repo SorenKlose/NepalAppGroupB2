@@ -1,6 +1,8 @@
 package com.example.nepalappgroupb2.Profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nepalappgroupb2.R;
 
-public class PopupImage extends AppCompatActivity implements View.OnClickListener {
+public class PopupImage extends AppCompatActivity {
 
     ImageView imageView;
     Button saveAsProfilePic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,19 +25,20 @@ public class PopupImage extends AppCompatActivity implements View.OnClickListene
 
         imageView = (ImageView) findViewById(R.id.imageView);
         saveAsProfilePic = (Button) findViewById(R.id.saveAsProfilePic);
-        saveAsProfilePic.setOnClickListener(this);
 
         Intent intent = getIntent();
 
-        int position = intent.getExtras().getInt("id");
-        ImageAdapter imageAdapter = new ImageAdapter(this);
-        imageView.setImageBitmap(imageAdapter.images.get(position));
+        final String imagePath = intent.getExtras().getString("image_path");
+        final Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+        imageView.setImageBitmap(bitmap);
 
+        saveAsProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileActivity.imagePath = imagePath;
+            }
+        });
     }
 
-    @Override
-    public void onClick(View view) {
 
-
-    }
 }

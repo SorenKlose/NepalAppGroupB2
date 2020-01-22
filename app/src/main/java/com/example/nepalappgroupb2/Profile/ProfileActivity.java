@@ -7,6 +7,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -45,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button diary;
     private ProgressBarFragment progressBar;
 
+    public static String imagePath = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +66,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         nameInput.setOnClickListener(this);
         heightInput.setOnClickListener(this);
         weightInput.setOnClickListener(this);
-        pictureFrame.setOnClickListener(this);
         pregnantButton.setOnClickListener(this);
         diary.setOnClickListener(this);
 
@@ -95,9 +98,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (!popUpScreenShown) {
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
-            View mView = getLayoutInflater().inflate(R.layout.profile_weightinput_popup, null);
+            View mView = getLayoutInflater().inflate(R.layout.profile_preg_or_mom, null);
             Button mom = (Button) mView.findViewById(R.id.btnMom);
-            Button pregnate = (Button) mView.findViewById(R.id.btnPreg);
+            Button pregnant = (Button) mView.findViewById(R.id.btnPreg);
             mBuilder.setView(mView);
             final AlertDialog dialog = mBuilder.create();
             dialog.show();
@@ -108,7 +111,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 public void onClick(View view) {
                     dialog.dismiss();
                 }});
-            pregnate.setOnClickListener(new View.OnClickListener(){
+            pregnant.setOnClickListener(new View.OnClickListener(){
                 public void onClick (View view){
                     Intent myIntent = new Intent(ProfileActivity.this, Profile2Activity.class);
                     ProfileActivity.this.startActivity(myIntent);
@@ -258,6 +261,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
         return super.dispatchTouchEvent( event );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(imagePath != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            pictureFrame.setImageBitmap(bitmap);
+        }
     }
 };
 

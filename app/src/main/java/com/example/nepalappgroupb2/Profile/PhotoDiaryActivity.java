@@ -1,7 +1,9 @@
 package com.example.nepalappgroupb2.Profile;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,35 +25,43 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClickListener {
 
     GridView gridView;
-    //ImageView test;
     ImageView cameraButton;
-
-
     String currentImagePath = null;
+    ImageAdapter imageAdapter;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_diary);
+        imageAdapter = new ImageAdapter(this);
 
-        //test = (ImageView) findViewById(R.id.test);
-
+        //herfra
+        sp = getSharedPreferences("images", Context.MODE_PRIVATE);
+        Map<String,?> keys = sp.getAll();
+        for(Map.Entry<String,?> entry : keys.entrySet()) {
+            String imagePath = entry.getValue().toString();
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            imageAdapter.images.add(bitmap);
+        }
+        // hertil
         gridView = (GridView) findViewById(R.id.gridView);
         cameraButton = (ImageView) findViewById(R.id.cameraButton);
 
         cameraButton.setOnClickListener(this);
 
-        gridView.setAdapter(new ImageAdapter(this));
+        gridView.setAdapter(imageAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), PopupImage.class);
-                intent.putExtra("id", i);
+                intent.putExtra("position", position);
                 // skal ikke være currentImagePath
                 intent.putExtra("image_path", currentImagePath);
                 startActivity(intent);
@@ -62,31 +72,29 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         savePicture();
-        ImageAdapter imageAdapter = new ImageAdapter(this);
-
-        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra(MediaStore.EXTRA_OUTPUT));
-        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.birthday);
-        imageAdapter.images.add(bitmap1);
     }
 
     public void savePicture(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File imageFile = null;
         try{
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File imageFile = null;
             imageFile = makeImageFile();
+            if(imageFile != null){
+                Uri imageUri = FileProvider.getUriForFile(this,
+                        "com.example.nepalappgroupb2.fileprovider",
+                        imageFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            }
+            startActivityForResult(intent, 1);
         } catch (IOException e){
             e.printStackTrace();
         }
-        if(imageFile != null){
-            Uri imageUri = FileProvider.getUriForFile(this,
-                    "com.example.nepalappgroupb2.fileprovider",
-                    imageFile);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        }
-        startActivityForResult(intent, 1);
     }
 
     private File makeImageFile() throws IOException {
+        SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageName = "jpg_" + timeStamp + "_";
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -99,10 +107,18 @@ public class PhotoDiaryActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Activity.RESULT_OK) {
-            ImageAdapter imageAdapter = new ImageAdapter(this);
-            Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra(MediaStore.EXTRA_OUTPUT));
+        if (resultCode == Activity.RESULT_OK) {
+            Bitmap bitmap = BitmapFactory.decodeFile(currentImagePath);
             imageAdapter.images.add(bitmap);
+            imageAdapter.notifyDataSetChanged();
+
+            //herfra
+            sp = getSharedPreferences("images", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString(currentImagePath, currentImagePath);
+            editor.apply();
+            // overvej om den så skal added direkte fem linjer oppe
+            // husk apply
         }
     }
 }

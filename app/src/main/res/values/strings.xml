@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NepalAppGroupB2</string>
+    <string name="app_name">B2 Nepal</string>
     <string name="progressbar_text">You are %d months in your pregnancy</string>
     <string name="appwidget_text" translatable="false">EXAMPLE</string>
     <string name="add_widget" translatable="false">Add widget</string>
