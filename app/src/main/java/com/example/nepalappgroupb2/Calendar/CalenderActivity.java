@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Domain.searchWordProvider;
+import com.example.nepalappgroupb2.R;
 
 public class CalenderActivity extends AppCompatActivity implements searchWordProvider {
 

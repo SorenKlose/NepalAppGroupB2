@@ -1,22 +1,24 @@
 package com.example.nepalappgroupb2.Homepage;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.crashlytics.android.Crashlytics;
+import com.example.nepalappgroupb2.Calendar.CalenderActivity;
 import com.example.nepalappgroupb2.CalendarWidgetLogic;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
-import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.NotificationReciever;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
@@ -24,6 +26,7 @@ import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
+
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 

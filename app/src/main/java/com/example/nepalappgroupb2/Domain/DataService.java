@@ -8,8 +8,6 @@ import com.example.nepalappgroupb2.Recipe.RecipeCardElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /* Denne Class er tiltængt at skulle agere kobling mellem Frontend Class'  (Activitys og Fragments )
  og så Class' der håndterer kommunikationen med backenden f.eks. "DataFromSheets".

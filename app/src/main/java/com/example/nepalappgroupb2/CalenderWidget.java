@@ -5,10 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.SystemClock;
-import android.widget.LinearLayout;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import com.example.nepalappgroupb2.Calendar.CalendarRcView;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;

@@ -2,8 +2,6 @@ package com.example.nepalappgroupb2.Recipe;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

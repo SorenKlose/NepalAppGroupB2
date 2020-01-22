@@ -13,13 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nepalappgroupb2.Domain.DataService;
-import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Domain.searchWordProvider;
+import com.example.nepalappgroupb2.R;
 
 import java.util.ArrayList;
 import java.util.List;
