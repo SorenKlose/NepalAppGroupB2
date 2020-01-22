@@ -1,4 +1,4 @@
-package com.example.nepalappgroupb2;
+package com.example.nepalappgroupb2.Widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -14,6 +14,7 @@ import com.example.nepalappgroupb2.Calendar.CalendarRcView;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
+import com.example.nepalappgroupb2.R;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

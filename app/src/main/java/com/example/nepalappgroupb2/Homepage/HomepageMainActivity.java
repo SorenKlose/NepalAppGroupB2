@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
-import com.example.nepalappgroupb2.CalendarWidgetLogic;
+import com.example.nepalappgroupb2.Widget.CalendarWidgetLogic;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Calendar.*;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
