@@ -77,14 +77,15 @@ public class CalendarRcView extends Fragment {
      * @return the nepali number as a String
      */
     private String getNepaliNum(int num) {
-        System.out.println("num er: " + num);
         StringBuilder valueName = new StringBuilder();
         String numbAsString = Integer.toString(num);
+        //splitting the number as a String into an array
         int[] splitNum = new int[numbAsString.length()];
+        //getting each number of into an int array
         for (int i = 0; i < numbAsString.length(); i++) {
             splitNum[i] = Character.getNumericValue(numbAsString.charAt(i));
         }
-        System.out.println("mit array: " + Arrays.toString(splitNum));
+        //translating each of the numbers to nepalese
         for (int i : splitNum) {
             valueName.append(getNepaliNumFromResource(i));
         }
@@ -253,23 +254,6 @@ public class CalendarRcView extends Fragment {
                 vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
             }
 
-
-            //switching the background colors of the cards
-//            // TODO: 15-01-2020 måske lave så pregnant har en farve og efter fødslen har det en anden?
-//            switch (position % 4) {
-//                case 0:
-//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.calendar_red));
-//                    break;
-//                case 1:
-//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.recipe_blue));
-//                    break;
-//                case 2:
-//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.comic_orange));
-//                    break;
-//                case 3:
-//                    vh.titleBackgroundColor.setBackgroundColor(getResources().getColor(R.color.quiz_green));
-//                    break;
-//            }
             System.out.println("" + (position + 1) + "month old");
 
             if (!isOpen) {
