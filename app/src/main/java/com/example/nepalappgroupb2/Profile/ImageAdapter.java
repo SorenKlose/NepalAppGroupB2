@@ -42,8 +42,7 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageBitmap(images.get(position));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new GridView.LayoutParams(250,250));
-        //billedet roteres 90 grader så derfor:
-        imageView.setRotation(270);
+
         return imageView;
     }
 }
