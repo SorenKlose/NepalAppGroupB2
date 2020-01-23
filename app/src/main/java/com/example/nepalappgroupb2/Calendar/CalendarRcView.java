@@ -226,7 +226,7 @@ public class CalendarRcView extends Fragment {
                 adapter.notifyItemChanged(position);
             } else {
                 int id = v.getId();
-                Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Reading text " + (id+1), Toast.LENGTH_SHORT).show();
 
                 String soundName = db.getMediaPlayer(tempMonths.get(position), id);
                 Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
