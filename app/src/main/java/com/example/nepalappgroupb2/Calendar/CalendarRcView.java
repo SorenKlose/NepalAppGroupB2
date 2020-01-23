@@ -81,6 +81,8 @@ public class CalendarRcView extends Fragment {
 
         recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;
+
+
     }
 
     @Override
@@ -192,6 +194,8 @@ public class CalendarRcView extends Fragment {
             mp = new MediaPlayer();
         }
     }
+
+
 
     /**
      * En Viewholder husker forskellige views i et listeelement, sådan at søgninger i viewhierakiet

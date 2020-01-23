@@ -28,6 +28,7 @@ public class NotificationReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
             notiManager = NotificationManagerCompat.from(context);
             Intent repeatingIntent = new Intent(context, CalenderActivity.class);
+            repeatingIntent.putExtra("fromNoti", true);
             repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
