@@ -51,7 +51,7 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
         //HVIS I GERNE VIL HAVE PROFILE DIALOGGEN TIL AT KOMME FREM HVER GANG; SÅ SKAL NEDESTÅENDE KØRES - A
-        SharedPreferences mPrefs = getSharedPreferences("popupscreen",Context.MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("popupscreen", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         //editor.clear();
         //editor.commit();
@@ -76,8 +76,7 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
-        //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
-        sendNoti();
+
 
         try {
             new AsyncTask() {
@@ -114,19 +113,19 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
             Intent i = new Intent(this, QuizActivity.class);
             startActivity(i);
         }
-        if(view == profileButton){
+        if (view == profileButton) {
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
     }
 
-    private void setCrashReporting(){
+    private void setCrashReporting() {
 
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
-        System.out.println("this is an emulator: "+EMULATOR);
+        System.out.println("this is an emulator: " + EMULATOR);
         if (EMULATOR) {
 
-            Crashlytics.setBool("emulator",true);
+            Crashlytics.setBool("emulator", true);
         }
         Fabric.with(this, new Crashlytics());
         //Crashlytics.getInstance().crash(); // forcer et crash
@@ -154,17 +153,4 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
-    public void sendNoti() {
-        java.util.Calendar calendar = Calendar.getInstance();
-
-        //  calendar.set(Calendar.HOUR_OF_DAY,16);
-        //  calendar.set(Calendar.MINUTE,(int) minuteFromNow);
-
-        Intent intent = new Intent(getApplicationContext(), NotificationReciever.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000L, pendingIntent);
-        alarmManager.cancel(pendingIntent);
-    }
 }
