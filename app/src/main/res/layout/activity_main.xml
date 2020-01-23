@@ -67,7 +67,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/progressbar_text"
         android:textColor="#7D7D7E"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:fontFamily="sans-serif-condensed-light"
         app:layout_constraintBottom_toTopOf="@+id/guideline35"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="76dp"
-        app:layout_constraintGuide_percent="0.07
+        app:layout_constraintGuide_percent="0.09
 " />
 
     <Button
@@ -243,8 +243,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.04"/>
+        app:layout_constraintGuide_end="702dp"
+        app:layout_constraintGuide_percent="0.05"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

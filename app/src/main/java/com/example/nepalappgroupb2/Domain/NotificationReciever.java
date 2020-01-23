@@ -45,7 +45,7 @@ public class NotificationReciever extends BroadcastReceiver {
             String indholdText = intent.getStringExtra("indholdText");
             Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.push_icon)
-                    .setContentTitle("New in your progress!")
+                    .setContentTitle("New in the calendar!")
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(indholdText))
                     .setContentText(indholdText)

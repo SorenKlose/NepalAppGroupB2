@@ -174,7 +174,7 @@ public class CalendarRcView extends Fragment {
                         }
                         View underView = vh.underviews.get(i);
                         TextView tv = underView.findViewById(R.id.descText);
-                        tv.setText(infoList.get(i) + "\n");
+                        tv.setText(infoList.get(i));
                         underView.setVisibility(View.VISIBLE);
                     }
                 }
