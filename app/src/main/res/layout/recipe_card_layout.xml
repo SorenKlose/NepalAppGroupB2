@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:fontFamily="@font/corben"
         android:gravity="center|top"
         android:text="@string/recipes_homepage"
