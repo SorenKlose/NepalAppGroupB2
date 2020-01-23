@@ -37,7 +37,11 @@ public class CalendarWidget extends AppWidgetProvider {
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_calender);
 
                 //setting the texts on title and description
-                widgetLogic.setWidgetText(context, views, month);
+                try {
+                    widgetLogic.setWidgetText(context, views, month);
+                } catch (IndexOutOfBoundsException e) {
+                    //no internet
+                }
 
                 //updating the widget
                 appWidgetManager.updateAppWidget(id, views);

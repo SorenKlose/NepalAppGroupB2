@@ -146,7 +146,12 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         //updating the widget with possible new text
         int month = progressBar.monthsOld(this);
         System.out.println("month er her: " + month);
-        widgetLogic.updateWidget(this, month);
+        try {
+            widgetLogic.updateWidget(this, month);
+        } catch (IndexOutOfBoundsException e) {
+            //no internet
+        }
+
     }
 
     //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
