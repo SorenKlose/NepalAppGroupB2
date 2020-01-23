@@ -52,6 +52,7 @@ public class NotificationReciever extends BroadcastReceiver {
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                     .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
                     .build();
             notiManager.notify(100, notification);
 
