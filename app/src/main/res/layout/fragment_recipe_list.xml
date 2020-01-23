@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
+<!--    <fragment
         android:id="@+id/searchWordFragment"
         android:name="com.example.nepalappgroupb2.Domain.SearchFilterFragment"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView6" />
+        app:layout_constraintTop_toBottomOf="@id/textView6" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quiz_recyclerView"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/searchWordFragment"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="182dp" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -32,19 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.1" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/corben"
-        android:gravity="center|top"
-        android:text="@string/recipes_homepage"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline42"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

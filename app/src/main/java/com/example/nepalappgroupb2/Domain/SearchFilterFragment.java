@@ -16,18 +16,16 @@ import androidx.fragment.app.Fragment;
 import com.example.nepalappgroupb2.R;
 
 public class SearchFilterFragment extends Fragment {
+
+
     private EditText searchEditText;
 
-    public static SearchFilterFragment newInstance() {
-        return new SearchFilterFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
-        return inflater.inflate(R.layout.search_filter_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_search_filter, container, false);
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -58,10 +56,10 @@ public class SearchFilterFragment extends Fragment {
                     ((searchWordProvider)getParentFragment()).getSearchWord().setValue(s.toString());
 
                 }
-
-
             }
         });
     }
-
+    public EditText getSearchEditText() {
+        return searchEditText;
+    }
 }

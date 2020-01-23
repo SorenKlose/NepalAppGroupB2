@@ -19,7 +19,7 @@ public class RecipePdfViewFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_recipe_pdf, container, false);
+        View layout = inflater.inflate(R.layout.fragment_recipe_pdf, container, false);
 
         pdfView = layout.findViewById(R.id.recipe_pdfview_test);
         pdfView.fromAsset(getArguments().getString("filename")).show();
