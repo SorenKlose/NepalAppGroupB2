@@ -43,8 +43,6 @@ public class PopupImage extends AppCompatActivity {
         saveAsProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ProfileActivity.imagePath = imagePath;
-
                 SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("profilePic", imagePath);

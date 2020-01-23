@@ -30,7 +30,6 @@ public class ProgressBarFragment extends Fragment {
         return view;
     }
 
-
     public void update(){
         int progressInDays = monthsOld(getContext())*30;
         double progressInPercent =  (double) progressInDays / (double)1000 * 100;
@@ -51,27 +50,22 @@ public class ProgressBarFragment extends Fragment {
         int month = sp.getInt("month", 0);
         int day = sp.getInt("day", 0);
         int monthsPregnant = sp.getInt("monthsPregnant", 0);
+        boolean hasBeenChanged = sp.getBoolean("hasBeenChanged", false);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-
-        if (year == 0 && month == 0 && day == 0) {
-            return 0;
+        if (!hasBeenChanged) {
+            return monthsPregnant;
         } else {
+            Calendar calendar = Calendar.getInstance();
+            calendar.clear();
             calendar.set(year, month, day);
+
             long birthDate = calendar.getTimeInMillis();
             long currentDate = Calendar.getInstance().getTimeInMillis();
-
             long progressInDays = TimeUnit.MILLISECONDS.toDays(
                     currentDate + TimeUnit.DAYS.toMillis(30) - birthDate);
-
-            if (progressInDays == 0) {
-                return monthsPregnant;
-            } else {
-                // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
-                long months = 9 + progressInDays / 30;
-                return (int) months;
-            }
+            // ikke helt nøjagtigt men det har ingen virkning i vores tilfælde
+            long months = 9 + progressInDays / 30;
+            return (int) months;
         }
     }
 }

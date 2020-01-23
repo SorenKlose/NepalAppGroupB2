@@ -45,8 +45,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button diary;
     private ProgressBarFragment progressBar;
 
-   // public static String imagePath = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,11 +150,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 editor.putInt("year", year);
                 editor.putInt("month", month);
                 editor.putInt("day", day);
+                editor.putBoolean("hasBeenChanged", true);
                 editor.apply();
                 progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
                 progressBar.update();
                 System.out.println(day + ", " + month + ", " + year);
-
             }
         };
     }
@@ -214,8 +212,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 Button saveWeightButton = (Button) inputDialog.findViewById(R.id.saveWeightButton);
 
-
-
                 saveWeightButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -264,10 +260,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-       /* if(imagePath != null){
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            pictureFrame.setImageBitmap(bitmap);
-        }*/
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
         if(sp.getString("profilePic", null) != null) {
             String imagePath = sp.getString("profilePic", null);
