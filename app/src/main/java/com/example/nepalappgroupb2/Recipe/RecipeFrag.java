@@ -24,7 +24,7 @@ import com.example.nepalappgroupb2.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeFrag extends Fragment implements Observer<String>, searchWordProvider, View.OnFocusChangeListener {
+public class RecipeFrag extends Fragment implements Observer<String>, searchWordProvider {
     RecipeCardElement recipeCardElement = new RecipeCardElement();
     private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     private RecyclerView recyclerView;
@@ -41,7 +41,6 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
         getSearchWord().observe( getActivity(), this);
 
         searcField = layout.findViewById(R.id.searchWordEditText);
-        searcField.setOnFocusChangeListener(this);
         titleView = layout.findViewById(R.id.textView6);
         recyclerView = layout.findViewById(R.id.quiz_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -147,12 +146,6 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
     @Override
     public void onChanged(String s) {
         adapter.getFilter().filter(s);
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        titleView.setVisibility(View.GONE);
-        titleView.setHeight(0);
     }
 
 }
