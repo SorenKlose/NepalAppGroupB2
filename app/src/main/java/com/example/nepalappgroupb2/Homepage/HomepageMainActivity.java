@@ -120,7 +120,7 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     protected void onPause() {
         super.onPause();
         Afspilning.stop();
-        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).setDuration(1);
+        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).z(0).rotation(0).setDuration(1);
         findViewById(R.id.højtlæsning).setEnabled(true);
     }
 
@@ -130,12 +130,12 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
             findViewById(R.id.højtlæsning).setEnabled(true);
             return;
         }
-        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1.2f).scaleY(1.2f).setDuration(500);
+        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1.2f).scaleY(1.2f).z(100).rotation(-10).setDuration(500);
         Afspilning.start(MediaPlayer.create(this, knapLyde[hjælpKnapNummer]), new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 if (isDestroyed()) return;
-                findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).setDuration(500).setListener(new AnimatorListenerAdapter() {
+                findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).z(0).rotation(0).setDuration(500).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         visNæsteHjælp();
