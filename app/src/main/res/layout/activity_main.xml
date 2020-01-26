@@ -7,6 +7,16 @@
     android:background="#FFFFF0"
     tools:context=".Homepage.HomepageMainActivity">
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Gruppe B2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <fragment
         android:id="@+id/progressBar"
         android:name="com.example.nepalappgroupb2.Progress.ProgressBarFragment"
@@ -30,10 +40,22 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/Titel"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.90999997"
         app:srcCompat="@drawable/logo_red_nobg_crop" />
+
+    <ImageView
+        android:id="@+id/højtlæsning"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_rounded_white"
+        app:srcCompat="@drawable/speaker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        />
+
 
     <ImageView
         android:id="@+id/quiz"
@@ -193,6 +215,7 @@
         android:id="@+id/btnProfile"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:background="@drawable/button_profile"
@@ -218,7 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"

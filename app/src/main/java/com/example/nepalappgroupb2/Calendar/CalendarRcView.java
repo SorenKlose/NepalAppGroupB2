@@ -74,7 +74,7 @@ public class CalendarRcView extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
+        month6sound = MediaPlayer.create(getContext(), R.raw.month6);
 
         //scrolling to correct month text
         int scrollToIndex = calendarLogic.scrollToMonth(progressBar.monthsOld(getContext()), tempMonths);
