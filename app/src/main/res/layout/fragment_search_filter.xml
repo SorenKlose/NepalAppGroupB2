@@ -9,10 +9,11 @@
 
     <EditText
         android:id="@+id/searchWordEditText"
-        android:layout_width="335dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:textSize="28sp" />
+        android:layout_weight="5"
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/imageView2"

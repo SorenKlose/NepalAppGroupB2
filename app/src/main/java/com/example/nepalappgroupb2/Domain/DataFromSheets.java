@@ -58,7 +58,9 @@ public class DataFromSheets {
                     monthList.add((Integer.valueOf(map.get(key))));
                 }
             }
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         //removing duplicates from the monthList
         List<Integer> noDuplicates = new ArrayList<>();

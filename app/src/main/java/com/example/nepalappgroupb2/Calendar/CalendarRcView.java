@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nepalappgroupb2.Domain.Afspilning;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
 import com.example.nepalappgroupb2.Domain.DataService;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
@@ -42,9 +43,6 @@ public class CalendarRcView extends Fragment {
     List<String> months = new ArrayList<>(); // List of the titles for every months underview in calendar.
     List<Integer> tempMonths; //List of every month that has at least one message.
     ViewGroup vg;
-    MediaPlayer month6sound;
-    MediaPlayer mp = new MediaPlayer();
-    int soundPlaying;
 
     HashSet<Integer> openMonths = new HashSet<>(); // Which months are currently open
 
@@ -74,13 +72,13 @@ public class CalendarRcView extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        month6sound = MediaPlayer.create(getContext(), R.raw.six_month_1);
-
         //scrolling to correct month text
         int scrollToIndex = calendarLogic.scrollToMonth(progressBar.monthsOld(getContext()), tempMonths);
 
         recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;
+
+
     }
 
     @Override
@@ -174,8 +172,11 @@ public class CalendarRcView extends Fragment {
                         }
                         View underView = vh.underviews.get(i);
                         TextView tv = underView.findViewById(R.id.descText);
-                        tv.setText(infoList.get(i) + "\n");
+                        tv.setText(infoList.get(i));
                         underView.setVisibility(View.VISIBLE);
+
+                        String soundName = db.getMediaPlayer(tempMonths.get(position), i);
+                        underView.findViewById(R.id.speakerImage).setVisibility(soundName.isEmpty()? View.GONE : View.VISIBLE);
                     }
                 }
             }
@@ -185,13 +186,10 @@ public class CalendarRcView extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
-        if (mp.isPlaying()) {
-            mp.stop();
-            mp.release();
-            mp = new MediaPlayer();
-        }
+        Afspilning.stop();
     }
+
+
 
     /**
      * En Viewholder husker forskellige views i et listeelement, sådan at søgninger i viewhierakiet
@@ -217,40 +215,16 @@ public class CalendarRcView extends Fragment {
                 boolean åben = openMonths.contains(position);
                 if (åben) {
                     openMonths.remove(position); // close
-                    if (mp.isPlaying() && soundPlaying == position) {
-                        mp.stop();
-                        mp.release();
-                        mp = new MediaPlayer();
-                    }
+                    Afspilning.stop();
                 } else openMonths.add(position); // open
                 adapter.notifyItemChanged(position);
             } else {
                 int id = v.getId();
-                Toast.makeText(v.getContext(), "Klik på by nummer " + id + " i " + months.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Reading text " + (id+1), Toast.LENGTH_SHORT).show();
 
                 String soundName = db.getMediaPlayer(tempMonths.get(position), id);
                 Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
-                try { // Checks if the Mediaplayer is already playing.
-                    if (!mp.isPlaying()) { // If not, starts playing.
-                        mp.setDataSource(getContext(), uri);
-                        mp.prepare();
-                        mp.start();
-                        soundPlaying = position;
-                        System.out.println("spiller: " + soundName);
-                    } else { // If it is playing, it stops the current sound, and starts the new sound.
-                        mp.stop();
-                        mp.release();
-                        mp = new MediaPlayer();
-                        mp.setDataSource(getContext(), uri);
-                        mp.prepare();
-                        mp.start();
-                        soundPlaying = position;
-                        System.out.println("spiller: " + soundName);
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Afspilning.start(MediaPlayer.create(getActivity(), uri));
             }
         }
     }

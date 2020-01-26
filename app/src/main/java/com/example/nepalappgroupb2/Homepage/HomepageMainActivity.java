@@ -1,13 +1,15 @@
 package com.example.nepalappgroupb2.Homepage;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,17 +19,16 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.nepalappgroupb2.Calendar.CalenderActivity;
+import com.example.nepalappgroupb2.Domain.Afspilning;
 import com.example.nepalappgroupb2.Widget.CalendarWidgetLogic;
 import com.example.nepalappgroupb2.Comic.ComicActivity;
 import com.example.nepalappgroupb2.Domain.DataFromSheets;
-import com.example.nepalappgroupb2.Domain.NotificationReciever;
 import com.example.nepalappgroupb2.Profile.ProfileActivity;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.Quiz.QuizActivity;
 import com.example.nepalappgroupb2.R;
 import com.example.nepalappgroupb2.Recipe.RecipeActivity;
 
-import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.Fabric;
@@ -51,7 +52,7 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
         //HVIS I GERNE VIL HAVE PROFILE DIALOGGEN TIL AT KOMME FREM HVER GANG; SÅ SKAL NEDESTÅENDE KØRES - A
-        SharedPreferences mPrefs = getSharedPreferences("popupscreen",Context.MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("popupscreen", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         //editor.clear();
         //editor.commit();
@@ -70,14 +71,15 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         pregnancyText = findViewById(R.id.homepageTitel);
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
 
+        findViewById(R.id.højtlæsning).setOnClickListener(this);
+
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
         comicsButton.setOnClickListener(this);
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
-        //Notifikation hvert minut, selvom det måske kommer lidt random?? MEN KØR METODEN NEDENFOR HVIS DET SKAL TESTES.
-        sendNoti();
+
 
         try {
             new AsyncTask() {
@@ -96,8 +98,60 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    int[] knapLyde = {
+            R.raw.button_health_development,
+            R.raw.button_recipes,
+            R.raw.button_usefull_information,
+            R.raw.button_questionanswer,
+            R.raw.button_profile,
+    };
+
+    int[] knapper = {
+            R.id.btnCalendar,
+            R.id.btnRecipe,
+            R.id.btnComics,
+            R.id.btnQuiz,
+            R.id.btnProfile,
+    };
+
+    int hjælpKnapNummer;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Afspilning.stop();
+        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).z(0).rotation(0).setDuration(1);
+        findViewById(R.id.højtlæsning).setEnabled(true);
+    }
+
+    private void visNæsteHjælp() {
+        hjælpKnapNummer++;
+        if (hjælpKnapNummer>=knapLyde.length) {
+            findViewById(R.id.højtlæsning).setEnabled(true);
+            return;
+        }
+        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1.2f).scaleY(1.2f).z(100).rotation(-10).setDuration(500);
+        Afspilning.start(MediaPlayer.create(this, knapLyde[hjælpKnapNummer]), new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (isDestroyed()) return;
+                findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).z(0).rotation(0).setDuration(500).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        visNæsteHjælp();
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
+        if (view.getId()==R.id.højtlæsning) {
+            view.setEnabled(false);
+            hjælpKnapNummer = -1;
+            visNæsteHjælp();
+        }
         if (view == calenderButton) {
             Intent i = new Intent(this, CalenderActivity.class);
             startActivity(i);
@@ -114,19 +168,19 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
             Intent i = new Intent(this, QuizActivity.class);
             startActivity(i);
         }
-        if(view == profileButton){
+        if (view == profileButton) {
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         }
     }
 
-    private void setCrashReporting(){
+    private void setCrashReporting() {
 
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
-        System.out.println("this is an emulator: "+EMULATOR);
+        System.out.println("this is an emulator: " + EMULATOR);
         if (EMULATOR) {
 
-            Crashlytics.setBool("emulator",true);
+            Crashlytics.setBool("emulator", true);
         }
         Fabric.with(this, new Crashlytics());
         //Crashlytics.getInstance().crash(); // forcer et crash
@@ -146,20 +200,12 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         //updating the widget with possible new text
         int month = progressBar.monthsOld(this);
         System.out.println("month er her: " + month);
-        widgetLogic.updateWidget(this, month);
+        try {
+            widgetLogic.updateWidget(this, month);
+        } catch (IndexOutOfBoundsException e) {
+            //no internet
+        }
+
     }
 
-    //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet
-    public void sendNoti() {
-        java.util.Calendar calendar = Calendar.getInstance();
-
-        //  calendar.set(Calendar.HOUR_OF_DAY,16);
-        //  calendar.set(Calendar.MINUTE,(int) minuteFromNow);
-
-        Intent intent = new Intent(getApplicationContext(), NotificationReciever.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000L, pendingIntent);
-        alarmManager.cancel(pendingIntent);
-    }
 }

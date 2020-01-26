@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nepalappgroupb2.Homepage.HomepageMainActivity;
 import com.example.nepalappgroupb2.Progress.ProgressBarFragment;
 import com.example.nepalappgroupb2.R;
 
@@ -44,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button pregnantButton;
     private Button diary;
     private ProgressBarFragment progressBar;
+    Profile2Activity profile2Activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         final SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sp.edit();
 
+
         switch (view.getId()){
             case R.id.nameInput:
 
@@ -223,8 +226,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         Toast.makeText(getApplication().getBaseContext(),"Saved",Toast.LENGTH_LONG).show();
                         inputDialog.cancel();
+
+                        // Notifikation hvert minut i 6 minutter bliver kørt her. Bruger shared så den kun gør det første gang appen bliver åbnet.
+                        SharedPreferences prefs = getSharedPreferences("noti", Context.MODE_PRIVATE);
+                        Boolean notifikation = prefs.getBoolean("noti", false);
+                        if (!notifikation) {
+                            profile2Activity.sendNoti();
+
+                        }
+                        SharedPreferences.Editor editorNoti = prefs.edit();
+                        editorNoti.putBoolean("noti", true);
+                        editorNoti.apply();
                     }
-                });
+                }
+
+                );
                 break;
 
             case R.id.pregnantButton:
