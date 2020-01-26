@@ -12,6 +12,7 @@ public class Afspilning {
   public static void start(MediaPlayer mp1, final MediaPlayer.OnCompletionListener ocl) {
     stop();
     try {
+      if (mp1 == null) return;
       mp = mp1;
       mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
         @Override
