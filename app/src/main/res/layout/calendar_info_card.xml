@@ -26,7 +26,7 @@
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:background="@color/beige"
-                android:weightSum="6">
+                >
 
                 <TextView
                     android:id="@+id/descText"
@@ -37,14 +37,16 @@
                     android:textColor="#000"
                     android:textSize="16sp"
                     android:padding="3dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="5"/>
 
                 <ImageView
                     android:id="@+id/speakerImage"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
+                    android:layout_marginRight="8dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:background="@drawable/button_rounded_white"
                     app:srcCompat="@drawable/speaker" />
 
             </LinearLayout>
