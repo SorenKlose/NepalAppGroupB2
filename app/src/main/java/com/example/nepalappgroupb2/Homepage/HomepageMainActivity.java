@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -79,6 +80,10 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         quizButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
+        // Trykker brugeren på volumen op/ned i denne aktivitet skal det altid styre lydstyrken af medieafspilleren
+        // (kalder man ikke dette så vil volumen op/ned styre telefonen RINGETONEs lydstyrke
+        // og kun lige mens der er en lyd der spiller vil det være lydens lydstyrke der justeres)
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 
         try {
@@ -149,7 +154,9 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         if (view.getId()==R.id.højtlæsning) {
             view.setEnabled(false);
+            //view.animate().
             hjælpKnapNummer = -1;
+            Afspilning.tjekVolumenErMindst(this, 20);
             visNæsteHjælp();
         }
         if (view == calenderButton) {

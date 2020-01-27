@@ -224,6 +224,7 @@ public class CalendarRcView extends Fragment {
 
                 String soundName = db.getMediaPlayer(tempMonths.get(position), id);
                 Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/" + soundName);
+                Afspilning.tjekVolumenErMindst(getActivity(), 20);
                 Afspilning.start(MediaPlayer.create(getActivity(), uri));
             }
         }
