@@ -11,7 +11,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -47,8 +50,10 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     TextView pregnancyText;
     CalendarWidgetLogic widgetLogic = new CalendarWidgetLogic();
     DataFromSheets db = new DataFromSheets();
+    private View højtlæsning;
+    Handler handler = new Handler();
 
-    @Override
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         SharedPreferences sp = getSharedPreferences("profile", Context.MODE_PRIVATE);
@@ -72,7 +77,8 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         pregnancyText = findViewById(R.id.homepageTitel);
         progressBar = (ProgressBarFragment) getSupportFragmentManager().findFragmentById(R.id.progressBar);
 
-        findViewById(R.id.højtlæsning).setOnClickListener(this);
+        højtlæsning = findViewById(R.id.højtlæsning);
+        højtlæsning.setOnClickListener(this);
 
         calenderButton.setOnClickListener(this);
         recipesButton.setOnClickListener(this);
@@ -101,7 +107,23 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        // De 3 første gange kommer der en intro til hvad knapperne gør
+        final int højtlæsningSket = PreferenceManager.getDefaultSharedPreferences(this).getInt("højtlæsningSket", 0);
+        if (højtlæsningSket<3) {
+          startHøjtlæsningAfSigSelv = new Runnable() {
+            @Override
+            public void run() {
+              PreferenceManager.getDefaultSharedPreferences(getApplication()).edit().putInt("højtlæsningSket", højtlæsningSket + 1).apply();
+              startHøjtlæsning();
+            }
+          };
+          handler.postDelayed(startHøjtlæsningAfSigSelv, 8000);
+        }
     }
+
+    Runnable startHøjtlæsningAfSigSelv = null;
+
 
     int[] knapLyde = {
             R.raw.button_health_development,
@@ -124,15 +146,13 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onPause() {
         super.onPause();
-        Afspilning.stop();
-        findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).translationZ(0).rotation(0).setDuration(1);
-        findViewById(R.id.højtlæsning).setEnabled(true);
+        stopHøjtlæsning();
     }
 
     private void visNæsteHjælp() {
         hjælpKnapNummer++;
         if (hjælpKnapNummer>=knapLyde.length) {
-            findViewById(R.id.højtlæsning).setEnabled(true);
+            stopHøjtlæsning();
             return;
         }
         findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1.2f).scaleY(1.2f).translationZ(100).rotation(-10).setDuration(500);
@@ -150,14 +170,36 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+  public void startRysteAnimation(View view) {
+    Animation anim = new RotateAnimation(-2,2,view.getWidth()/2,view.getHeight()/2);
+    anim.setDuration(100);
+    anim.setRepeatMode(Animation.REVERSE);
+    anim.setRepeatCount(Animation.INFINITE);
+    view.startAnimation(anim);
+  }
+
+
+  private void startHøjtlæsning() {
+    højtlæsning.setEnabled(false);
+    hjælpKnapNummer = -1;
+    Afspilning.tjekVolumenErMindst(this, 20);
+    startRysteAnimation(højtlæsning);
+    visNæsteHjælp();
+  }
+
+  private void stopHøjtlæsning() {
+    Afspilning.stop();
+    if (hjælpKnapNummer<knapLyde.length) findViewById(knapper[hjælpKnapNummer]).animate().scaleX(1).scaleY(1).translationZ(0).rotation(0).setDuration(1);
+    højtlæsning.setEnabled(true);
+    højtlæsning.setAnimation(null); // stop rysteanimation
+  }
+
     @Override
     public void onClick(View view) {
+        handler.removeCallbacks(startHøjtlæsningAfSigSelv);
         if (view.getId()==R.id.højtlæsning) {
-            view.setEnabled(false);
-            //view.animate().
-            hjælpKnapNummer = -1;
-            Afspilning.tjekVolumenErMindst(this, 20);
-            visNæsteHjælp();
+            startHøjtlæsning();
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("højtlæsningSket", 1000).apply();
         }
         if (view == calenderButton) {
             Intent i = new Intent(this, CalenderActivity.class);
@@ -181,7 +223,8 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void setCrashReporting() {
+
+  private void setCrashReporting() {
 
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
         System.out.println("this is an emulator: " + EMULATOR);
