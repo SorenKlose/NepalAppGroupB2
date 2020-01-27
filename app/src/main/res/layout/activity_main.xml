@@ -157,6 +157,17 @@
         app:layout_constraintVertical_bias="0.782"
         android:fontFamily="@font/corben"/>
 
+    <ProgressBar
+        android:id="@+id/kalenderProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:elevation="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/btnCalendar"
+        app:layout_constraintStart_toStartOf="@+id/btnCalendar" />
+
+
     <Button
         android:id="@+id/btnRecipe"
         android:layout_width="0dp"

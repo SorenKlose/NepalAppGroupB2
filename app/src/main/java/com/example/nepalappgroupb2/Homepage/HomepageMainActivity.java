@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,21 +93,26 @@ public class HomepageMainActivity extends AppCompatActivity implements View.OnCl
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 
-        try {
-            new AsyncTask() {
-                @Override
-                protected Object doInBackground(Object[] objects) {
-                    try {
-                        db.fromSheets(getBaseContext());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return 0;
+        calenderButton.setEnabled(false);
+        final ProgressBar kalenderProgressBar = (ProgressBar) findViewById(R.id.kalenderProgressBar);
+
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    db.fromSheets(getBaseContext());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }.execute().get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+                return 0;
+            }
+
+          @Override
+          protected void onPostExecute(Object o) {
+            calenderButton.setEnabled(true);
+            kalenderProgressBar.setVisibility(View.GONE);
+          }
+        }.execute();
 
         // De 3 første gange kommer der en intro til hvad knapperne gør
         final int højtlæsningSket = PreferenceManager.getDefaultSharedPreferences(this).getInt("højtlæsningSket", 0);
