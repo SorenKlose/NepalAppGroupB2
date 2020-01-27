@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#99CCFF</color>
 
-    <color name="calendar_red">#FF8a8a</color>
-    <color name="recipe_blue">#9EC5FF</color>
-    <color name="comic_orange">#FFC794</color>
-    <color name="quiz_green">#A7E590</color>
+    <color name="calendar_red">#C76B6B</color>
+    <color name="recipe_blue">#8DABE0</color>
+    <color name="comic_orange">#C79B74</color>
+    <color name="quiz_green">#749B62</color>
     <color name="white">#FFFFFF</color>
     <color name="beige">#FFFFF0</color>
 </resources>
