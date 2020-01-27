@@ -24,9 +24,8 @@ import com.example.nepalappgroupb2.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeFrag extends Fragment implements Observer<String>, searchWordProvider {
+public class RecipeFrag extends Fragment {
     RecipeCardElement recipeCardElement = new RecipeCardElement();
-    private final MutableLiveData<String> searchWord = new MutableLiveData<>();
     private RecyclerView recyclerView;
 
     List<RecipeCardElement> cardArray = DataService.getListOfRecipes();
@@ -37,8 +36,6 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View layout = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-
-        getSearchWord().observe( getActivity(), this);
 
         titleView = layout.findViewById(R.id.textView6);
         recyclerView = layout.findViewById(R.id.quiz_recyclerView);
@@ -137,13 +134,8 @@ public class RecipeFrag extends Fragment implements Observer<String>, searchWord
             return filter;
         }
     }
-    @Override
-    public MutableLiveData<String> getSearchWord() {
-        return searchWord;
-    }
 
-    @Override
-    public void onChanged(String s) {
+    public void filterList(String s) {
         adapter.getFilter().filter(s);
     }
 

@@ -7,17 +7,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.nepalappgroupb2.Domain.SearchFilterFragment;
+import com.example.nepalappgroupb2.Domain.searchWordProvider;
 import com.example.nepalappgroupb2.R;
 
-public class RecipeActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+public class RecipeActivity extends AppCompatActivity
+        implements View.OnFocusChangeListener,
+                    Observer<String>,
+                    searchWordProvider {
+
+    private final MutableLiveData<String> searchWord = new MutableLiveData<>();
 
     RecipeFrag recipeListFrag;
     RecipePdfViewFrag recipePdfFrag;
     SearchFilterFragment searchFrag;
     TextView titleView;
-    EditText input;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +37,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnFocusCha
             titleView = findViewById(R.id.textView6);
 
         }
-
+        getSearchWord().observe(this,this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.recipe_searchbar, searchFrag)
                 .add(R.id.recipe_framelayout, recipeListFrag)
@@ -45,7 +52,9 @@ public class RecipeActivity extends AppCompatActivity implements View.OnFocusCha
         recipePdfFrag.setArguments(pdfInfo);
         getSupportFragmentManager().beginTransaction().addToBackStack(null)
                 .add(R.id.recipe_framelayout, recipePdfFrag)
+                .remove(searchFrag)
                 .commit();
+        searchFrag.getSearchEditText().clearFocus();
     }
     @Override
     public void onStart(){
@@ -54,6 +63,18 @@ public class RecipeActivity extends AppCompatActivity implements View.OnFocusCha
     }
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        titleView.setVisibility(View.GONE);
+        if(hasFocus){
+            titleView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public MutableLiveData<String> getSearchWord() {
+        return searchWord;
+    }
+
+    @Override
+    public void onChanged(String s) {
+        recipeListFrag.filterList(s);
     }
 }
