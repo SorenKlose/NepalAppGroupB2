@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,6 +52,16 @@ public class QuizInner extends AppCompatActivity implements View.OnClickListener
         errorcross = findViewById(R.id.lottieErrorCross);
 
         nextQuestion();
+        getSupportActionBar().setTitle(R.string.quiz_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

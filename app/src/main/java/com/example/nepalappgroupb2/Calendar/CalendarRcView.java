@@ -74,6 +74,9 @@ public class CalendarRcView extends Fragment {
 
         //scrolling to correct month text
         int scrollToIndex = calendarLogic.scrollToMonth(progressBar.monthsOld(getContext()), tempMonths);
+        if (scrollToIndex==0) scrollToIndex = 9+4; // test - 5 måneder gammelt barn, hvor der er tekst med lyd
+
+        openMonths.add(scrollToIndex); // Åbn den aktuelle måned
 
         recyclerView.getLayoutManager().scrollToPosition(scrollToIndex);
         return layout;

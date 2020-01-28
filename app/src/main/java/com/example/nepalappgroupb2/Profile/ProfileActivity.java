@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -159,6 +160,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 System.out.println(day + ", " + month + ", " + year);
             }
         };
+        getSupportActionBar().setTitle(R.string.profile_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

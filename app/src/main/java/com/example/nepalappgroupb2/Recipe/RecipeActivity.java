@@ -1,6 +1,7 @@
 package com.example.nepalappgroupb2.Recipe;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -44,6 +45,16 @@ public class RecipeActivity extends AppCompatActivity
                 .commit();
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getSupportActionBar().setTitle(R.string.recipes_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void openPdf(String pdfName){

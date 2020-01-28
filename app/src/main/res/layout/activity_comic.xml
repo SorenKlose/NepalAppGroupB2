@@ -11,9 +11,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="29dp">
+>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,7 +57,7 @@
                 app:srcCompat="@drawable/comic6" />
         </LinearLayout>
     </ScrollView>
-
+<!--
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline41"
         android:layout_width="wrap_content"
@@ -82,5 +80,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

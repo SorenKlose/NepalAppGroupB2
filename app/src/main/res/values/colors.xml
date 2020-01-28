@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#182524</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#99CCFF</color>
-
+    <color name="mørk">#182524</color>
     <color name="calendar_red">#C76B6B</color>
     <color name="recipe_blue">#8DABE0</color>
     <color name="comic_orange">#C79B74</color>

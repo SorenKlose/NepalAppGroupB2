@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -80,6 +81,16 @@ public class Profile2Activity extends AppCompatActivity {
 
             }
         });
+        getSupportActionBar().setTitle(R.string.profile_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Metode til at køre notifikationer i gennem en enkelt channel med høj priotet

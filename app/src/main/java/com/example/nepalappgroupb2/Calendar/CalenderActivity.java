@@ -2,6 +2,7 @@ package com.example.nepalappgroupb2.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
@@ -36,11 +37,23 @@ public class CalenderActivity extends AppCompatActivity implements searchWordPro
         isFromNoti = getIntent().getBooleanExtra("fromNoti", false);
 
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.calendar_framelayout, new CalendarLoading())
-                .commit();
+        if (savedInstanceState==null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.calendar_framelayout, new CalendarLoading())
+                    .commit();
+        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        getSupportActionBar().setTitle(R.string.calendar_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
     }
     public MutableLiveData<String> getSearchWord() {
         return searchWord;
